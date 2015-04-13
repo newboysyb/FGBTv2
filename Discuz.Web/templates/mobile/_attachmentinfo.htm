@@ -1,0 +1,29 @@
+﻿	<%if {attachment.attachimgpost}==1%>
+	<%else if {attachment.filename}.Trim().ToLower().EndsWith("rar")||{attachment.filename}.Trim().ToLower().EndsWith("zip")%>
+	<img class="absmiddle" border="0" alt="" src="images/attachicons/rar.gif"/>
+	<%else%>
+	<img class="absmiddle" border="0" alt="" src="images/attachicons/attachment.gif"/>
+	<%/if%>
+	<dd>
+	<%if {attachment.attachprice}<=0%>
+	   <a href="attachment.aspx?attachmentid={attachment.aid}" class="xg2">[点击查看图片附件]</a>
+	<%else%>
+		<%if {attachment.isbought}==1 || {post.posterid}=={userid}%>
+		   <a href="attachment.aspx?attachmentid={attachment.aid}" class="xg2">{attachment.attachment}</a>
+		<%else%>
+		   <%if {usergroupinfo.radminid}==1%>
+			  <a href="attachment.aspx?attachmentid={attachment.aid}" class="xg2">{attachment.attachment}</a>
+		   <%else%>
+			  {attachment.attachment}
+		   <%/if%>
+		<%/if%>
+	<%/if%>
+	<%set (string){filesizeformat} = "0.0"%>
+	<em class="xg1">({((decimal)attachment.Filesize/1024).ToString(filesizeformat)}K, 下载次数:{attachment.downloads})</em>
+<%set (bool) {viewattach} = false %>
+
+<%if {!UserAuthority.DownloadAttachment(forum,userid,usergroupinfo)}%>	
+  [您无权查看此附件，请登陆电脑版查看详细信息]               
+<%else if {attachment.attachprice}>0%>
+	[收费附件，请登陆电脑版查看]
+<%/if%>

@@ -1,0 +1,5 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Space.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Space.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\space\obj\Debug\ResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\space\obj\Debug\Discuz.Space.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\space\obj\Debug\Discuz.Space.pdb

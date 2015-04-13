@@ -1,0 +1,16 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\Debug\Discuz.Plugin.Mail.SysMail.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\Debug\Discuz.Plugin.Mail.SysMail.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\Debug\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\Debug\Discuz.Plugin.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\Debug\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\Debug\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\Debug\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\Debug\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\Debug\Discuz.Plugin.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\Debug\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\Debug\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\Debug\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\Debug\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\obj\Debug\Discuz.Plugin.Mail.SysMail.csprojResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\obj\Debug\Discuz.Plugin.Mail.SysMail.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\obj\Debug\Discuz.Plugin.Mail.SysMail.pdb

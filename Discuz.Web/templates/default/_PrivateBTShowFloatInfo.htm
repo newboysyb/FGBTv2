@@ -1,0 +1,170 @@
+﻿<!--弹出信息窗口代码 Newboysyb Studio 2010 Futrue Garden BT System v2.0 Copyright(c)-->
+<!--2010.06.16 第二版 -->
+              
+              <div class="PrivateBTInfoFloat" id="PrivateBTInfoFloat"><div class="PrivateBTInfoFloatMid"><div class="PrivateBTInfoFloatMid2"  id="PrivateBTInfoFloatMid2"></div></div></div>
+              <div class="PrivateBTInfoFloatMask" id="PrivateBTInfoFloatMask"></div>
+				      <script type="text/javascript">
+                  var buaabtoHttpReq;
+				          function privatebtshowfloatinfo(showtype, seedid)
+                  {
+                      $('PrivateBTInfoFloat').style.width = document.body.clientWidth * 0.9 + "px";
+                      $('PrivateBTInfoFloat').style.marginLeft = "-" + document.body.clientWidth * 0.45 + "px";  
+                      //$('PrivateBTInfoFloat').style.visibility = "visible";
+                      $('PrivateBTInfoFloatMid2').innerHTML="<div class=\"PrivateBTListBorder\"><div  class=\"PrivateBTList\"><div class=\"float\" id=\"floatlayout_handlekey\"><h3 class=\"float_ctrl\"><em><img src=\"/templates/default/images/loading.gif\"> 加载中...</em></h3><br/><br/><br/><br/></div></div></div>";
+                      adjustinfodiv1();
+
+                      if(showtype == "publish") setTimeout("privatebtshowfloatinfoloading('" + showtype + "', '" + seedid + "')",0);
+                      else setTimeout("privatebtshowfloatinfoloading('" + showtype + "', " + seedid + ")",0);
+                   }
+                   function privatebtshowfloatinfoloading(showtype, seedid)
+                   {
+                      if(window.ActiveXObject)
+                      {
+                          buaabtoHttpReq=new ActiveXObject("Microsoft.XMLHTTP");
+                      }
+                      else if(window.XMLHttpRequest)
+                      {
+                          buaabtoHttpReq=new XMLHttpRequest();
+                      }
+                          
+                      if(showtype=='peerlist') buaabtoHttpReq.open("GET","showpeer.aspx?seedid=" + seedid,false);
+                      else if(showtype=='filelist') buaabtoHttpReq.open("GET","showseedfile.aspx?seedid=" + seedid,true);
+                      else if(showtype=='peerhistorylist') buaabtoHttpReq.open("GET","showpeerhistory.aspx?seedid=" + seedid,true);
+                      else if(showtype=='seedoplist') buaabtoHttpReq.open("GET","showseedop.aspx?seedid=" + seedid,true);
+                      else if(showtype=='seedinfolist') buaabtoHttpReq.open("GET","showseedinfo.aspx?seedid=" + seedid,true);
+                      else if(showtype=='publish') buaabtoHttpReq.open("GET","publish.aspx?infloat=1&type=" + seedid,true);
+                      else if(showtype=='edit') buaabtoHttpReq.open("GET","edit.aspx?infloat=1&seedid=" + seedid,true);
+                      else buaabtoHttpReq.open("GET","showseedinfo.aspx?seedid=" + seedid,true);
+                      
+                      buaabtoHttpReq.send(null); 
+                      
+                      setTimeout("privatebtshowfloatinfodelay()",500);
+                   }
+                   
+                  function privatebtshowfloatinfodelay()
+                  {
+                      //alert("checking status!");   
+                      if (buaabtoHttpReq.readyState == 4)
+                      {
+                           //alert("Server is done!");
+                           if (buaabtoHttpReq.status == 200)
+                           {
+                              //alert("Server is ok!");
+                              $('PrivateBTInfoFloatMid2').innerHTML = buaabtoHttpReq.responseText;  
+                              buaabtoHttpReq = null;
+                              window.onresize = adjustinfodiv;
+                              document.onkeydown = esckeydown;
+                              //window.onscroll = adjustinfodiv;
+                              adjustinfodiv();
+                              return;
+                           }
+                      }
+                      setTimeout("privatebtshowfloatinfodelay()",500);  
+                  }
+                  function esckeydown(event)
+                  {
+                      event = event || window.event; 
+                      if(event.keyCode==27)
+                      {
+                          event.returnValue = null;
+                          window.returnValue = null;
+                          hidedetailinfo()
+                          event.returnvalue = false;
+                          return;
+                      }
+                      event.returnvalue = true;
+                  }
+                  function adjustinfodiv1()
+                  {
+                      var clientWidth = document.body.clientWidth;
+                      var clientHeight = document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight;
+                      var scrollTop = document.body.scrollTop ? document.body.scrollTop : document.documentElement.scrollTop;
+                      
+                      $('PrivateBTInfoFloat').style.width = (document.body.clientWidth * 0.9) + "px";                    
+                      $('PrivateBTInfoFloat').style.marginLeft = "-" + (document.body.clientWidth * 0.45) + "px"; 
+                      $('PrivateBTInfoFloatMask').style.marginLeft = "-" + (document.body.clientWidth * 0.45 + 7) + "px";
+
+                      if($('PrivateBTInfoFloat').offsetHeight / 2 - document.documentElement.scrollTop < 0)
+                      {
+                          $('PrivateBTInfoFloat').style.top = ((clientHeight - $('PrivateBTInfoFloat').offsetHeight) / 2 + scrollTop) + 'px';
+                          $('PrivateBTInfoFloatMask').style.top = ((clientHeight - $('PrivateBTInfoFloat').offsetHeight) / 2 + scrollTop - 6) + 'px';
+                      }
+                      else
+                      {
+                          $('PrivateBTInfoFloat').style.top = ((clientHeight - $('PrivateBTInfoFloat').offsetHeight) / 2 + scrollTop) + 'px';
+                          $('PrivateBTInfoFloatMask').style.top = ((clientHeight - $('PrivateBTInfoFloat').offsetHeight) / 2 + scrollTop - 6) + 'px';                      }
+                      //$('PrivateBTInfoFloatMask').style.marginTop = ($('PrivateBTInfoFloat').style.marginTop -6) + "px"
+                      $('PrivateBTInfoFloatMask').style.width = ($('PrivateBTInfoFloat').clientWidth + 14) + "px";
+                      $('PrivateBTInfoFloatMask').style.height = ($('PrivateBTInfoFloat').clientHeight + 12) + "px";
+                      $('PrivateBTInfoFloat').style.visibility = "visible";
+                      $('PrivateBTInfoFloatMask').style.visibility = "visible";
+                      
+                      //$('PrivateBTInfoFloat').style.height = "200px";
+                        
+                  }
+                  function adjustinfodiv()
+                  {
+                      var clientWidth = document.body.clientWidth;
+                      var clientHeight = document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight;
+                      var scrollTop = document.body.scrollTop ? document.body.scrollTop : document.documentElement.scrollTop;
+                    
+                      $('PrivateBTInfoFloat').style.width = (clientWidth * 0.9) + "px";                    
+                      $('PrivateBTInfoFloat').style.marginLeft = "-" + (clientWidth * 0.45) + "px"; 
+                      $('PrivateBTInfoFloatMask').style.marginLeft = "-" + (clientWidth * 0.45 + 7) + "px";
+                      
+                      if($('PrivateBTInfoListBorder2').offsetHeight  > document.body.parentNode.clientHeight * 0.8 - 80)
+                      {
+                          if((document.body.parentNode.clientHeight * 0.8 - 90) > 50)
+                          {
+                              $('PrivateBTInfoListBorder').style.height = (document.body.parentNode.clientHeight * 0.8 - 80) + "px";
+                              //$('PrivateBTInfoFloatMask').style.height = (document.body.parentNode.clientHeight * 0.8 - 80 + 12) + "px";
+                          }
+                          else
+                          {
+                              $('PrivateBTInfoListBorder').style.height = "50px";
+                              //$('PrivateBTInfoFloatMask').style.height = "62px";
+                          }
+                      }
+                      else
+                      {
+                          //if($('PrivateBTInfoListBorder').style.height != "")
+                          $('PrivateBTInfoListBorder').style.height = "auto";
+                          
+                      }
+                      if($('PrivateBTInfoFloat').offsetHeight / 2 - scrollTop < 0)
+                      {
+                          //$('PrivateBTInfoFloat').style.top = (scrollTop - $('PrivateBTInfoFloat').offsetHeight / 2) + "px"
+                          //$('PrivateBTInfoFloatMask').style.top = (scrollTop - $('PrivateBTInfoFloat').offsetHeight / 2 - 6) + "px"
+                          $('PrivateBTInfoFloat').style.top = ((clientHeight - $('PrivateBTInfoFloat').offsetHeight) / 2 + scrollTop) + 'px';
+                          $('PrivateBTInfoFloatMask').style.top = ((clientHeight - $('PrivateBTInfoFloat').offsetHeight) / 2 + scrollTop - 6) + 'px';
+                      }
+                      else
+                      {
+                          //$('PrivateBTInfoFloat').style.top = "-" + ($('PrivateBTInfoFloat').offsetHeight / 2 - scrollTop) + "px";
+                          //$('PrivateBTInfoFloatMask').style.top = "-" + ($('PrivateBTInfoFloat').offsetHeight / 2 - scrollTop + 6) + "px";
+                          $('PrivateBTInfoFloat').style.top = ((clientHeight - $('PrivateBTInfoFloat').offsetHeight) / 2 + scrollTop) + 'px';
+                          $('PrivateBTInfoFloatMask').style.top = ((clientHeight - $('PrivateBTInfoFloat').offsetHeight) / 2 + scrollTop - 6) + 'px';
+                      }
+                      //$('PrivateBTInfoFloatMask').style.marginTop = ($('PrivateBTInfoFloat').style.marginTop -6) + "px"
+                      $('PrivateBTInfoFloatMask').style.width = ($('PrivateBTInfoFloat').clientWidth + 14) + "px";
+                      $('PrivateBTInfoFloatMask').style.height = ($('PrivateBTInfoFloat').clientHeight + 12) + "px";
+                      $('PrivateBTInfoFloat').style.visibility = "visible";
+                      $('PrivateBTInfoFloatMask').style.visibility = "visible";
+                      
+                      $('PrivateBTInfoListBorder2').style.height = ($('PrivateBTInfoFloat').clientHeight - 157) + "px";
+                      
+                  }
+                  function hidedetailinfo()
+                  {
+                    $('PrivateBTInfoFloat').style.visibility = "hidden";
+                    $('PrivateBTInfoFloatMask').style.visibility = "hidden";
+                    $('PrivateBTInfoFloatMid2').innerHTML = "";
+                    //window.onresize="";
+                    //document.onkeydown="";
+                    window.onresize=null;
+                    document.onkeydown=null;
+                    window.onscroll=null;
+                  }
+
+              </script>
+<!--End弹出信息窗口代码 Newboysyb Studio 2009 FGBT v1.0-->

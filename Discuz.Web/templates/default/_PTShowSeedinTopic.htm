@@ -1,0 +1,226 @@
+﻿           <%if {topic.SeedId}>0&&{post.Layer}==0&&{post.id}==1%>   
+             <%if {ratioprotectionNote}=="ALERT"%>
+              <div class="PrivateBTSeedInfoTableAlert">
+                <table class="PrivateBTSeedInfoTableAlert">
+                  <tr class="PrivateBTSeedInfoListTitleAlert">
+                    <td style="width:50px;"><img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/alert.png" title="共享率保护"/></td>
+                    <td style="overflow:hidden;">
+                        <a href="usercpratioprotect.aspx">共享率保护</a>：您的上传不足，但是已经取消共享率保护，可以下载此种子，请务必谨慎保护您的共享率</a><br/>
+                        <em>共享率保护防止因为过度下载导致上传严重不足。<a href="usercpratioprotect.aspx"><strong>取消共享率保护</strong></a>可能导致您的账号进入到难以恢复的状态。</em>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <br/>
+             <%else if {ratioprotectionNote}!=""%>
+              <div class="PrivateBTSeedInfoTableAlert">
+                <table class="PrivateBTSeedInfoTableAlert">
+                  <tr class="PrivateBTSeedInfoListTitleAlert">
+                    <td style="width:50px;"><img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/alert.png" title="共享率保护"/></td>
+                    <td style="overflow:hidden;">
+                        <a href="usercpratioprotect.aspx">共享率保护</a>：您的上传不足，无法下载此种子。请先下载蓝种，保种获取足够上传之后再下载非蓝种</a><br/>
+                        <em>共享率保护防止因为过度下载导致上传严重不足。<a href="usercpratioprotect.aspx"><strong>取消共享率保护</strong></a>可能导致您的账号进入到难以恢复的状态。</em>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <br/>
+             <%/if%>
+             
+              <div class="PrivateBTSeedInfoTable">
+                <table class="PrivateBTSeedInfoTable">
+                  <tr class="PrivateBTSeedInfoListTitle">
+                    <td class="PrivateBTSeedInfoListA"></td>
+                    <td class="PrivateBTSeedInfoListB"></td>
+                    <td class="PrivateBTSeedInfoListC"></td>
+                    <td class="PrivateBTSeedInfoListD"></td>
+                  </tr>
+                  <tr class="PrivateBTSeedInfoListTitle">
+                    <td colspan="4" style="overflow:hidden;">
+                        种子基本信息&nbsp;&nbsp;&nbsp;{PrivateBT.Type2Name(seedinfo.Type)}&nbsp;&nbsp;&nbsp;<%if {blueseednote}!=""%>{blueseednote}&nbsp;&nbsp;&nbsp;<%/if%><%if {seedinfo.type}==1&&{imdblink}!=""%><a href="{imdblink}">{imdblink}</a><%/if%>
+                    </td>
+                  </tr>
+                  <tr class="PrivateBTSeedInfoListDownLink">
+                    <td style="overflow:hidden;"><span class="PrivateBTLink_GreenBold">下载种子：</span></td>
+                    <td colspan="3" style="overflow:hidden;">
+                        <a href="{forumpath}downloadseed.aspx?seedid={seedinfo.SeedId}">
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/download.gif" title="下载种子"/>
+                        </a>
+                        <%if {seedinfo.FileName}!=""%>
+                            <a href="downloadseed.aspx?seedid={seedinfo.SeedId}"><span class="PrivateBTLink_GreenBold">{seedinfo.FileName}.torrent</span></a>
+                        <%else%>
+                            <a href="downloadseed.aspx?seedid={seedinfo.SeedId}"><span class="PrivateBTLink_GreenBold">{seedinfo.TopicTitle}.torrent</span></a>
+                        <%/if%>
+                    </td>
+                  </tr>
+                  <tr class="PrivateBTSeedInfoList">
+                    <td class="PrivateBTSeedInfoListA">种子大小：</td>
+                    <td class="PrivateBTSeedInfoListB"><a onclick="fgbtshowwindow('showseedfile{seedinfo.SeedId}','showseedfile.aspx?seedid={seedinfo.SeedId}')">{PTTools.Upload2Str(seedinfo.FileSize,false)}</a></td>
+                    <td class="PrivateBTSeedInfoListC">文件计数：</td>
+                    <td class="PrivateBTSeedInfoListD"><a onclick="fgbtshowwindow('showseedfile{seedinfo.SeedId}','showseedfile.aspx?seedid={seedinfo.SeedId}')">{seedinfo.FileCount}</a></td>
+                  </tr>
+                  <tr class="PrivateBTSeedInfoList">
+                    <td><span class="blue">正在做种：</span></td>
+                    <td><a onclick="fgbtshowwindow('showseedpeer{seedinfo.SeedId}','showseedpeer.aspx?seedid={seedinfo.SeedId}')"><span class="blue">{seedinfo.Upload}</span></a></td>
+                    <td>总流量：</td>
+                    <td>
+                        {PTTools.Upload2Str(seedinfo.Traffic,false)}
+                       <%if {userid}<=2%>
+                          <%if {trafficcheck}=="blue"%>
+                              <img src="{forumurl}templates/{templatepath}/images/bt/check_blue.png" title="上传比下载偏低"/>
+                          <%else if {trafficcheck}=="green"%>
+                              <img src="{forumurl}templates/{templatepath}/images/bt/check_green.png" title="上传与下载相当"/>
+                          <%else if {trafficcheck}=="yellow"%>
+                              <img src="{forumurl}templates/{templatepath}/images/bt/check_yellow.png" title="上传过多，注意作弊"/>
+                          <%else%>
+                              <img src="{forumurl}templates/{templatepath}/images/bt/check_red.png" title="上传严重超过下载，核实作弊"/>
+                          <%/if%>
+                          {PTTools.Upload2Str(seedinfo.UpTraffic,false)}
+                          (<%if {trafficcheck}=="blue"%>-<%else%>+<%/if%>{PTTools.Upload2Str(seedinfo.UpTraffic-seedinfo.Traffic,false)})
+                      <%/if%>
+                    </td>
+                  </tr>
+                  <tr class="PrivateBTSeedInfoList">
+                    <td><span class="red">正在下载：</span></td>
+                    <td><a onclick="fgbtshowwindow('showseedpeer{seedinfo.SeedId}','showseedpeer.aspx?seedid={seedinfo.SeedId}')"><span class="red">{seedinfo.Download}</span></a></td>
+                    <td>上传系数：</td>
+                    <td>
+                        {seedinfo.UploadRatio}&nbsp;
+                        <%if seedinfo.UploadRatio==1.0f%>
+                        <%else if seedinfo.UploadRatio==2.0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U20.png" title="按200%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%else if seedinfo.UploadRatio==1.6f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U16.png" title="按160%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%else if seedinfo.UploadRatio==1.2f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U12.png" title="按120%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%else if seedinfo.UploadRatio==0.6f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U6.png" title="按60%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%else if seedinfo.UploadRatio==0.3f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U3.png" title="按30%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%else if seedinfo.UploadRatio==0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U0.png" title="按0%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%/if%>
+                        &nbsp;{uploadratioNote}
+                    </td>
+                  </tr>
+                  <tr class="PrivateBTSeedInfoList">
+                    <td>下载完成：</td>
+                    <td>{seedinfo.Finished}</td>
+                    <td>下载系数：</td>
+                    <td>
+                        {seedinfo.DownloadRatio}&nbsp;                        
+                        <%if seedinfo.DownloadRatio==1.0f%>
+                        <%else if seedinfo.DownloadRatio==0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D0.png" title="蓝种，不计下载{seedinfo.Dis_DownloadRatioNote}"/>
+                        <%else if seedinfo.DownloadRatio==0.3f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D3.png" title="按30%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                        <%else if seedinfo.DownloadRatio==0.6f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D6.png" title="按60%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                        <%else if seedinfo.DownloadRatio==2.0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D20.png" title="按200%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                        <%else if seedinfo.DownloadRatio==3.0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D30.png" title="按300%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                        <%/if%>
+                        &nbsp;{downloadratioNote}
+                    </td>
+                  </tr>
+                  <tr class="PrivateBTSeedInfoList">
+                    <td>做种IP：</td>
+                    <td>
+                              <%if {seedinfo.Upload}!=0%>
+                                <%if {seedinfo.IPv6}=={seedinfo.Upload}%>
+                                    <span class="PrivateBTFontRed">IPv6</span>
+                                <%else if {seedinfo.IPv6}==0%>
+                                    <span class="PrivateBTFontRed">IPv4</span>
+                                <%else%>
+                                    <span class="PrivateBTFontRed">IPv4/IPv6</span>
+                                <%/if%>
+                              <%else%>
+                                无
+                              <%/if%>
+                    <td>最后活动：</td>
+                    <td><%if {seedinfo.LastLive}<{seedinfo.PostDateTime}%>无<%else%>{seedinfo.LastLive} (距今{PTTools.Minutes2String((DateTime.Now-seedinfo.LastLive).TotalMinutes)})<%/if%></td>
+                  </tr>
+                  <tr class="PrivateBTSeedInfoList">
+                    <td>存活时间：</td>
+                    <td>{PTTools.Minutes2String(seedinfo.Live/60.0)}</td>
+                    <td>做种奖励：</td>
+                    <td>{PTTools.Upload2Str(PTSeeds.GetSeedAward(seedinfo.FileSize,seedinfo.Live,seedinfo.Upload),false)}/h</td>
+                  </tr>
+                  <tr class="PrivateBTSeedInfoList">
+                    <td>最后做种：</td>
+                    <td><%if {seedinfo.LastSeederName}==""%>无<%else%><a href="userinfo-{seedinfo.LastSeederId}.aspx">{seedinfo.LastSeederName}</a><%/if%></td>
+                    <td>INFO HASH：</td>
+                    <td>{seedinfo.InfoHash}</td>
+                  </tr>
+                <tr class="PrivateBTSeedInfoList">
+                    <td colspan="4">
+                        <a href="showseeds.aspx?type={PrivateBT.Type2Str(seedinfo.Type)}"  style="text-decoration:none">
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/{seedinfo.Type}.png" title="{PrivateBT.Type2Name(seedinfo.Type)}" />
+                        </a>&nbsp;
+                        <span class="PrivateBTSeedInfoListLink"><a onclick="fgbtshowwindow('showseedinfo{seedinfo.SeedId}','showseedinfo.aspx?seedid={seedinfo.SeedId}')">种子详细命名信息</a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="PrivateBTPeerListLink"><a onclick="fgbtshowwindow('showseedpeer{seedinfo.SeedId}','showseedpeer.aspx?seedid={seedinfo.SeedId}')">Peer节点信息，共{(seedinfo.Upload+seedinfo.Download)}个</a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <%if {userid}<3%>
+                        <span class="PrivateBTPeerHistoryListLink"><a onclick="fgbtshowwindow('showseedpeerhistory{seedinfo.SeedId}','showseedpeerhistory.aspx?seedid={seedinfo.SeedId}')">Peer节点历史记录</a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <%/if%>
+                        <span class="PrivateBTFileListLink"><a onclick="fgbtshowwindow('showseedfile{seedinfo.SeedId}','showseedfile.aspx?seedid={seedinfo.SeedId}')">种子包含的文件，共{seedinfo.FileCount}个</a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="PrivateBTSeedOpListLink"><a onclick="fgbtshowwindow('showseedop{seedinfo.SeedId}','showseedop.aspx?seedid={seedinfo.SeedId}')">种子的管理操作记录</a></span>
+                    </td>
+                </tr>
+                </table>
+              </div>
+              <br/>
+            <%/if%>
+            
+            
+            
+             <%if {topic.SeedId}<0&&{post.Layer}==0&&{post.id}==1&&{topic.special}==64&&{abtseedinfo.Aid}>0%>   
+              <div class="PrivateBTSeedInfoTable_s">
+                <table class="PrivateBTSeedInfoTable_s">
+                  <tr class="PrivateBTSeedInfoListTitle_s">
+                    <td class="PrivateBTSeedInfoListA"></td>
+                    <td class="PrivateBTSeedInfoListB"></td>
+                    <td class="PrivateBTSeedInfoListC"></td>
+                    <td class="PrivateBTSeedInfoListD"></td>
+                  </tr>
+                  <tr class="PrivateBTSeedInfoListTitle_s">
+                    <td colspan="4" style="overflow:hidden;">
+                        文件交换种子 [ 注意：文件交换种子不计流量 即 永久蓝种，下载种子文件将向发布者支付 1 金币，您现在有 {btuserinfo.Extcredits2} 金币 ] <a href="showtopic-83062.aspx">如何获取金币？</a>
+                    </td>
+                  </tr>
+                  <tr class="PrivateBTSeedInfoListDownLink_s">
+                    <td style="overflow:hidden;"><span class="PrivateBTLink_GreenBold">下载种子：</span></td>
+                    <td colspan="3" style="overflow:hidden;">
+                        <a href="javascript:downloadabtseed();">
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/download.gif" title="下载种子"/>
+                        </a>
+                        <%if {abtseedinfo.FileName}!=""%>
+                            <a href="downloadseed.aspx?abtseed=1&seedid={abtseedinfo.Aid}&topicid={topic.tid}"><span class="PrivateBTLink_GreenBold">{abtseedinfo.FileName}.torrent</span></a>
+                        <%else%>
+                            <a href="downloadseed.aspx?abtseed=1&seedid={abtseedinfo.Aid}&topicid={topic.tid}"><span class="PrivateBTLink_GreenBold">{topic.Title}.torrent</span></a>
+                        <%/if%>
+                    </td>
+                  </tr>
+                  <tr class="PrivateBTSeedInfoList_s">
+                    <td class="PrivateBTSeedInfoListA">种子大小：</td>
+                    <td class="PrivateBTSeedInfoListB">{PTTools.Upload2Str(abtseedinfo.FileSize,false)}</td>
+                    <td class="PrivateBTSeedInfoListC">文件计数：</td>
+                    <td class="PrivateBTSeedInfoListD">{abtseedinfo.FileCount}</td>
+                  </tr>
+                  <tr class="PrivateBTSeedInfoList_s">
+                    <td><span class="blue">正在做种：</span></td>
+                    <td><span class="blue">{abtseedinfo.Upload}</span></td>
+                    <td>下载完成：</td>
+                    <td>{abtseedinfo.Finished}</td>
+                  </tr>
+                  <tr class="PrivateBTSeedInfoList_s">
+                    <td><span class="red">正在下载：</span></td>
+                    <td><span class="red">{abtseedinfo.Download}</span></td>
+                    <td>最后活动：</td>
+                    <td><%if {abtseedinfo.LastLive}<{DateTime.Parse(topic.Postdatetime)}%>无<%else%>{abtseedinfo.LastLive} (距今{PTTools.Minutes2String((DateTime.Now-abtseedinfo.LastLive).TotalMinutes)})<%/if%></td>
+                  </tr>
+               </table>
+             </div>
+             <span class="PrivateBTLink_GreenBold">由于部分加壳修改版浏览器存在后台隐蔽下载种子、多线程下载等行为，会造成重复下载或下载的文件损坏，请务必使用原版IE、Firefox、Chrome、Opera浏览器下载种子！</span>
+             <br/>
+             <%/if%>

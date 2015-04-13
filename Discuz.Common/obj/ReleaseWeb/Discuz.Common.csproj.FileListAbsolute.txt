@@ -1,0 +1,9 @@
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Common\bin\ReleaseWeb\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Common\bin\ReleaseWeb\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Common\obj\ReleaseWeb\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Common\obj\ReleaseWeb\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Common\bin\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Common\bin\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Common\obj\ReleaseWeb\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Common\obj\ReleaseWeb\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Common\obj\ReleaseWeb\Discuz.Common.csprojResolveAssemblyReference.cache

@@ -1,0 +1,161 @@
+<%template _header%>	
+    <%if page_err==0%>
+	    <div id="floatlayout_topicadmin">
+          <h3 class="flb">
+            <em id="return_emailfriend">种子节点列表</em>
+            <span><a href="javascript:;" class="flbc" onclick="hideWindow('showseedpeer{seedid}')" title="关闭(ESC)">关闭</a></span>
+          </h3>
+          <h3 class="flb">
+              <em id="em1">
+                  <a href="showtopic-{seedinfo.TopicId}.aspx">
+                  <%if {seedinfo.DownloadRatio}==0%>
+                      <font style="color:#00F">{seedinfo.TopicTitle}</font>
+                  <%else%>
+                      {seedinfo.TopicTitle}
+                  <%/if%>
+                  </a>
+              </em>
+          </h3>
+          <h3 class="flb">
+              <em id="em1">
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/{seedinfo.Type}.png" title="{PrivateBT.Type2Name(seedinfo.Type)}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <a href="{forumpath}downloadseed.aspx?seedid={seedinfo.SeedId}">
+                      <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/download.gif" title="下载种子"/>
+                  </a>
+                  <%if {rationote}!=""%>&nbsp;&nbsp;&nbsp;&nbsp;{rationote}<%/if%>
+              </em>
+          </h3>
+          <div class="PrivateBTInfoFileListBorder" id="PrivateBTInfoListBorder_showseedpeer{seedid}">
+              <div class="PrivateBTInfoListBorder2" id="PrivateBTInfoListBorder2_showseedpeer{seedid}">
+                 <!--  列表开始 -->
+                 <%if {userid}==1%>
+                   <table class="PrivateBTPeerListTable">
+                         <tr class="PrivateBTPeerListTitle">
+                                      <td width="8%">用户名</td>
+                                      <td width="5%">共享率</td>
+                                      <td width="25%">IP地址</td>
+                                      <td width="8%">IP</td>
+                                      <td width="5%">端口</td>
+                                      <td width="5%">进度</td>
+                                      <td width="7%">上传</td>
+                                      <td width="7%">上传速度</td>
+                                      <td width="7%">下载</td>
+                                      <td width="7%">下载速度</td>
+                                      <td width="8%">活动时间</td>
+                                      <td width="8%" class="PrivateBTInfoListR">客户端</td>
+                         </tr>
+                         <%if {peerlist.Rows.Count}==0%><tr class="PrivateBTPeerList"><td colspan="11" align="left">该种子没有活动节点</td></tr><%/if%>
+                         <%loop peer peerlist%>
+                         <tr class="PrivateBTPeerList">
+                            <td width="8%"><a class="PrivateBTLink_black" href="{forumurl}userinfo-{peer[uid]}.aspx">{peer[username]}</a></td>
+                            <td width="5%">{peer[rat]}</td>
+                            <td width="25%">
+                               
+                              <%if {peer[lastsend]}=="-1"%>
+                                  <span title = "IP优化：[限学院路]" style="color:Red">
+                              <%else if {peer[lastsend]}=="-2"||{peer[lastsend]}=="101"%>
+                                  <span title = "IP优化：[限沙河]" style="color:Blue">
+                              <%else if {peer[lastsend]}=="0"%>
+                                  <span>
+                              <%else%>
+                                  <span title = "IP优化：[限本区:{peer[lastsend]}]" style="color:Purple">
+                              <%/if%>
+                              {peer[ip]}&nbsp;/&nbsp;{peer[ipv6ip]}</span>
+                            </td>
+                            <td width="8%">{peer[ipstr]}</td>
+                            <td width="5%">{peer[port]}</td>
+                            <td width="5%">{peer[per]}</td>
+                            <td width="7%">{peer[up]}</td>
+                            <td width="7%">{peer[upspeed]}</td>
+                            <td width="7%">{peer[down]}</td>
+                            <td width="7%">{peer[downspeed]}</td>
+                            <td width="8%">{peer[active]}</td>
+                            <td width="8%" class="PrivateBTInfoListR">{peer[client]}</td>
+                         </tr>
+                         <%/loop%>
+                          <tr class="PrivateBTPeerListTitle">
+                            <td width="8%">用户名</td>
+                            <td width="5%">共享率</td>
+                            <td width="25%">IP地址</td>
+                            <td width="8%">IP</td>
+                            <td width="5%">端口</td>
+                            <td width="5%">进度</td>
+                            <td width="7%">上传</td>
+                            <td width="7%">上传速度</td>
+                            <td width="7%">下载</td>
+                            <td width="7%">下载速度</td>
+                            <td width="8%">活动时间</td>
+                            <td width="8%" class="PrivateBTInfoListR">客户端</td>
+                         </tr>
+                     </table>
+                 <%else%>
+                     <table class="PrivateBTPeerListTable">
+                           <tr class="PrivateBTPeerListTitle">
+                                        <td width="14%">用户名</td>
+                                        <td width="8%">共享率</td>
+                                        <td width="10%">IP</td>
+                                        <td width="8%">进度</td>
+                                        <td width="10%">上传</td>
+                                        <td width="10%">上传速度</td>
+                                        <td width="10%">下载</td>
+                                        <td width="10%">下载速度</td>
+                                        <td width="10%">活动时间</td>
+                                        <td width="10%" class="PrivateBTInfoListR">客户端</td>
+                           </tr>
+                           <%if {peerlist.Rows.Count}==0%><tr class="PrivateBTPeerList"><td colspan="11" align="left">该种子没有活动节点</td></tr><%/if%>
+                           <%loop peer peerlist%>
+                           <tr class="PrivateBTPeerList">
+                              <td width="14%"><a class="PrivateBTLink_black" href="{forumurl}userinfo-{peer[uid]}.aspx">{peer[username]}</a></td>
+                              <td width="8%">{peer[rat]}</td>
+                              <td width="10%">{peer[ipstr]}</td>
+                              <td width="8%">{peer[per]}</td>
+                              <td width="10%">{peer[up]}</td>
+                              <td width="10%">{peer[upspeed]}</td>
+                              <td width="10%">{peer[down]}</td>
+                              <td width="10%">{peer[downspeed]}</td>
+                              <td width="10%">{peer[active]}</td>
+                              <td width="10%" class="PrivateBTInfoListR">{peer[client]}</td>
+                           </tr>
+                           <%/loop%>
+                            <tr class="PrivateBTPeerListTitle">
+                                <td width="14%">用户名</td>
+                                <td width="8%">共享率</td>
+                                <td width="10%">IP</td>
+                                <td width="8%">进度</td>
+                                <td width="10%">上传</td>
+                                <td width="10%">上传速度</td>
+                                <td width="10%">下载</td>
+                                <td width="10%">下载速度</td>
+                                <td width="10%">活动时间</td>
+                                <td width="10%" class="PrivateBTInfoListR">客户端</td>
+                           </tr>
+                       </table>
+                 <%/if%>
+                 <!--  列表结束 -->
+              </div>
+          </div>
+          
+          
+          <h3 class="PrivateBTInfoListNote">
+              正在上传：{seedinfo.Upload}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              正在下载：{seedinfo.Download}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              累计完成：{seedinfo.Finished}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              累计流量：{PTTools.Upload2Str(seedinfo.Traffic,false)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              存活时间：{PTTools.Minutes2String(seedinfo.Live/60.0)}
+          </h3>
+     </div>
+    <%else%>
+     <div id="floatlayout_topicadmin">
+          <h3 class="flb">
+              <em id="return_emailfriend">种子节点列表</em>
+              <span><a href="javascript:;" class="flbc" onclick="hideWindow('showseedpeer{seedid}')" title="关闭">关闭</a></span>
+          </h3>
+          <div id="PrivateBTInfoListBorder">
+              <div id="PrivateBTInfoListBorder2">
+                  <%template _btinfolisterrmsgbox%>
+              </div>
+          </div>
+    </div>     
+    <%/if%>
+<%template _copyright%>
+<%template _footer%>

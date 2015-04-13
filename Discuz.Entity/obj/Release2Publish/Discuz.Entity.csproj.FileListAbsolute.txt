@@ -1,0 +1,8 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\bin\Release2Publish\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\bin\Release2Publish\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\bin\Release2Publish\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\bin\Release2Publish\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\bin\Release2Publish\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\obj\Release2Publish\ResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\obj\Release2Publish\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\obj\Release2Publish\Discuz.Entity.pdb

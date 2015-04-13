@@ -1,0 +1,271 @@
+﻿<%template _header%>
+<script type="text/javascript" src="{jsdir}/bbcode.js"></script>
+<script type="text/javascript" src="{jsdir}/editor.js"></script>
+<%if {infloat}!=1%>
+<div class="wrap cl pageinfo">
+	<div id="nav">
+	<%if {usergroupinfo.allowsearch}>0%>
+		<%template _quicksearch%>
+	<%/if%>
+	<a href="{config.forumurl}" class="title">{config.forumtitle}</a> &raquo; <%if {forum.Pathlist}!=""%>{ShowForumAspxRewrite(forum.Pathlist.Trim(),forumid,forumpageid)}  &raquo; <%/if%><strong>
+		<%if {type}=="bonus"%>
+			发表新悬赏
+		<%else if {type}=="poll"%>
+			发表新投票
+		<%else if {type}=="debate"%>
+			发起新辩论
+		<%else if {type}=="seed"%>
+			发文件交换种子
+		<%else if {type}=="lottery"%>
+			发博彩贴
+		<%else%>
+		   发表新主题
+		<%/if%></strong>
+	</div>
+</div>
+ <%/if%>
+<script type="text/javascript" reload="1">
+var postminchars = parseInt('{config.minpostsize}');
+var postmaxchars = parseInt('{config.maxpostsize}');
+var disablepostctrl = parseInt('{disablepost}');
+var forumpath = "{forumpath}";
+var posturl=forumpath+'posttopic.aspx?forumid={forumid}&forumpage={forumpageid}';
+var postaction='{rooturl}posttopic.aspx?infloat=1&forumid={forumid}&'
+</script>
+<%if page_err==0%>
+<%if {ispost}%>
+    <%if {infloat}==1%>
+        {msgbox_text}
+    <%else%>
+        <%template _msgbox%>
+    <%/if%>
+<%else%>
+<div class="wrap cl post">
+<script type="text/javascript">
+function geteditormessage(theform)
+{
+	var message = wysiwyg ? html2bbcode(getEditorContents()) : (!theform.parseurloff.checked ? parseurl(theform.message.value) : theform.message.value);
+	theform.message.value = message;
+}
+</script>
+<form method="post" name="postform" id="postform" action="" enctype="multipart/form-data" onsubmit="return validate(this);">
+    <%csharp%>
+    string formatNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+    <%/csharp%>
+    <%set (int){postid} = 0%>
+    <input type="hidden" name="posttime" id="posttime" value="{formatNow}" />
+	<%template _post%>
+	<%template _postattachments%>
+	<%if {adveditor}%>
+	<div id="specialposttable"  style="display: none;">	
+		<%if {type}=="bonus"%>	
+		<div class="exfm cl">
+			<label for="rewardprice">悬赏价格:</label>
+			<input name="topicprice" type="text" class="txt" id="topicprice" value="{usergroupinfo.minbonusprice}" size="5" maxlength="5" onkeyup="getrealprice(this.value)"/>
+				GB上传 (只允许正整数)
+				[ 悬赏范围 {usergroupinfo.minbonusprice}GB - {usergroupinfo.maxbonusprice}GB, 当前可用 {PTTools.Upload2Str(mybonustranscredits)} ]
+				[ 税后支付 <span id="realprice">3GB</span>， 其中<span id="returnprice">1.0GB</span>将在结贴时返还] 
+			<script type="text/javascript" reload="1">
+				function getrealprice(price) {
+					if (!price.search(/^\d+$/)) {
+						n = 2.0 * parseInt(price) + 1.0 * parseInt(price) * {Scoresets.GetCreditsTax()};
+						if (price > 32767) {
+							$('realprice').innerHTML = '<b>悬赏不能高于 32767</b>';
+							$('returnprice').innerHTML = '-'
+						} else if (price < {usergroupinfo.minbonusprice} || (price > {usergroupinfo.maxbonusprice})) {
+							$('realprice').innerHTML = '<b>悬赏超出范围</b>';
+							$('returnprice').innerHTML = '-'
+						} else {
+							$('realprice').innerHTML = n + 'GB';
+							$('returnprice').innerHTML = parseInt(price) + 'GB';
+						}
+					} else {
+						$('realprice').innerHTML = '<b>填写无效</b>';
+						$('returnprice').innerHTML = '-'
+					}
+				}
+			</script>
+		</div>
+		<%/if%>
+		<%if {usergroupinfo.allowpostpoll}==1&&{type}=="poll"%>
+		<div class="exfm cl">
+			<div class="sinf z">
+				<div class="cl">
+					<h4><em>选项:</em>每行填写 1 个选项</h4>
+				</div>
+				<input id="PollItemname" type="hidden" name="PollItemname" value="" />
+				<input id="PollItemvalue" type="hidden" name="PollItemvalue" value="" />
+				<div id="polloptions" class="mbm">
+					<p id="divPollItem"><a onclick="if(!delObj(document.getElementById('polloptions'),2,this.parentNode)){alert('投票项不能少于2个');}" title="删除投票项" class="del" href="javascript:;">del</a><input type="text" id="pollitemid" name="pollitemid" class="txt" style="width:340px;" tabindex="1" /></p>
+					<p><a onclick="if(!delObj(document.getElementById('polloptions'),2,this.parentNode)){alert('投票项不能少于2个');}" title="删除投票项" class="del" href="javascript:;">del</a><input type="text" id="pollitemid" name="pollitemid" class="txt" style="width:340px;" tabindex="1" /></p>
+				</div>
+				<p><a onclick="clonePoll('{config.maxpolloptions}')" href="javascript:;">+增加投票项</a></p>
+			</div>
+			<div class="sadd z">
+				<p class="mbn"><label for="polldatas">投票结束日期</label>
+					<input name="enddatetime" type="text" id="enddatetime" size="10" value="{enddatetime}" style="cursor:default" class="txt" onClick="showcalendar(event, 'enddatetime', 'cal_startdate', 'cal_enddate', '{enddatetime}');" readonly="readonly" />
+					<input type="hidden" name="cal_startdate" id="cal_startdate" size="10"  value="{enddatetime}"/>
+					<input type="hidden" name="cal_enddate" id="cal_enddate" size="10"  value=""/>
+				</p>
+				<p class="mbn"><label for="pollnum">
+					<input type="checkbox" name="multiple"  onclick="this.checked?$('maxchoicescontrol').style.display='':$('maxchoicescontrol').style.display='none';" class="checkinput" />多选投票</label>
+					<span id="maxchoicescontrol" style="display: none">最多可选项数: <input type="text" tabindex="1" value="" class="spshortinput txt" name="maxchoices" size="8"/></span>
+				</p>
+				<p class="mbn">
+					<input name="createpoll" type="hidden" id="createpoll" value="1" />
+					<input type="checkbox" tabindex="1" name="visiblepoll"/>提交投票后结果才可见</p>
+				<p class="mbn"><input type="checkbox" tabindex="1" name="allowview"/>公开投票参与人</p>
+			</div>
+		</div>
+		<%/if%>
+		<%if {type}=="lottery"%>
+		<div class="exfm cl">
+			<div class="sinf z">
+				<div class="cl">
+					<h4><em>选项:</em>每行填写 1 个选项（请确保最终 有且仅有 1个结果）</h4>
+				</div>
+				<input id="PollItemname" type="hidden" name="PollItemname" value="" />
+				<input id="PollItemvalue" type="hidden" name="PollItemvalue" value="" />
+				
+				<div id="polloptions" class="mbm">
+					<p id="divPollItem"><a onclick="if(!delObj(document.getElementById('polloptions'),2,this.parentNode)){alert('博彩项不能少于2个');}" title="删除博彩项" class="del" href="javascript:;">del</a><input type="text" id="pollitemid" name="pollitemid" class="txt" style="width:340px;" tabindex="1" /></p>
+					<p><a onclick="if(!delObj(document.getElementById('polloptions'),2,this.parentNode)){alert('博彩项不能少于2个');}" title="删除博彩项" class="del" href="javascript:;">del</a><input type="text" id="pollitemid" name="pollitemid" class="txt" style="width:340px;" tabindex="1" /></p>
+				</div>
+				<p><a onclick="clonePoll('{config.maxpolloptions}')" href="javascript:;">+增加博彩项</a></p>
+			</div>
+			<div class="sadd z">
+			  <p class="mbn"><label for="polldatas">基础发布投注额，由发布者支付<br/>最少1TB，以TB为单位</label>
+          <input name="basewager" id="basewager" size="5"  value="1"/>TB
+			  </p>
+			  <p></p>
+				<p class="mbn"><label for="polldatas">博彩结束日期</label>
+					<input name="enddatetime" type="text" id="enddatetime" size="10" value="{enddatetime}" style="cursor:default" class="txt" onClick="showcalendar(event, 'enddatetime', 'cal_startdate', 'cal_enddate', '{enddatetime}');" readonly="readonly" />
+					<input type="hidden" name="cal_startdate" id="cal_startdate" size="10"  value="{enddatetime}"/>
+					<input type="hidden" name="cal_enddate" id="cal_enddate" size="10"  value=""/>
+				</p>
+				<p class="mbn"><label for="polldatas">博彩结束时间</label>
+          <input name="cal_endtimehour" id="cal_endtimehour" size="5"  value=""/>时
+          <input name="cal_endtimemins" id="cal_endtimemins" size="5"  value=""/>分
+          <input name="createlottery" type="hidden" id="createlottery" value="1" />
+				</p>
+				<%csharp%>string formatstr="0.00";<%/csharp%>
+				<p class="mbn"><label for="polldatas" style="color:red"><b>发布【必须】先联系版主【许可】！删贴流量不退！</b></label></p>
+				<p class="mbn"><label for="polldatas">胜出彩金池 = 所有输者的投注额 + 基础发布投注</label></p>
+				<p class="mbn"><label for="polldatas">胜出彩金池分配：{(PTLottery.WAGER_RETURN_RATIO*100).ToString(formatstr)}%平均分配给胜者</label></p>
+				<p class="mbn"><label for="polldatas">返还庄家{(PTLottery.BANKER_RETURN_RATIO*100).ToString(formatstr)}%（封顶2倍基础流量）</label></p>
+				<p class="mbn"><label for="polldatas">发布者不能进行普通投注，博彩发布60分钟内可编辑</label></p>
+				<p class="mbn"><label for="polldatas">60分钟后开放投注，不可编辑。结束后可编辑选择结果</label></p>
+			</div>
+		</div>
+		  <script type="text/javascript">
+         if(typeof verctrl_post == 'undefined' || verctrl_post != '20140616')
+         {
+              alert("请按Ctrl + F5刷新页面，直到本提示不再出现方可发布");
+         }
+      </script>
+		<%/if%>
+		<%if {type}=="debate"%>
+		<div class="exfm cl">
+			<div class="sinf z">
+				<dl>
+					<dt><strong class="rq">*</strong><label for="affirmpoint">正方:</label></dt>
+					<dd><textarea tabindex="1" class="txtarea" id="positiveopinion" name="positiveopinion" style="width: 210px;" ></textarea></dd>
+					<dt><strong class="rq">*</strong><label for="negapoint">反方:</label></dt>				
+					<dd><textarea tabindex="1" class="txtarea" id="negativeopinion" name="negativeopinion" style="width: 210px;" ></textarea></dd>
+				</dl>
+			</div>
+			<div class="sadd">
+				<label for="endtime">结束时间:</label>
+				<p>
+					<input type="text" name="terminaltime" id="terminaltime" style="cursor:default;" class="txt" size="16" value="{enddatetime}" onclick="showcalendar(event, 'terminaltime', 'cal_startdate', 'cal_enddate', '{enddatetime}');" readonly />
+					<input type="hidden" name="cal_startdate" id="cal_startdate" value="{enddatetime}">
+					<input type="hidden" name="cal_enddate" id="cal_enddate" value="">
+				</p>
+			</div>
+		</div>
+		<script type="text/javascript">
+			function doadvdebate()
+			{
+				var adv_open = $('advdebate_open');
+				var adv_close = $('advdebate_close');
+				if (adv_open && adv_close)
+				{
+					if (adv_open.style.display != 'none')
+					{
+						adv_open.style.display = 'none';
+						adv_close.style.display = '';
+					}
+					else
+					{
+						adv_open.style.display = '';
+						adv_close.style.display = 'none';
+					}
+				}
+			}
+		</script>
+		<%/if%>
+		<%if {type}=="seed"%>
+		<div class="exfm cl">
+		<table class="PublishTable" summary="post" cellspacing="0" cellpadding="0" id="newpost">
+        <%if {publishnote}!=""%><tbody><tr class="PublishBar"><th></th><td></td></tr><tr class="PublishWarning"><td colspan = "2" class="PublishWarning">{publishnote}</td></tr></tbody><%/if%>
+        <tbody>
+            <tr class="PublishBar"><th></th><td></td></tr>
+            <tr><th>
+            <span class="b">种子文件</span></th><td>
+            <input class="hideinputfile" name="seed_file" type="file" id="seed_file" size="1" onchange="checkfiletype(this)" title="" />
+            <input class="file_show" name="file_show" type="text" id="file_show" size="60" onclick="$('seed_file').click();"   />
+            <input class="file_btn" type="button" onclick="$('seed_file').click();" value="选择种子" style="z-index:999;" />&nbsp;&nbsp;&nbsp;种子文件文件最大为4MB
+            </td></tr>
+        </tbody>
+     </table>
+     </div>
+      <script type="text/javascript">
+          function checkfiletype(input)
+          {
+            if(!input.value) return;
+            if(input.value.length > 8)
+            {
+              if(input.value.slice(input.value.length - 8) == ".torrent") 
+              {
+                  var filename = input.value.split("\\");
+                  var len = filename.length;
+                  $("file_show").value = filename[len-1];
+                  return;
+
+              }
+            }
+            alert("只能选择.torrent类型的文件");
+          }
+      </script>
+		<%/if%>
+		</div>
+	<%/if%>
+	</form>
+</div>
+	<%/if%>
+<%else%>
+    <%if {ispost}%>
+		<%if {needlogin}%>
+			<%template _login%>
+		<%else%>
+			 <%if {infloat}==1%>
+			 <p>{msgbox_text}</p>
+			 <%else%>
+                <%csharp%>
+                    string backLink = HttpContext.Current.Request.RawUrl.ToString();
+                    SetBackLink(backLink.Contains("&cedit=yes") ? backLink : backLink + "&cedit=yes");
+                <%/csharp%>
+			    <%template _errmsgbox%>
+			 <%/if%>
+		<%/if%>
+	<%else%>
+	<%if {needlogin}%>
+		<%template _login%>
+	<%else%>
+	   <%template _errmsgbox%>
+	<%/if%>	
+	<%/if%>
+<%/if%>
+<script type="text/javascript"  src="{jsdir}/template_calendar.js"></script>
+<%template _copyright%>
+<%template _footer%>

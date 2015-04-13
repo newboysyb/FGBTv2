@@ -1,0 +1,272 @@
+﻿<form method="post" action="javascript:PrivateBTSearchSubmit()">
+<div class="PrivateBTSeedSearchForm" id = "PrivateBTSeedSearchForm"><span>
+		<input id="PrivateBTSeedSearchOrderBy" type="hidden" name="orderby" value="{orderby}"/>
+		<input id="PrivateBTSeedSearchAsc" type="hidden" name="asc" value="{asc}"/>
+		<div class="PrivateBTseedsearchdiv" id="PrivateBTseedsearchdiv">	
+						<div class="PrivateBTseedsearchdiv1">
+						<span class="PrivateBTseedsearchText">按名称搜索种子</span>
+						<input id="PrivateBTSeedSearchhidekeywords" name="asc" value="{keywords} " onkeypress="if(event.keyCode==13) {PrivateBTSearchSubmit();return false;}"/>
+						<div class="select_typeid">
+              <select name="PrivateBTSeedSearchSelectType" class="PrivateBTSeedSearchSelect" id="PrivateBTSeedSearchSelectType">
+                  <option value="0" <%if {seedtype}==0%>selected="selected"<%/if%>>种子分类</option>
+                  <option value="1" <%if {seedtype}==1%>selected="selected"<%/if%>>电影</option>
+                  <option value="2" <%if {seedtype}==2%>selected="selected"<%/if%>>剧集</option>
+                  <option value="3" <%if {seedtype}==3%>selected="selected"<%/if%>>动漫</option>
+                  <option value="4" <%if {seedtype}==4%>selected="selected"<%/if%>>音乐</option>
+                  <option value="5" <%if {seedtype}==5%>selected="selected"<%/if%>>游戏</option>
+                  <option value="6" <%if {seedtype}==6%>selected="selected"<%/if%>>纪录</option>
+                  <option value="7" <%if {seedtype}==7%>selected="selected"<%/if%>>体育</option>
+                  <option value="8" <%if {seedtype}==8%>selected="selected"<%/if%>>综艺</option>
+                  <option value="9" <%if {seedtype}==9%>selected="selected"<%/if%>>软件</option>
+                  <option value="10" <%if {seedtype}==10%>selected="selected"<%/if%>>学习</option>
+                  <option value="11" <%if {seedtype}==11%>selected="selected"<%/if%>>视频</option>
+                  <option value="12" <%if {seedtype}==12%>selected="selected"<%/if%>>其他</option>
+              </select>
+              <script type="text/javascript">loadselect("PrivateBTSeedSearchSelectType");</script>
+            </div>
+            <div class="select_typeid">
+              <select name="PrivateBTSeedSearchSelectStat" class="PrivateBTSeedSearchSelect" id="PrivateBTSeedSearchSelectStat">
+                  <option value="0" <%if {seedstat}==0%>selected="selected"<%/if%>>正常种子</option>
+                  <option value="1" <%if {seedstat}==1%>selected="selected"<%/if%>>在线种子</option>
+                  <option value="3" <%if {seedstat}==3%>selected="selected"<%/if%>>IPv6在线</option>
+                  <option value="4" <%if {seedstat}==4%>selected="selected"<%/if%>>离线种子</option>
+                  <option value="5" <%if {seedstat}==5%>selected="selected"<%/if%>>蓝色种子</option>
+                  <option value="6" <%if {seedstat}==6%>selected="selected"<%/if%>>在线蓝种</option>
+                  <option value="7" <%if {seedstat}==7%>selected="selected"<%/if%>>IPv6蓝种</option>
+                  <option value="8" <%if {seedstat}==8%>selected="selected"<%/if%>>包含死种</option>
+                  <option value="9" <%if {seedstat}==9%>selected="selected"<%/if%>>只看死种</option>
+              </select>
+              <script type="text/javascript">loadselect("PrivateBTSeedSearchSelectStat");</script>
+            </div>
+            </div>
+            <br/>
+            
+            
+            <div class="PrivateBTseedsearchdiv2" id="divnotinkeyword">
+              <span class="PrivateBTseedsearchText">种子标题中排除</span>
+              <input id="PrivateBTSeedSearchhidenotinkeywords" name="asc" value="{notinkeywords} " onkeypress="if(event.keyCode==13) {PrivateBTSearchSubmit();return false;}"/>
+              <br/>
+            </div>
+            
+            
+            <div class="PrivateBTseedsearchdiv2">
+						<span class="PrivateBTseedsearchText">按用户搜索种子</span><input id="PrivateBTSeedSearchhideusername" onblur="PrivateBTSearchUserStatChange()" name="asc" value="{searchusername}"  onkeypress="if(event.keyCode==13) {PrivateBTSearchSubmit();return false;}"/>
+            <span id="userstatreplace">
+              <div class="select_typeid">
+                <select name="PrivateBTSeedSearchSelectuser" class="PrivateBTSeedSearchSelect" id="PrivateBTSeedSearchSelectuser">
+                    <option value="1" <%if {userstat}==1%>selected="selected"<%/if%>>上传中</option>
+                    <option value="2" <%if {userstat}==2%>selected="selected"<%/if%>>下载中</option>
+                    <option value="3" <%if {userstat}==3%>selected="selected"<%/if%>>发布的</option>
+                    <%if {searchusername}=={username}%><option value="4" <%if {userstat}==4%>selected="selected"<%/if%>>完成的</option><%/if%>
+                </select>
+                <script type="text/javascript">loadselect("PrivateBTSeedSearchSelectuser");</script>
+              </div>
+            </span>
+            </div>
+            <div id="divnotinkeywordhit" style="display:none;"><a onclick="shownotin();">排除</a></div>
+            <div class="PrivateBTseedsearchdiv3">
+						<button class="PrivateBTSeedSearchButton" onclick="PrivateBTSearchSubmit()"/> 搜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;索 </button>
+						<button class="PrivateBTSeedSearchButton" onclick="PrivateBTSearchReset()"/> 重&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置 </button>
+		        </div>
+		        
+          
+        
+		</div>
+</div>
+<div id="PrivateBTSearchTips" class="PrivateBTSearchTips"></div>
+<div id="PrivateBTSearchMenu" class="PrivateBTSearchMenu" onmouseover="clearTimeout(privatebtclock)"; onmouseout="privatebtclock=setTimeout('PrivateBTSeedSearchKeywordTypeHideMenu()',500);">
+    <a style="cursor:pointer;" onclick="PrivateBTSearchMenuSet('seedname')">种子名</a>
+    <br/><a style="cursor:pointer;" onclick="PrivateBTSearchMenuSet('username')">用户名</a>
+</div>
+
+<script language="javascript">
+function shownotin()
+{
+  $("divnotinkeyword").style.display="block";
+  $("divnotinkeywordhit").style.display="none";
+}
+var privatebtclock;
+    var currentuser = '{username}';
+    var allstat = '<div class="select_typeid"><select name=\"PrivateBTSeedSearchSelectuser\" class=\"PrivateBTSeedSearchSelect\" id=\"PrivateBTSeedSearchSelectuser\">';
+    allstat += '<option value=\"1\"';<%if {userstat}==1%>allstat += 'selected=\"selected\"';<%/if%>allstat += '>上传中</option>';
+    allstat += '<option value=\"2\"';<%if {userstat}==2%>allstat += 'selected=\"selected\"';<%/if%>allstat += '>下载中</option>';
+    allstat += '<option value=\"3\"';<%if {userstat}==3%>allstat += 'selected=\"selected\"';<%/if%>allstat += '>发布的</option>';
+    allstat += '<option value=\"4\"';<%if {userstat}==4%>allstat += 'selected=\"selected\"';<%/if%>allstat += '>完成的</option></select></div>';
+    var partstat = '<div class="select_typeid"><select name=\"PrivateBTSeedSearchSelectuser\" class=\"PrivateBTSeedSearchSelect\" id=\"PrivateBTSeedSearchSelectuser\">';
+    partstat += '<option value=\"1\"';<%if {userstat}==1%>partstat += 'selected=\"selected\"';<%/if%>partstat += '>上传中</option>';
+    partstat += '<option value=\"2\"';<%if {userstat}==2%>partstat += 'selected=\"selected\"';<%/if%>partstat += '>下载中</option>';
+    partstat += '<option value=\"3\"';<%if {userstat}==3%>partstat += 'selected=\"selected\"';<%/if%>partstat += '>发布的</option></select></div>';
+function PrivateBTSearchInputKeyDown(event)
+{
+    event = event ? event : (window.event ? window.event : null); 
+    if(event.keyCode==13)
+    { 
+        PrivateBTSearchSubmit();
+        event.returnvalue = false;
+        return;
+    }
+    else
+    { 
+        setTimeout('PrivateBTSearchUserStatChange()',50);
+        event.returnvalue = false;
+        return false;
+    }
+    event.returnvalue = false;
+    return false;
+}
+function PrivateBTSearchUserStatChange()
+{
+
+    if(document.getElementById("PrivateBTSeedSearchhideusername").value == currentuser)
+    {
+        document.getElementById('userstatreplace').innerHTML = allstat;
+    }
+    else document.getElementById('userstatreplace').innerHTML = partstat;
+    loadselect("PrivateBTSeedSearchSelectuser");
+}
+
+function PrivateBTSearchReset()
+{
+    document.getElementById("PrivateBTSeedSearchhideusername").value = "";
+    document.getElementById("PrivateBTSeedSearchhidekeywords").value = "";
+}
+function PrivateBTSeedSearchKeywordTypeHideMenu()
+{
+    document.getElementById("PrivateBTSearchMenu").className='PrivateBTSearchMenu';
+}
+function PrivateBTSeedSearchKeywordTypeshowMenu()
+{
+    var target = document.getElementById("PrivateBTseedsearchdiv");
+    var pos = new CPos(target.offsetLeft, target.offsetTop);
+    var target = target.offsetParent;
+    while (target)
+    {
+        pos.x += target.offsetLeft;
+        pos.y += target.offsetTop;
+        target = target.offsetParent
+    }
+    document.getElementById("PrivateBTSearchMenu").className='PrivateBTSearchMenuShow';
+    if(navigator.userAgent.indexOf("Firefox")!=-1)
+    {
+        document.getElementById("PrivateBTSearchMenu").style.left=(pos.x - 0) + 'px';
+        document.getElementById("PrivateBTSearchMenu").style.top=(pos.y + 28) + 'px';
+    }
+    else
+    {
+        document.getElementById("PrivateBTSearchMenu").style.left=(pos.x - 0) + 'px';
+        document.getElementById("PrivateBTSearchMenu").style.top=(pos.y + 28) + 'px';
+    }
+}
+
+function PrivateBTSearchSubmit()
+{
+    var nexturl = "{forumurl}showseeds.aspx?";
+    var type = "";
+    var orderby = "";
+    var asc = "False";
+    var keywords = "";
+    var notinkeywords = "";
+    var seedstat = "";
+    var userstat = "";
+    var username = "";
+
+    if(document.getElementById('PrivateBTSeedSearchSelectType').value=='0') type ="type=all";
+    else if(document.getElementById('PrivateBTSeedSearchSelectType').value=='1') type = 'type=movie';
+    else if(document.getElementById('PrivateBTSeedSearchSelectType').value=='2') type = 'type=tv';
+    else if(document.getElementById('PrivateBTSeedSearchSelectType').value=='3') type = 'type=comic';
+    else if(document.getElementById('PrivateBTSeedSearchSelectType').value=='4') type = 'type=music';
+    else if(document.getElementById('PrivateBTSeedSearchSelectType').value=='5') type = 'type=game';
+    else if(document.getElementById('PrivateBTSeedSearchSelectType').value=='6') type = 'type=discovery';
+    else if(document.getElementById('PrivateBTSeedSearchSelectType').value=='7') type = 'type=sport';
+    else if(document.getElementById('PrivateBTSeedSearchSelectType').value=='8') type = 'type=entertainment';
+    else if(document.getElementById('PrivateBTSeedSearchSelectType').value=='9') type = 'type=software';
+    else if(document.getElementById('PrivateBTSeedSearchSelectType').value=='10') type = 'type=staff';
+    else if(document.getElementById('PrivateBTSeedSearchSelectType').value=='11') type = 'type=video';
+    else if(document.getElementById('PrivateBTSeedSearchSelectType').value=='12') type = 'type=other';
+    else  type='type=all';
+    
+    orderby = document.getElementById('PrivateBTSeedSearchOrderBy').value;
+    asc = document.getElementById('PrivateBTSeedSearchAsc').value;
+    keywords = document.getElementById('PrivateBTSeedSearchhidekeywords').value;
+    notinkeywords = document.getElementById('PrivateBTSeedSearchhidenotinkeywords').value;
+    seedstat = document.getElementById('PrivateBTSeedSearchSelectStat').value;
+    userstat = document.getElementById('PrivateBTSeedSearchSelectuser').value;
+    username = document.getElementById('PrivateBTSeedSearchhideusername').value;
+    
+    nexturl += type;
+    if(orderby != '') nexturl += '&orderby=' + orderby;
+    if(asc != '') nexturl +=  '&asc=' + asc;
+    if(keywords != '') nexturl += '&keywords=' + escape(keywords).replace(/\+/g, '%2B').replace(/\"/g,'%22').replace(/\'/g, '%27').replace(/\//g,'%2F');
+    if(notinkeywords != '') nexturl += '&notin=' + escape(notinkeywords).replace(/\+/g, '%2B').replace(/\"/g,'%22').replace(/\'/g, '%27').replace(/\//g,'%2F');
+    if(seedstat != '') nexturl += '&seedstat=' + seedstat;
+    if(username != '') nexturl += '&username=' + username;
+    if(userstat != '') nexturl += '&userstat=' + userstat;
+    
+    window.location.href = nexturl;
+
+}
+function PrivateBTSearchSubmitPage(url)
+{
+    document.getElementById('seedsearchform').action = url;
+    document.getElementById('seedsearchform').submit()
+}
+function CPos(x, y)
+{
+    this.x = x;
+    this.y = y;
+}
+function tips()
+{
+    document.onkeydown = "";
+    var target = document.getElementById("PrivateBTseedsearchdiv");
+    var pos = new CPos(target.offsetLeft, target.offsetTop);
+    var target = target.offsetParent;
+    while (target)
+    {
+        pos.x += target.offsetLeft;
+        pos.y += target.offsetTop;
+        target = target.offsetParent
+    }
+    document.getElementById("PrivateBTSearchTips").className='PrivateBTSearchTipsShow';
+    document.getElementById("PrivateBTSearchTips").innerHTML='请使用空格分隔关键词，种子名和用户名的搜索条件会同时起作用，不用时请清除';
+    if(navigator.userAgent.indexOf("Firefox")!=-1)
+    {
+        document.getElementById("PrivateBTSearchTips").style.left=(pos.x - 0) + 'px';
+        document.getElementById("PrivateBTSearchTips").style.top=(pos.y + 28) + 'px';
+    }
+    else
+    {
+        document.getElementById("PrivateBTSearchTips").style.left=(pos.x - 0) + 'px';
+        document.getElementById("PrivateBTSearchTips").style.top=(pos.y + 28) + 'px';
+    }
+}
+function outtips(){
+    document.getElementById("PrivateBTSearchTips").className='PrivateBTSearchTips';
+    document.onkeydown = function(event) 
+    {
+        event = event ? event : (window.event ? window.event : null);   
+        //alert((event.currentTarget || document.activeElement).tagName);
+        if((event.currentTarget || document.activeElement).tagName == "INPUT")
+        {
+            event.returnvalue = true;
+            return;
+        }
+        if (event.keyCode==39) 
+        {
+            location=nextpage;
+            event.returnvalue = false;
+            return;
+        }
+        if (event.keyCode==37) 
+        {
+            location=prevpage;
+            event.returnvalue = false;
+            return;
+        }
+        event.returnvalue = true;
+        return;
+        //event.returnvalue = false;
+    }
+}
+</script>
+</form>

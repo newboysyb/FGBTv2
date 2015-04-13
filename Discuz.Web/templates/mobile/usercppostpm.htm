@@ -1,0 +1,48 @@
+﻿<%template _header%>
+    <div id="nav">
+        &raquo; <a href="">用户中心</a> &raquo; <strong>撰写短消息</strong>
+    </div>
+<%if {ispost}%>
+			<%if page_err==0%>
+          <%template _msgbox%>
+			<%else%>
+          <%template _errmsgbox%>
+			<%/if%>	  
+<%else%>
+    <%if page_err==0%>
+        <%if ispost%>
+            <%template _msgbox%>
+        <%else%>	
+            <div class="vt">
+                <div class="bm">
+                    <form id="postpm" name="postpm" method="post" action="">	
+                    <div class="bm_h">
+                        撰写短消息
+                    </div>
+                    
+                    收件人：<br/>
+                    <input name="msgto" type="text" id="msgto" value="{msgto}" size="25" class="txt"/>
+                    标题：<br/>
+                    <input name="subject" type="text"id="subject" value="{subject}" size="40" class="txt"/>
+                    内容：<br/>
+                    <textarea name="message" cols="60" rows="8" id="message" class="txt">{message}</textarea>
+                    
+                    <%if {isseccode}%>
+                        <%template _vcode%>
+                    <%/if%>
+                    <br/>
+                    <input name="savetosentbox" type="checkbox" id="savetosentbox" value="1"  checked="true"/>保存到发件箱
+                    <input type="checkbox" name="emailnotify" id="emailnotify"/>Email通知
+                    <br/>
+                    <button name="sendmsg" type="submit" id="sendmsg" class="pn"><span>立即发送</span></button>
+                    </form>
+                </div>            
+            </div>
+                       
+        <%/if%>
+		<%else%>
+        <%template _errmsgbox%>
+		<%/if%>
+<%/if%>
+<%template _copyright%>
+<%template _footer%>

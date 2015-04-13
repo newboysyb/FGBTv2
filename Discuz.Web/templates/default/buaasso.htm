@@ -1,0 +1,17 @@
+﻿<%template _header%>
+<%if {infloat}!=1%>
+<div class="wrap cl pageinfo">
+	<div id="nav">
+		<%if {usergroupinfo.allowsearch}>0%>
+			<%template _quicksearch%>
+		<%/if%><a href="{config.forumurl}" class="title">{config.forumtitle}</a> &raquo; BUAASSO
+	</div>
+</div>
+<%/if%>
+<%if page_err==0%>
+<%template _msgbox%>
+<%else%>
+<%template _errmsgbox%>
+<%/if%>
+<%template _copyright%>
+<%template _footer%>

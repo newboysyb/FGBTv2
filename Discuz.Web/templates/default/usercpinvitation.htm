@@ -1,0 +1,156 @@
+﻿<%template _header%>
+<div class="wrap cl pageinfo">
+	<div id="nav">
+		<%if {usergroupinfo.allowsearch}>0%>
+			<%template _quicksearch%>
+		<%/if%>
+		<a href="{config.forumurl}" class="title">{config.forumtitle}</a> &raquo; <a href="usercpprofile.aspx">用户中心</a> &raquo; <strong>购买邀请</strong>
+	</div>
+</div>
+<div class="wrap uc cl">
+	<%template _menu%>
+	<div class="uc_main">
+	<div class="uc_content">
+		<h1>购买邀请</h1>
+		<%template _invitemenu%>	
+    <%if page_err==0%>
+    		{jscreditsratearray}
+      <%if ispost%>
+        <%template _usercpmsgbox%>
+      <%else%>
+      <%if {EPayments.IsOpenEPayments()}%>
+	    <script type="text/javascript" reload="1">
+	        function RedirectPayPage() {
+	            var paytype = $('paytype').value;
+	            var amount = $('paycredits').value;
+	            if (amount == '') {
+	                alert('您还没有填写需要充值的积分数量');
+	                return false;
+	            }
+	            if(isNaN(amount)){
+	                alert('请输入正确的数值');
+	                return false;
+	            }
+	            if (paytype == '') {
+	                alert('您还没有选择充值平台');
+	                return false;
+	            }
+	            if(amount<{config.Mincreditstobuy}){
+	                alert('您购买的积分数超过了系统要求的最低数量，无法购买');
+	                return false;
+	            }
+	            if({config.Maxcreditstobuy}>0&&amount>{config.Maxcreditstobuy}){
+	                alert('您购买的积分数超过了系统要求的最高数量，无法购买');
+	                return false;
+	            }
+	            if(amount%1!=0){
+	                alert('购买的积分数必须是整数');
+	                return false;
+	            }
+	            if(!is_ie){
+	                alert('由于您使用的浏览器为非IE浏览器，所以可能造成支付失败，请最好使用IE浏览器');
+	            }
+//	            amount=amount-(amount%1);
+	            window.location.href = "usercpcreditspay.aspx?redirect=" + paytype + "&amount=" + amount;
+	        }
+
+	        function ShowPayRMB() {
+	            var amount = $('paycredits').value;
+	            if(isNaN(amount)){
+	                $('rmbmsg').style.color = '#FF0000';
+	                $('rmbmsg').innerHTML = '请输入正确的数值';
+	                return false;
+	            }	                
+	            if(amount!=''){
+	                var result = amount/{config.Cashtocreditrate};
+	                if(amount%1!=0){
+	                    $('rmbmsg').style.color = '#FF0000';
+	                    $('rmbmsg').innerHTML = '购买的积分数必须是整数';
+	                }
+	                else if(amount<{config.Mincreditstobuy}){
+	                    $('rmbmsg').style.color = '#FF0000';
+	                    $('rmbmsg').innerHTML = '系统规定您至少应购买{config.Mincreditstobuy}个积分';
+	                }
+	                else if({config.Maxcreditstobuy}>0&&amount>{config.Maxcreditstobuy}){
+	                     $('rmbmsg').style.color = '#FF0000';
+	                     $('rmbmsg').innerHTML = '系统规定您至多可以购买{config.Maxcreditstobuy}个积分';
+	                }
+	                else{
+	                    $('rmbmsg').style.color = '#000000';
+	                    $('rmbmsg').innerHTML = '需要支付 ￥'+ Math.round((Math.floor(result*1000)/10))/100 + '元';
+	                }
+	            }
+	            else{
+	                $('rmbmsg').innerHTML = '';
+	            }
+	        }
+	    </script>
+      <%/if%>
+        <form action="" method="post" id="postform">
+        <table cellspacing="0" cellpadding="0" class="tfm" summary="共享率保护">
+          <caption>
+            <div class="hintinfo" style="margin:0;">
+					    <p>邀请码有效期为14天！当前邀请码的价格为{PTTools.Upload2Str(inviteprice)}上传流量/个，您所拥有的上传现在可以购买{maxnumber}个邀请，您可以将金币转换为上传后再购买</p>
+            </div>
+            <br/>
+            <div class="hintinfo" style="margin:0;">
+              <p>{alertmessage}</p>
+            </div>
+          </caption>
+          <tbody>
+          <tr>
+              <th>当前帐户:</th>
+              <td>
+                  <%if {score[1]}!=""%>
+                  {score[1]}: <em>{user.extcredits1}</em>&nbsp;&nbsp;
+                  <%/if%>
+                  <%if {score[2]}!=""%>
+                  {score[2]}: <em>{user.extcredits2}</em>&nbsp;&nbsp;
+                  <%/if%>
+                  <%if {score[3]}!=""%>
+                  {score[3]}: <em>{PTTools.Upload2Str(user.Extcredits3)}</em>&nbsp;&nbsp;
+                  <%/if%>
+                  <%if {score[4]}!=""%>
+                  {score[4]}: <em>{PTTools.Upload2Str(user.Extcredits4)}</em>&nbsp;&nbsp;
+                  <%/if%>
+                  <%if {score[5]}!=""%>
+                  {score[5]}: <em>{user.extcredits5}</em>&nbsp;&nbsp;
+                  <%/if%>
+                  <%if {score[6]}!=""%>
+                  {score[6]}: <em>{user.extcredits6}</em>&nbsp;&nbsp;
+                  <%/if%>
+                  <%if {score[7]}!=""%>
+                  {score[7]}: <em>{user.extcredits7}</em>&nbsp;&nbsp;
+                  <%/if%>
+                  <%if {score[8]}!=""%>
+                  {score[8]}: <em>{user.extcredits8}</em>&nbsp;&nbsp;
+                  <%/if%>
+              </td>
+          </tr>
+          <tr>
+              <th>购买邀请码数量:</th>
+              <td>
+                  <input name="paynum" type="text" id="paynum" value="1" size="10" class="txt"/><br/>
+              </td>
+          </tr>
+            <th>验证用户密码</th>
+            <td><input name="password" type="password" id="password" size="20" class="txt"/></td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button type="submit" name="Submit" class="pn"><span>确定</span></button>
+            </td>
+          </tr>
+          
+          </tbody>
+          </table>
+          </form>
+      <%/if%>
+    <%else%>
+      <%template _usercperrmsgbox%>
+    <%/if%>
+	</div>
+	</div>
+</div>
+<%template _copyright%>
+<%template _footer%>

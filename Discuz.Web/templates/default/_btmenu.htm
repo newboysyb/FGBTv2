@@ -1,0 +1,7 @@
+﻿<%if {userid}>0%>
+<ul class="f_tab">
+	<li <%if pagename=="usercpratioprotect.aspx"%>class="cur_tab"<%/if%>><a href="usercpratioprotect.aspx">共享率保护</a></li>
+  <li <%if pagename=="usercpresetpasskey.aspx"%>class="cur_tab"<%/if%>><a href="usercpresetpasskey.aspx">重置用户识别码（Passkey）</a></li>
+	<li <%if pagename=="usercpresetpeer.aspx"%>class="cur_tab"<%/if%>><a href="usercpresetpeer.aspx">重置上传下载列表</a></li>
+</ul>
+<%/if%>

@@ -1,0 +1,40 @@
+﻿<%template _header%>
+
+    <div id="nav">
+        &raquo; <a href="">用户中心</a> &raquo; <strong>通知</strong>
+    </div>
+    <%if page_err==0%>
+        <%if ispost%>
+            <%template _msgbox%>
+        <%else%>	
+
+            <form id="noticelist" name="noticelist" method="post" action=""> 
+          
+                <div class="vt">
+                    <div class="bm">
+                        <div class="bm_h">
+                            通知
+                        </div>
+                        <%if {noticeinfolist.Count}==0%>
+                            <div>暂无新的通知</div>
+                        <%else%>
+                            <%loop (NoticeInfo) noticeinfo noticeinfolist%>
+                                <div class="bm_c bm_c_bg">
+                                    <div class="bm_user">
+                                        <%set (string){postdatetime}=ForumUtils.ConvertDateTimeWithColor({noticeinfo.postdatetime})%>	
+                                        <span class="xg1">{postdatetime}</span><%if {noticeinfo.New}==1%> <span style="color:#D00"> 新通知 New! </span> <%/if%><br/>
+                                        <%set (string){note}=UBB.ParseUrl({noticeinfo.note}) %>
+                                        <%if {noticeinfo.New}==1%><strong>{note}</strong><%else%>{note}<%/if%>
+                                    </div>
+                                </div>
+                            <%/loop%>
+                        <%/if%>
+                    </div>
+                </div>    
+            </form>
+        <%/if%>
+		<%else%>
+        <%template _errmsgbox%>
+		<%/if%>
+<%template _copyright%>
+<%template _footer%>

@@ -1,0 +1,5 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Web.Services.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Web.Services.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web.Services\obj\Release\ResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web.Services\obj\Release\Discuz.Web.Services.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web.Services\obj\Release\Discuz.Web.Services.pdb

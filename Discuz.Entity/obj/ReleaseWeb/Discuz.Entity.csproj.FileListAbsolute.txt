@@ -1,0 +1,19 @@
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Entity\bin\ReleaseWeb\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Entity\bin\ReleaseWeb\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Entity\bin\ReleaseWeb\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Entity\bin\ReleaseWeb\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Entity\bin\ReleaseWeb\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Entity\bin\ReleaseWeb\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Entity\bin\ReleaseWeb\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Entity\obj\ReleaseWeb\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Entity\obj\ReleaseWeb\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\bin\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\bin\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\bin\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\bin\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\bin\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\bin\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\bin\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\obj\ReleaseWeb\Discuz.Entity.csprojResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\obj\ReleaseWeb\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Entity\obj\ReleaseWeb\Discuz.Entity.pdb

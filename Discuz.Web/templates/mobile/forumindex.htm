@@ -1,0 +1,72 @@
+﻿<%template _header%>
+
+    <div id="nav">
+    &raquo; 首页
+    </div>
+     <%set (bool){evenpage} = false%>
+     
+     <%set (string){displaytopten}="displaytopten"%>
+     <%if {DNTRequest.GetString(displaytopten)}=="1"%>
+     <div class="fl">
+        <div class="bm">
+            <div class="bm_h">今日十大</div>
+            <%loop toptentopic PTTopTen.GetTopTenTopics()%>                                  
+                  <%if {toptentopic[_id]}<11%>
+                  <div class="bm_c<%if {evenpage}==true%> even<%else%> add<%/if%><%set {evenpage} = !{evenpage}%>">
+                      <img src="/images/top/{toptentopic[_id]}.gif" />&nbsp;<a href="showforum-{toptentopic[fid]}.aspx" target="_blank">[&nbsp;{toptentopic[forumname]}&nbsp;]</a>&nbsp;
+                      <%if {toptentopic[typeid]}!="0"%><a href="showforum.aspx?forumid={toptentopic[fid]}&typeid={toptentopic[typeid]}" >[&nbsp;{toptentopic[typename]}&nbsp;]</a>&nbsp;<%/if%>
+                      <a href="showtopic-{toptentopic[tid]}.aspx" class="xg2"  title="今天参与人数 {toptentopic[repliestoday]}， {toptentopic[title]}">{toptentopic[title]}</a>&nbsp;&nbsp;<span title="今天参与人数 {toptentopic[repliestoday]}， {toptentopic[title]}">(&nbsp;{toptentopic[repliestoday]}&nbsp;)</span>
+                  </div>
+                  <%/if%>
+            <%/loop%>
+     <%else%>
+          <a href="forumindex.aspx?displaytopten=1">查看今日十大</a>
+     <%/if%>
+
+
+
+
+    <%set (int){lastforumlayer} = -1%>
+    <%set {evenpage} = false%>
+    <div class="fl">
+    <%loop (IndexPageForumInfo) forum forumlist%>
+    <%if {forum.layer}==0%>
+         <%set {evenpage} = false%>
+        <%if {lastforumlayer}==0||{lastforumlayer}==1%>
+            </div>
+        <%/if%>
+        <div class="bm">
+        <div class="bm_h">
+            <%set {aspxrewriteurl} = this.ShowForumAspxRewrite({forum.fid},0,{forum.rewritename})%>
+            <a href="{aspxrewriteurl}">{forum.name}</a>
+        </div>
+    <%else if {forum.layer}==1%>
+        <%set {lastforumlayer} = 1%>
+        <%set {evenpage} = !{evenpage}%>
+        <%if {evenpage}==true%>
+        <div class="bm_c even">
+        <%else%>
+        <div class="bm_c add">
+        <%/if%>
+            <%set {aspxrewriteurl} = this.ShowForumAspxRewrite({forum.fid},0,{forum.rewritename})%>
+            <a href="{aspxrewriteurl}">{forum.name}</a><%if {forum.todayposts}>0%><font class="xg1">({forum.todayposts})</font><%/if%>
+        </div>
+    <%/if%>
+    <%/loop%>
+    <%if {lastforumlayer}==0||{lastforumlayer}==1%>
+        </div>
+    <%/if%>
+    </div>
+
+
+
+	今日发帖:<em>{todayposts}</em><span class="pipe">|</span>
+	最高发帖:<em>{highestposts}</em><span class="pipe">|</span>
+	在线:<em>{totalonline}</em><span class="pipe">|</span>
+	最高在线:<em>{highestonlineusercount}</em><span class="pipe">|</span>
+	主题:<em>{totaltopic}</em><span class="pipe">|</span>
+	帖子:<em>{totalpost}</em><span class="pipe">|</span>
+	注册用户:<em>{totalusers}</em>
+
+<%template _copyright%>
+<%template _footer%>

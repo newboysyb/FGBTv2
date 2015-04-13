@@ -1,0 +1,19 @@
+<div class="fl">
+    <div class="bm">
+        <div class="bm_h">子版块</div>
+        <div class="bm_c arrow_r">
+            <%set (bool){evenpage} = false%>
+            <%loop (IndexPageForumInfo) subforum subforumlist%>
+                <%set {evenpage} = !{evenpage}%>
+                <%if {evenpage}==true%>
+                <div class="bm_c even">
+                <%else%>
+                <div class="bm_c add">
+                <%/if%>
+                    <%set {aspxrewriteurl} = this.ShowForumAspxRewrite({subforum.fid},0,{subforum.rewritename})%>
+                    <a href="{aspxrewriteurl}">{subforum.name}</a><%if {subforum.todayposts}>0%><font class="xg1">({subforum.todayposts})</font><%/if%>
+                </div>
+            <%/loop%>
+        </div>
+    </div>
+</div>

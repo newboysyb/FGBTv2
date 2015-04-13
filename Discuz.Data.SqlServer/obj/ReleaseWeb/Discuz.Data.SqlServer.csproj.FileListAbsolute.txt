@@ -1,0 +1,35 @@
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Discuz.Data.SqlServer.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Discuz.Data.SqlServer.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Discuz.Data.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Discuz.Cache.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Discuz.Data.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Discuz.Cache.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\bin\ReleaseWeb\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\obj\ReleaseWeb\Discuz.Data.SqlServer.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Data.SqlServer\obj\ReleaseWeb\Discuz.Data.SqlServer.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Discuz.Data.SqlServer.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Discuz.Data.SqlServer.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Discuz.Data.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Discuz.Cache.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Discuz.Data.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Discuz.Cache.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\bin\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\obj\ReleaseWeb\Discuz.Data.SqlServer.csprojResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\obj\ReleaseWeb\Discuz.Data.SqlServer.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\obj\ReleaseWeb\Discuz.Data.SqlServer.pdb

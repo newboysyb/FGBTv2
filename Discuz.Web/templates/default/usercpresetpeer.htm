@@ -1,0 +1,62 @@
+﻿<%template _header%>
+<div class="wrap cl pageinfo">
+	<div id="nav">
+		<%if {usergroupinfo.allowsearch}>0%>
+			<%template _quicksearch%>
+		<%/if%>
+		<a href="{config.forumurl}" class="title">{config.forumtitle}</a> &raquo; <a href="usercpprofile.aspx">用户中心</a> &raquo; <strong>重置上传下载列表</strong>
+	</div>
+</div>
+<div class="wrap uc cl">
+	<%template _menu%>
+	<div class="uc_main">
+	<div class="uc_content">
+		<h1>重置上传下载列表</h1>
+		<%template _btmenu%>	
+    <%if page_err==0%>
+      <%if ispost%>
+        <%template _usercpmsgbox%>
+      <%else%>
+        <form action="" method="post" id="postform">
+        <table cellspacing="0" cellpadding="0" class="tfm" summary="共享率保护">
+          <caption>
+            <div class="hintinfo" style="margin:0;">
+                <p>此功能用以 “当客户端机器因意外掉电等原因重新启动uTorrent，此时服务器端仍保留有之前上传下载记录，从而导致出现红种” 的情况</p>
+                <p>操作过程：请先将所有种子停止，然后使用清空上传功能，之后再重新开启所有任务</p>
+                <p>注意：请勿频繁使用此功能，否则将造成上传流量统计不全、下载被重复统计等后果</p>
+            </div>
+          </caption>
+          <tbody>
+          <tr>
+              <th>正在上传的种子数:</th>
+              <td>
+                  <a href="{forumurl}showseeds.aspx?type=all&orderby=0&asc=False&seedstat=0&username={user.username}&userstat=1" style="color:#09C; font-weight:bold;"><img src="{forumurl}templates/{templatepath}/images/bt/upcount.png" title="正在上传种子数"/> {user.UpCount}</a><br/>
+              </td>
+          </tr>
+          <tr>
+              <th>正在下载的种子数:</th>
+              <td>
+                  <a href="{forumurl}showseeds.aspx?type=all&orderby=0&asc=False&seedstat=0&username={user.username}&userstat=2" style="color:#F60; font-weight:bold;"><img src="{forumurl}templates/{templatepath}/images/bt/downcount.png" title="正在下载种子数"/> {user.DownCount}</a>
+              </td>
+          </tr>
+          <tr>
+            <th>验证用户密码</th>
+            <td><input name="password" type="password" id="password" size="20" class="txt"/></td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button type="submit" name="Submit" class="pn"><span>确定</span></button>
+            </td>
+          </tr>
+          </tbody>
+          </table>
+          </form>
+      <%/if%>
+    <%else%>
+      <%template _usercperrmsgbox%>
+    <%/if%>
+	</div>
+	</div>
+</div>
+<%template _copyright%>
+<%template _footer%>

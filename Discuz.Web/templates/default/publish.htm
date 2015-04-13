@@ -1,0 +1,82 @@
+﻿<%template _header%>
+<script type="text/javascript" src="{jsdir}/bbcode.js"></script>
+<script type="text/javascript" src="{jsdir}/editor.js"></script>
+<script type="text/javascript" src="{jsdir}/futuregarden.js"></script>
+<%if {infloat}!=1%>
+<div class="wrap cl pageinfo">
+	<div id="nav">
+	<%if {usergroupinfo.allowsearch}>0%>
+		<%template _quicksearch%>
+	<%/if%>
+	<a href="{config.forumurl}" class="title">{config.forumtitle}</a> &raquo; <%if {forum.Pathlist}!=""%>{ShowForumAspxRewrite(forum.Pathlist.Trim(),forumid,forumpageid)}  &raquo; <%/if%><strong>发布新种子</strong>
+	</div>
+</div>
+ <%/if%>
+<script type="text/javascript" reload="1">
+var postminchars = parseInt('{config.minpostsize}');
+var postmaxchars = parseInt('{config.maxpostsize}');
+var disablepostctrl = parseInt('{disablepost}');
+var forumpath = "{forumpath}";
+var posturl=forumpath+'publish.aspx?forumid={forumid}&forumpage={forumpageid}';
+var postaction='{rooturl}publish.aspx?infloat=1&forumid={forumid}&'
+</script>
+<%if page_err==0%>
+<%if {ispost}%>
+    <%if {infloat}==1%>
+        {msgbox_text}
+    <%else%>
+        <%template _msgbox%>
+    <%/if%>
+<%else%>
+<div class="wrap cl post">
+<script type="text/javascript">
+function geteditormessage(theform)
+{
+	var message = wysiwyg ? html2bbcode(getEditorContents()) : (!theform.parseurloff.checked ? parseurl(theform.message.value) : theform.message.value);
+	theform.message.value = message;
+}
+</script>
+<form method="post" name="postform" id="postform" action="" enctype="multipart/form-data" onsubmit="return checkinput(this);">
+    <%csharp%>
+    string formatNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+    <%/csharp%>
+    <%set (int){postid} = 0%>
+    <input type="hidden" name="posttime" id="posttime" value="{formatNow}" />
+	<%template _seedpost%>
+	<%template _postattachments%>
+	<%if {adveditor}%>
+	<div id="specialposttable"  style="display: none;">	
+		<div class="PrivateBTexfm cl">
+			<%template _seedpublish%>
+		</div>
+  </div>
+	<%/if%>
+</form>
+</div>
+	<%/if%>
+<%else%>
+    <%if {ispost}%>
+		<%if {needlogin}%>
+			<%template _login%>
+		<%else%>
+			 <%if {infloat}==1%>
+			 <p>{msgbox_text}</p>
+			 <%else%>
+                <%csharp%>
+                    string backLink = HttpContext.Current.Request.RawUrl.ToString();
+                    SetBackLink(backLink.Contains("&cedit=yes") ? backLink : backLink + "&cedit=yes");
+                <%/csharp%>
+			    <%template _errmsgbox%>
+			 <%/if%>
+		<%/if%>
+	<%else%>
+	<%if {needlogin}%>
+		<%template _login%>
+	<%else%>
+	   <%template _errmsgbox%>
+	<%/if%>	
+	<%/if%>
+<%/if%>
+<script type="text/javascript"  src="{jsdir}/template_calendar.js"></script>
+<%template _copyright%>
+<%template _footer%>

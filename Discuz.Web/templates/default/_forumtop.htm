@@ -1,0 +1,85 @@
+<%if {forumhotconfiginfo.enable}%>
+<script type="text/javascript">
+    function top_tabselect(id) {
+        $('top_layer_' + id).style.display = ''
+        $('top_tab_li_' + id).className = 'current'
+        for (var i = 1; i <= 1; i++) {
+            if (i != id) {
+                if ($('top_tab_li_' + i)) {
+                    $('top_tab_li_' + i).className = 'switchNavItem'
+                    $('top_layer_' + i).style.display = 'none';
+                }
+            }
+        }
+    }
+    function topseed_tabselect(id) {
+        $('topseed_layer_' + id).style.display = ''
+        $('topseed_tab_li_' + id).className = 'current'
+        for (var i = 1; i <= 2; i++) {
+            if (i != id) {
+                if ($('topseed_tab_li_' + i)) {
+                    $('topseed_tab_li_' + i).className = 'switchNavItem'
+                    $('topseed_layer_' + i).style.display = 'none';
+                }
+            }
+        }
+    }
+</script>
+
+<div class="PrivateBTTodayTop">
+    <div class="PrivateBTTopLeft" style="height:278px;  width:100%; overflow:hidden; float:left;">
+        <div class="main cl forumhot">
+            <table width="50%" cellspacing="0" cellpadding="0">
+              <tbody>
+                  <tr>
+                    <td>
+                        <div class="title_bar xg2">
+                          <ul id="tabswi1_A" class="tab_forumhot">
+                                <li class="switchNavItem" index="2" id="top_tab_li_1"><a href="javascript:"  onmousemove="top_tabselect(1)">十大主题</a></li>
+                          </ul>
+                        </div>
+                        <div id="tabswi1_B" class="pd cl">
+                              <div class="newHotB" name="top_layer_1" id="top_layer_1"  style="display:none">	
+                              <ul class="toplist">
+                                <%loop toptentopic PTTopTen.GetTopTenTopics()%>                                  
+                                      <%if {toptentopic[_id]}<11%>
+                                      <li><img src="/images/top/{toptentopic[_id]}.gif" />&nbsp;<a href="showforum-{toptentopic[fid]}.aspx" target="_blank">[&nbsp;{toptentopic[forumname]}&nbsp;]</a>&nbsp;
+                                      <%if {toptentopic[typeid]}!="0"%><a href="showforum.aspx?forumid={toptentopic[fid]}&typeid={toptentopic[typeid]}" >[&nbsp;{toptentopic[typename]}&nbsp;]</a>&nbsp;<%/if%>
+                                      <a href="showtopic-{toptentopic[tid]}.aspx" target="_blank" class="xg2"  title="今天参与人数 {toptentopic[repliestoday]}， {toptentopic[title]}">{toptentopic[title]}</a>&nbsp;&nbsp;<span title="今天参与人数 {toptentopic[repliestoday]}， {toptentopic[title]}">(&nbsp;{toptentopic[repliestoday]}&nbsp;)</span></li>
+                                      <%/if%>
+                                <%/loop%>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<%/if%>
+<script type="text/javascript">
+    for (var i = 1; i <= 1; i++) {
+        try {
+            $('top_layer_' + i).style.display = ''
+            $('top_tab_li_' + i).className = 'current'
+            break;
+        }
+        catch (e) {
+            continue;
+        }
+    }
+    for (var i = 1; i <= 1; i++) {
+        try {
+            $('topseed_layer_' + i).style.display = ''
+            $('topseed_tab_li_' + i).className = 'current'
+            break;
+        }
+        catch (e) {
+            continue;
+        }
+    }
+</script>

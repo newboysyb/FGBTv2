@@ -1,0 +1,69 @@
+﻿<%template _header%>
+<div class="wrap cl pageinfo">
+	<div id="nav">
+		<%if {usergroupinfo.allowsearch}>0%>
+			<%template _quicksearch%>
+		<%/if%>
+		<a href="{config.forumurl}" class="title">{config.forumtitle}</a> &raquo; <a href="usercpprofile.aspx">用户中心</a> &raquo; <strong>已用/已过期邀请码</strong>
+	</div>
+</div>
+<div class="wrap uc cl">
+	<%template _menu%>
+	<div class="uc_main">
+	<div class="uc_content">
+		<h1>已用/已过期邀请码</h1>
+		<%template _invitemenu%>	
+    <%if page_err==0%>
+    <div class="pages_btns">
+			<div class="pages">
+			<em>{pageid}/{pagecount}页</em> {pagenumbers}
+			</div>
+		</div>
+				<%if {invitationlist.rows.Count}>0%>	
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="datatable">
+              <caption>
+                <div class="hintinfo" style="margin:0;">
+                    <p>请注意：如果被邀请人因为严重违反论坛相关规定被管理人员禁封，您将受到扣除500G上传的处罚。详情请查看公告区通知</p>
+                    <p>请注意：邀请人真实上传达到一定值，您将获得奖励上传，最多可达270G。详情请查看公告区通知</p>
+                </div>
+                <br/>
+              </caption>
+              <tr class="colplural">
+              <th width="10%">序号</th>
+              <th width="10%">邀请码ID</th>
+              <th width="30%">邀请码</th>
+              <th width="20%">购买时间</th>
+							<th width="20%">有效期</th>
+							<th width="10%">状态</th>
+            </tr>
+            <%loop invitation invitationlist%>
+            <tbody>
+            <tr class="messagetable" onmouseover="this.className='messagetableon'" onmouseout="this.className='messagetable'">
+                          <td>{invitation[sn]}</td>
+                          <td>{invitation[id]}</td>
+                          <td>{invitation[invitekey]}</td>
+                          <td>{invitation[buytime]}</td>
+                          <td>{invitation[valid]}</td>
+                          <td>{invitation[status]}</td>
+            </tr>
+            </tbody>
+            <%/loop%>
+            </table>
+        <%else%>
+            <div class="zerothreads">暂无记录</div>
+        <%/if%>
+
+		<div class="pages_btns">
+			<div class="pages">
+			<em>{pageid}/{pagecount}页</em> {pagenumbers}
+			</div>
+		</div>
+        
+    <%else%>
+      <%template _usercperrmsgbox%>
+    <%/if%>
+	</div>
+	</div>
+</div>
+<%template _copyright%>
+<%template _footer%>

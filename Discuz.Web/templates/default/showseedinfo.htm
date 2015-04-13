@@ -1,0 +1,488 @@
+<%template _header%>	
+    <%if page_err==0%>
+	    <div id="floatlayout_topicadmin">
+          <h3 class="flb">
+            <em id="return_emailfriend">种子详细命名信息</em>
+            <span><a href="javascript:;" class="flbc" onclick="hideWindow('showseedinfo{seedid}')" title="关闭(ESC)">关闭</a></span>
+          </h3>
+          <h3 class="flb">
+              <em id="em1">
+                  <a href="showtopic-{seedinfo.TopicId}.aspx">
+                  <%if {seedinfo.DownloadRatio}==0%>
+                      <font style="color:#00F">{seedinfo.TopicTitle}</font>
+                  <%else%>
+                      {seedinfo.TopicTitle}
+                  <%/if%>
+                  </a>
+              </em>
+          </h3>
+          <h3 class="flb">
+              <em id="em1">
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/{seedinfo.Type}.png" title="{PrivateBT.Type2Name(seedinfo.Type)}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <a href="{forumpath}downloadseed.aspx?seedid={seedinfo.SeedId}">
+                      <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/download.gif" title="下载种子"/>
+                  </a>
+                  <%if {rationote}!=""%>&nbsp;&nbsp;&nbsp;&nbsp;{rationote}<%/if%>
+              </em>
+          </h3>
+          <div class="PrivateBTInfoFileListBorder" id="PrivateBTInfoListBorder_showseedinfo{seedid}">
+              <div class="PrivateBTInfoListBorder2" id="PrivateBTInfoListBorder2_showseedinfo{seedid}">
+                     <!--  列表开始 -->
+                         <%if {seedinfo.Type}==1%>
+                         <table class="PrivateBTSeedInfoTableMovie">
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td width="15%">中文名：</td>
+                              <td width="85%">{seedinfo.Info1}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>英文名：</td>
+                              <td>{seedinfo.Info2}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>IMDb编号：</td>
+                              <td>{seedinfo.Info3}&nbsp;&nbsp;&nbsp;&nbsp;<%if {seedinfo.type}==1&&imdblink!=""%><a href="{imdblink}">{imdblink}</a><%/if%></td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>电影类别：</td>
+                              <td>{seedinfo.Info4}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>分辨率：</td>
+                              <td>{seedinfo.Info5}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>视频格式：</span></td>
+                              <td>{seedinfo.Info6}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>音频格式：</td>
+                              <td>{seedinfo.Info7}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>导演：</td>
+                              <td>{seedinfo.Info8}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>演员：</td>
+                              <td>{seedinfo.Info9}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>发行时间：</td>
+                              <td>{seedinfo.Info10}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>制片国家/地区：</td>
+                              <td>{seedinfo.Info11}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>语言：</td>
+                              <td>{seedinfo.Info12}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>字幕：</td>
+                              <td>{seedinfo.Info13}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>分级：</td>
+                              <td>{seedinfo.Info14}</td>
+                            </tr>
+                          </table>
+                          <%else if {seedinfo.Type}==2%>
+                          <table class="PrivateBTSeedInfoTableMovie">
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td width="15%">国家/地区：</td>
+                              <td width="85%" >{seedinfo.Info1}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>中文名：：</td>
+                              <td>{seedinfo.Info2}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>英文名：</td>
+                              <td>{seedinfo.Info3}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>季度信息：</td>
+                              <td>{seedinfo.Info4}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>语言：</td>
+                              <td>{seedinfo.Info5}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>分辨率：</span></td>
+                              <td>{seedinfo.Info6}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>字幕：</td>
+                              <td>{seedinfo.Info7}</td>
+                            </tr>
+                          </table>
+                          <%else if {seedinfo.Type}==3%>
+                          <table class="PrivateBTSeedInfoTableMovie">
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td width="15%">国家/地区：</td>
+                              <td width="85%" >{seedinfo.Info1}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>中文名：</td>
+                              <td>{seedinfo.Info2}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>英文名：</td>
+                              <td>{seedinfo.Info3}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>季度信息：</td>
+                              <td>{seedinfo.Info4}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>类别：</td>
+                              <td>{seedinfo.Info5}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>语言：</span></td>
+                              <td>{seedinfo.Info6}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>视频格式：</td>
+                              <td>{seedinfo.Info7}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>片源：</td>
+                              <td>{seedinfo.Info8}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>字幕：</td>
+                              <td>{seedinfo.Info9}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>字幕组：</td>
+                              <td>{seedinfo.Info10}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>发行时间：</td>
+                              <td>{seedinfo.Info11}</td>
+                            </tr>
+                          </table>
+                          <%else if {seedinfo.Type}==4%>
+                          <table class="PrivateBTSeedInfoTableMovie">
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td width="15%">国家/地区：</td>
+                              <td width="85%" >{seedinfo.Info1}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>类别：</td>
+                              <td>{seedinfo.Info2}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>艺术家：</td>
+                              <td>{seedinfo.Info3}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>专辑名：</td>
+                              <td>{seedinfo.Info4}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>发行时间：</td>
+                              <td>{seedinfo.Info5}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>语言：</span></td>
+                              <td>{seedinfo.Info6}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>文件格式：</td>
+                              <td>{seedinfo.Info7}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>码率：</td>
+                              <td>{seedinfo.Info8}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>发行：</td>
+                              <td>{seedinfo.Info9}</td>
+                            </tr>
+                          </table>
+                          <%else if {seedinfo.Type}==5%>
+                          <table class="PrivateBTSeedInfoTableMovie">
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td width="15%">平台：</td>
+                              <td width="85%" >{seedinfo.Info1}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>中文名：</td>
+                              <td>{seedinfo.Info2}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>英文名：</td>
+                              <td>{seedinfo.Info3}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>类别：</td>
+                              <td>{seedinfo.Info4}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>语言：</td>
+                              <td>{seedinfo.Info5}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>文件格式：</span></td>
+                              <td>{seedinfo.Info6}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>制作公司：</td>
+                              <td>{seedinfo.Info7}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>国家/地区：</td>
+                              <td>{seedinfo.Info8}</td>
+                            </tr>
+                          </table>
+                          <%else if {seedinfo.Type}==6%>
+                          <table class="PrivateBTSeedInfoTableMovie">
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td width="15%">中文名：</td>
+                              <td width="85%" >{seedinfo.Info1}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>英文名：</td>
+                              <td>{seedinfo.Info2}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>类别：</td>
+                              <td>{seedinfo.Info3}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>语言：</td>
+                              <td>{seedinfo.Info4}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>文件格式：</td>
+                              <td>{seedinfo.Info5}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>分辨率：</span></td>
+                              <td>{seedinfo.Info6}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>字幕：</td>
+                              <td>{seedinfo.Info7}</td>
+                            </tr>
+                          </table>
+                          <%else if {seedinfo.Type}==7%>
+                          <table class="PrivateBTSeedInfoTableMovie">
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td width="15%">时间：</td>
+                              <td width="85%" >{seedinfo.Info1}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>中文名：</td>
+                              <td>{seedinfo.Info2}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>英文名：</td>
+                              <td>{seedinfo.Info3}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>类别：</td>
+                              <td>{seedinfo.Info4}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>语言/解说人：</td>
+                              <td>{seedinfo.Info5}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>文件格式：</span></td>
+                              <td>{seedinfo.Info6}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>分辨率：</td>
+                              <td>{seedinfo.Info7}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>字幕：</td>
+                              <td>{seedinfo.Info8}</td>
+                            </tr>
+                          </table>
+                          <%else if {seedinfo.Type}==8%>
+                          <table class="PrivateBTSeedInfoTableMovie">
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td width="15%">国家地区：</td>
+                              <td width="85%" >{seedinfo.Info2}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>中文名：</td>
+                              <td>{seedinfo.Info3}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>英文名：</td>
+                              <td>{seedinfo.Info1}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>发行时间：</td>
+                              <td>{seedinfo.Info4}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>简介：</td>
+                              <td>{seedinfo.Info5}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>语言：</span></td>
+                              <td>{seedinfo.Info6}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>文件格式：</td>
+                              <td>{seedinfo.Info7}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>分辨率：</td>
+                              <td>{seedinfo.Info8}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>字幕：</td>
+                              <td>{seedinfo.Info9}</td>
+                            </tr>
+                          </table>
+                          <%else if {seedinfo.Type}==9%>
+                          <table class="PrivateBTSeedInfoTableMovie">
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td width="15%">中文名：</td>
+                              <td width="85%" >{seedinfo.Info1}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>英文名：</td>
+                              <td>{seedinfo.Info2}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>语言：</td>
+                              <td>{seedinfo.Info3}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>软件类型：</td>
+                              <td>{seedinfo.Info4}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>文件格式：</td>
+                              <td>{seedinfo.Info5}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>发行时间：</span></td>
+                              <td>{seedinfo.Info6}</td>
+                            </tr>
+                          </table>
+                          <%else if {seedinfo.Type}==10%>
+                          <table class="PrivateBTSeedInfoTableMovie">
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td width="15%">中文名：</td>
+                              <td width="85%" >{seedinfo.Info1}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>英文名：</td>
+                              <td>{seedinfo.Info2}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>类别：</td>
+                              <td>{seedinfo.Info3}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>语言：</td>
+                              <td>{seedinfo.Info4}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>文件格式：</td>
+                              <td>{seedinfo.Info5}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>发行时间：</span></td>
+                              <td>{seedinfo.Info6}</td>
+                            </tr>
+                          </table>
+                          <%else if {seedinfo.Type}==11%>
+                          <table class="PrivateBTSeedInfoTableMovie">
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td width="15%">发行时间：</td>
+                              <td width="85%" >{seedinfo.Info1}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>国家/地区：</td>
+                              <td>{seedinfo.Info2}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>中文名：</td>
+                              <td>{seedinfo.Info3}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>英文名：</td>
+                              <td>{seedinfo.Info4}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>语言：</td>
+                              <td>{seedinfo.Info5}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>文件格式：</span></td>
+                              <td>{seedinfo.Info6}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>分辨率：</td>
+                              <td>{seedinfo.Info7}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>字幕：</td>
+                              <td>{seedinfo.Info8}</td>
+                            </tr>
+                          </table>
+                          <%else if {seedinfo.Type}==12%>
+                          <table class="PrivateBTSeedInfoTableMovie">
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td width="15%">中文名：</td>
+                              <td width="85%">{seedinfo.Info1}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>英文名：</td>
+                              <td>{seedinfo.Info2}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>简介：</td>
+                              <td>{seedinfo.Info3}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>文件格式：</td>
+                              <td>{seedinfo.Info4}</td>
+                            </tr>
+                            <tr class="PrivateBTSeedInfoTableListMovie">
+                              <td>发行时间：</td>
+                              <td>{seedinfo.Info5}</td>
+                            </tr>
+                         </table>
+                        <%else%>
+                        <%/if%>
+                        <!--  列表结束 -->
+                     </div>
+          </div>
+          
+          
+          <h3 class="PrivateBTInfoListNote">
+              正在上传：{seedinfo.Upload}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              正在下载：{seedinfo.Download}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              累计完成：{seedinfo.Finished}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              累计流量：{PTTools.Upload2Str(seedinfo.Traffic,false)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              存活时间：{PTTools.Minutes2String(seedinfo.Live/60.0)}
+          </h3>
+     </div>
+    <%else%>
+     <div id="floatlayout_topicadmin">
+          <h3 class="flb">
+              <em id="return_emailfriend">种子节点列表</em>
+              <span><a href="javascript:;" class="flbc" onclick="hideWindow('showseedpeer{seedid}')" title="关闭">关闭</a></span>
+          </h3>
+          <div id="PrivateBTInfoListBorder">
+              <div id="PrivateBTInfoListBorder2">
+                  <%template _btinfolisterrmsgbox%>
+              </div>
+          </div>
+    </div>     
+    <%/if%>
+<%template _copyright%>
+<%template _footer%>

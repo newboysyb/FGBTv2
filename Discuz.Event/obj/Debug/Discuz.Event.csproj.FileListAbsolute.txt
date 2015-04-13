@@ -1,0 +1,5 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Event.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Event.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\obj\Debug\Discuz.Event.csprojResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\obj\Debug\Discuz.Event.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\obj\Debug\Discuz.Event.pdb

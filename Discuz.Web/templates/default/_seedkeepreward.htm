@@ -1,0 +1,53 @@
+﻿<%set (bool){showkeepreward}=false%>
+<%if {userstat}==1&&((searchuserid==userid)||(userid==1&&searchuserid>1))%>
+<%set {showkeepreward}=true%>
+<%set (PTKeepRewardStatic){kr}=PrivateBT.GetKeepReward(searchuserid, DateTime.Now.AddMinutes(-0), searchuserinfo.Joindate)%>
+<%set (double){kratio}=0%>
+<%set (string){kratiofomart}="0.0"%>
+<br/><br/>
+<div class="PTSeedRewardShow" id = "PTSeedRewardShow" style="width:100%;text-align:center;">
+<div style="width:920px;margin-right:auto;margin-left:auto;border:#AAA 1px solid;">
+   <span></span>
+   <table cellpadding="0" cellspacing="0" border="0" class="datatable">
+   <tr>
+      <th width="200" colspan="4" style="text-align:center;"><b>有效保种 {kr.TotalUpCount} 个，总计保种奖励 {PTTools.Upload2Str(kr.TotalRewardPerHour)}/h</b> <%if {PrivateBT.DEBUG_IsTestUser(userid)}==true%><br/>（旧算法理论保种奖励：{PTTools.Upload2Str(kr.Old_RewardPerHour)}/h）（旧算法实际执行保种奖励大约：{PTTools.Upload2Str(kr.Old_RewardPerHour_Real)}/h）<%/if%></th>
+   </tr>
+   <tr>
+      <th width="150">超大体积（&gt;100GB)</th>
+      <th width="50">{kr.BigBig_UpCount} 个</th>
+      <th width="90">{PTTools.Upload2Str(kr.BigBig_RewardPerHour)}/h</th>
+      <%set {kratio}=(double)(kr.BigBig_RewardPerHour/kr.BigBig_RewardPerHour_Limit)%>
+      <td style='text-align:left'><div class='optionbar left'><div class='pollcolor5' style='width:{((int)(kratio*420))}px'>&nbsp;</div></div>&nbsp;上限{PTTools.Upload2Str(kr.BigBig_RewardPerHour_Limit)}/h （{(kratio*100).ToString(kratiofomart)}%）</td>
+   </tr>
+   <tr>
+      <th width="150">大体积（25GB~100GB）</th>
+      <th width="50">{kr.Big_UpCount} 个</th>
+      <th width="90">{PTTools.Upload2Str(kr.Big_RewardPerHour)}/h</th>
+      <%set {kratio}=(double)(kr.Big_RewardPerHour/kr.Big_RewardPerHour_Limit)%>
+      <td style='text-align:left'><div class='optionbar left'><div class='pollcolor5' style='width:{((int)(kratio*420))}px'>&nbsp;</div></div>&nbsp;上限{PTTools.Upload2Str(kr.Big_RewardPerHour_Limit)}/h （{(kratio*100).ToString(kratiofomart)}%）</td>
+   </tr>
+   <tr>
+      <th width="150">中等体积（5GB~25GB）</th>
+      <th width="50">{kr.Mid_UpCount} 个</th>
+      <th width="90">{PTTools.Upload2Str(kr.Mid_RewardPerHour)}/h</th>
+      <%set {kratio}=(double)(kr.Mid_RewardPerHour/kr.Mid_RewardPerHour_Limit)%>
+      <td style='text-align:left'><div class='optionbar left'><div class='pollcolor5' style='width:{((int)(kratio*420))}px'>&nbsp;</div></div>&nbsp;上限{PTTools.Upload2Str(kr.Mid_RewardPerHour_Limit)}/h （{(kratio*100).ToString(kratiofomart)}%）</td>
+   </tr>
+   <tr>
+      <th width="150">小体积（1GB~5GB）</th>
+      <th width="50">{kr.Small_UpCount} 个</th>
+      <th width="90">{PTTools.Upload2Str(kr.Small_RewardPerHour)}/h</th>
+      <%set {kratio}=(double)(kr.Small_RewardPerHour/kr.Small_RewardPerHour_Limit)%>
+      <td style='text-align:left'><div class='optionbar left'><div class='pollcolor5' style='width:{((int)(kratio*420))}px'>&nbsp;</div></div>&nbsp;上限{PTTools.Upload2Str(kr.Small_RewardPerHour_Limit)}/h （{(kratio*100).ToString(kratiofomart)}%）</td>
+   </tr>
+   <tr>
+      <th width="150">微小体积（&lt;1GB）</th>
+      <th width="50">{kr.Tiny_UpCount} 个</th>
+      <th width="90">{PTTools.Upload2Str(kr.Tiny_RewardPerHour)}/h</th>
+      <%set {kratio}=(double)(kr.Tiny_RewardPerHour/kr.Tiny_RewardPerHour_Limit)%>
+      <td style='text-align:left'><div class='optionbar left'><div class='pollcolor5' style='width:{((int)(kratio*420))}px'>&nbsp;</div></div>&nbsp;上限{PTTools.Upload2Str(kr.Tiny_RewardPerHour_Limit)}/h （{(kratio*100).ToString(kratiofomart)}%）</td>
+   </tr>
+   </table>
+</div>
+</div>
+<%/if%>

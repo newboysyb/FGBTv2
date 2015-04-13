@@ -1,0 +1,5 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Album.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Album.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Album\obj\Release\Discuz.Album.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Album\obj\Release\Discuz.Album.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Album\obj\Release\Discuz.Album.csprojResolveAssemblyReference.cache

@@ -1,0 +1,110 @@
+﻿<%template _header%>
+<script type="text/javascript" src="{jsdir}/template_usercpnotice.js"></script>
+<div class="wrap cl pageinfo">
+	<div id="nav">
+		<%if {usergroupinfo.allowsearch}>0%>
+			<%template _quicksearch%>
+		<%/if%>
+        <a href="{config.forumurl}" class="title">{config.forumtitle}</a> &raquo; <a href="usercpprofile.aspx">用户中心</a> &raquo; <strong>通知</strong>
+	</div>
+</div>
+<div class="wrap uc cl">
+    <%template _menu%>
+	<div class="uc_main">
+	<div class="uc_content">
+		<h1>通知</h1>
+		<%template _smsmenu%>
+	<%if page_err==0%>
+	<%if ispost%>
+		<%template _usercpmsgbox%>
+	<%else%>
+		<%if {noticeinfolist.Count}==0%>
+			<div class="zerothreads">暂无新的通知</div>
+		<%else%>
+			<div class="pages_btns">
+				<div class="pages">
+					<em>共有通知:{reccount}条</em> <em>其中新通知:{newnoticecount}条</em> {pagenumbers} <em>{pageid}/{pagecount}页</em> 
+				</div>
+        <%if {filter}=="all" || {filter}==""%>全部通知<%/if%>
+        <%if {filter}=="spacecomment"%>{config.spacename}日志评论<%/if%>
+        <%if {filter}=="albumcomment"%>{config.albumname}图片评论<%/if%>
+        <%if {filter}=="postreply"%>主题回复<%/if%>
+        <%if {filter}=="topicadmin"%>管理通知<%/if%>
+        <span class="pipe">|</span>
+				<a href="###" onclick="if (confirm('您确定标记 #全部# 通知为已读?'))PrivateBTMarkReadAll('now')">全部标记为已读</a>
+				<%if {automarkread}>0%>
+            &nbsp;（&nbsp;<a href="###" onclick="if (confirm('您确定 #取消# 在访问通知页面时自动标记所有未通知为已读?'))PrivateBTMarkReadAll('off')" title="在访问通知页面时自动标记所有未通知为已读"><input id="automarkread" type="checkbox" name="automarkread" value="2" checked="checked"/>自动</a>&nbsp;）&nbsp;
+        <%else%>
+            &nbsp;（&nbsp;<a href="###" onclick="if (confirm('您确定在访问通知页面时自动标记所有未通知为已读?'))PrivateBTMarkReadAll('on')" title="在访问通知页面时自动标记所有未通知为已读"><input id="automarkread" type="checkbox" name="automarkread" value="2"/>自动</a>&nbsp;）&nbsp;
+        <%/if%>
+        <span class="pipe">|</span>
+        <a href="usercppreference.aspx">提示音设置</a>
+			</div>
+			<form id="noticelist" name="noticelist" method="post" action="">
+			<div class="nts">
+				<%loop (NoticeInfo) noticeinfo noticeinfolist%>
+				<dl>
+					<dd class="m mbn">
+                        <%if noticeinfo.Posterid==0%>
+						    <img alt="systempm" src="{imagedir}/systempm.gif">
+                        <%else%>
+                        <%set (string){avatarurl}=Avatars.GetAvatarUrl(noticeinfo.Posterid,AvatarSize.Small) %>
+				            <img src="{avatarurl}" onerror="this.onerror=null;this.src='{forumpath}images/common/noavatar_small.gif'"  alt="头像" width="48" height="48"/>
+					    <%/if%>
+                    </dd>
+					<dt>
+						<%set (string){postdatetime}=ForumUtils.ConvertDateTimeWithColor({noticeinfo.postdatetime})%>	
+						<span class="xg1">{postdatetime}</span><%if {noticeinfo.New}==1%> <span class="PrivateBTNewNotice"> 新通知 New! </span> <%/if%>
+					</dt>
+					<dd class="ntc_body" <%if {noticeinfo.New}==3%>onclick="javascript:PrivateBTMarkNotice('{noticeinfo.Nid}')"<%/if%>>
+						<%set (string){note}=UBB.ParseUrl({noticeinfo.note}) %>
+						<%if {noticeinfo.New}==1%><strong>{note}</strong><%else%>{note}<%/if%>
+					</dd>
+				</dl>
+				<%/loop%>
+			</div>
+			<input type="hidden" id="markauto" name="markauto"/>
+			</form>
+			<!--标记已读通知-->
+			<script type="text/javascript">
+        function PrivateBTMarkReadAll(markauto)
+        {
+            $('markauto').value = markauto;
+            $('noticelist').submit();
+        }
+			function PrivateBTMarkNotice(noticeid)
+			{
+			    var marknoticeHttpReq;
+          if(window.ActiveXObject)
+          {
+              marknoticeHttpReq=new ActiveXObject("Microsoft.XMLHTTP");
+          }
+          else if(window.XMLHttpRequest)
+          {
+              marknoticeHttpReq=new XMLHttpRequest();
+          }
+          parm = "markauto=markmotice&noticeid=" + noticeid;
+          marknoticeHttpReq.open("POST","usercpnotice.aspx",true);
+          marknoticeHttpReq.setRequestHeader("cache-control","no-cache");
+          marknoticeHttpReq.setRequestHeader("contentType","text/html;charset=uft-8");
+          marknoticeHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;"); 
+          //marknoticeHttpReq.onreadystatechange = StatHandler; 
+          marknoticeHttpReq.send(parm); 
+			}
+			<!--END标记已读通知-->
+			</script>
+			<div class="pages_btns">
+				<div class="pages">
+					<em>共有通知:{reccount}条</em> <em>其中新通知:{newnoticecount}条</em> {pagenumbers} <em>{pageid}/{pagecount}页</em> 
+				</div>
+			</div>
+		<%/if%>
+	<%/if%>
+	<%else%>
+		<%template _usercperrmsgbox%>
+	<%/if%>
+    </div>
+</div>
+</div>
+<%template _copyright%>
+<%template _footer%>

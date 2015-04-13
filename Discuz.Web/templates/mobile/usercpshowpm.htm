@@ -1,0 +1,40 @@
+﻿<%template _header%>
+    <div id="nav">
+        &raquo; <a href="">用户中心</a> &raquo; <strong>查看短消息</strong>
+    </div>
+    <%if page_err==0%>
+        <%if ispost%>
+            <%template _msgbox%>
+        <%else%>	
+            <div class="vt">
+                <div class="bm">
+                    <div class="bm_h">
+                        查看短消息
+                    </div>
+                    
+                    <font class="xg1">标题：</font>{subject}
+                    <br/>
+                    <font class="xg1">发送人：</font>{msgfrom}
+                    <br/>
+                    <font class="xg1">发送时间：</font>{postdatetime}
+                    <br/>
+                    <font class="xg1">消息内容：</font>
+                    <br/>
+                    {message}
+                    <br/>
+                    <div class="tz pbn">               
+                        <a href="usercpinbox.aspx">返回列表</a>
+                        <a href="usercppostpm.aspx?action=re&amp;pmid={pmid}">回复</a>
+                        <a href="usercppostpm.aspx?action=fw&amp;pmid={pmid}">转发</a>
+                        <a href="usercpshowpm.aspx?action=noread&amp;pmid={pmid}">标记为未读</a>
+                        <a href="usercpshowpm.aspx?action=delete&amp;pmid={pmid}"  onclick="return confirm('您确定要删除吗?')">删除</a>
+                    </div>
+                </div>            
+            </div>
+                       
+        <%/if%>
+		<%else%>
+        <%template _errmsgbox%>
+		<%/if%>
+<%template _copyright%>
+<%template _footer%>

@@ -1,0 +1,273 @@
+﻿<%template _header%>
+<%if {userid}>0 && {page_err}==0%>
+
+    <div id="nav">
+       &raquo; {forumnav}
+    </div>
+
+    <div class="box flif">今日{forum.Todayposts}<span class="pipe">|</span>主题{topiccount}</span></div>
+    
+    <%if {forum.Subforumcount}>0&&{subforumlist.Count}>0%>
+      <%template _subforum%>
+    <%/if%>
+    
+    <%if {forum.layer}!=0%>
+        <%csharp%>
+        string url = forumpath + "showforum.aspx?search=1&forumid=" + forumid + "&typeid=" + topictypeid;
+                string showforumurl = url;
+        url += filter == "" ? "" : "&filter=" + filter;
+        filter = filter == "" ? "all" : filter;
+        <%/csharp%>
+          
+        <%if {pagecount}!=1%>
+            <div class="pg">
+                {pagenumbers}
+                {nextpage}
+            
+            <%if {pagecount}>8%>
+                <input type="text"  value="{pageid}" style="text-align:center;" onKeyDown="pageinputOnKeyDown(this,event);" size="2" maxlength="10" />/{pagecount}
+                      <script type="text/javascript">
+                          function pageinputOnKeyDown(obj, event) {
+                              if (event.keyCode == 13) {
+                              <%if {topictypeid}<0%>
+                                    window.location = '{forumpath}showforum-{forumid}-' + (parseInt(obj.value) > 0 ? parseInt(obj.value) : 1) + '{config.extname}';
+                              <%else%>
+                                    window.location = '{forumpath}showforum.aspx?forumid={forumid}&page=' + (parseInt(obj.value) > 0 ? parseInt(obj.value) : 1) + '&typeid={topictypeid}';
+                              <%/if%>
+                              }
+                              return (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 97 && event.keyCode <= 105) || event.keyCode == 8;
+                          }
+                      </script>
+            <%/if%>
+            </div>
+        <%/if%>
+     <%set (bool){evenpage} = false%>
+     <div class="tl">
+            <div class="bm">
+                <div class="bm_h">
+                    {forum.name}
+                </div>
+                
+                <%loop (PTSeedinfoShort) topseedinfo topseedinfolist%>
+                <div class="bm_c<%if {evenpage}==true%> even<%else%> add<%/if%><%set {evenpage} = !{evenpage}%>">
+                
+                    <a href="?type={topseedinfo.Dis_EngTypeName}"  style="text-decoration:none">
+                        <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/{topseedinfo.Type}.png" title="{topseedinfo.Dis_ChnTypeName}" />
+                    </a>
+                
+                    
+                    <a  onclick="atarget(this)" href="{forumpath}showtopic-{topseedinfo.TopicId}.aspx">
+                    <%if topseedinfo.DownloadRatio==0f%>
+                      <span style="color:#00F">{topseedinfo.TopicTitle}</span>
+                    <%else if topseedinfo.DownloadRatio==0.3f%>
+                      <span style="color:#04A">{topseedinfo.TopicTitle}</span>
+                    <%else if topseedinfo.DownloadRatio==0.6f%>
+                      <span style="color:#088">{topseedinfo.TopicTitle}</span>
+                    <%else if topseedinfo.DownloadRatio>1.0f||topseedinfo.UploadRatio<1.0f%>
+                      <span style="color:#888">{topseedinfo.TopicTitle}</span>
+                    <%else%>
+                      <span style="color:#000">{topseedinfo.TopicTitle}</span>
+                    <%/if%>
+                    </a>
+                    
+                    <%if {downloadratio}<topseedinfo.DownloadRatio%>
+                        <%if downloadratio==0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D0.png" title="全站优惠，蓝种，不计下载{topseedinfo.Dis_DownloadRatioNote}"/>
+                        <%else if downloadratio==0.3f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D3.png" title="全站优惠，按30%计算下载流量{topseedinfo.Dis_DownloadRatioNote}" />
+                        <%else if downloadratio==0.6f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D6.png" title="全站优惠，按60%计算下载流量{topseedinfo.Dis_DownloadRatioNote}" />
+                        <%/if%>
+                    <%else%>
+                        <%if topseedinfo.DownloadRatio==1.0f%>
+                        <%else if topseedinfo.DownloadRatio==0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D0.png" title="蓝种，不计下载{topseedinfo.Dis_DownloadRatioNote}"/>
+                        <%else if topseedinfo.DownloadRatio==0.3f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D3.png" title="按30%计算下载流量{topseedinfo.Dis_DownloadRatioNote}" />
+                        <%else if topseedinfo.DownloadRatio==0.6f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D6.png" title="按60%计算下载流量{topseedinfo.Dis_DownloadRatioNote}" />
+                        <%else if topseedinfo.DownloadRatio==2.0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D20.png" title="按200%计算下载流量{topseedinfo.Dis_DownloadRatioNote}" />
+                        <%else if topseedinfo.DownloadRatio==3.0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D30.png" title="按300%计算下载流量{topseedinfo.Dis_DownloadRatioNote}" />
+                        <%/if%>
+                    <%/if%>
+                    
+                    <%if {uploadratio}>topseedinfo.UploadRatio%>
+                        <%if uploadratio==3.0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U30.png" title="按300%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                        <%else if uploadratio==2.0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U20.png" title="按200%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                        <%else if uploadratio==1.6f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U16.png" title="按160%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                        <%else if uploadratio==1.2f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U12.png" title="按120%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                        <%/if%>   
+                    <%else%>
+                        <%if topseedinfo.UploadRatio==1.0f%>
+                        <%else if topseedinfo.UploadRatio==2.0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U20.png" title="按200%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                        <%else if topseedinfo.UploadRatio==1.6f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U16.png" title="按160%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                        <%else if topseedinfo.UploadRatio==1.2f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U12.png" title="按120%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                        <%else if topseedinfo.UploadRatio==0.6f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U6.png" title="按60%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                        <%else if topseedinfo.UploadRatio==0.3f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U3.png" title="按30%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                        <%else if topseedinfo.UploadRatio==0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U0.png" title="按0%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                        <%/if%>
+                    <%/if%> 
+                    
+                    <%if topseedinfo.Upload!=0%>
+                      <%if topseedinfo.IPv6==topseedinfo.Upload%>
+                          <span class="PrivateBTFontRed">IPv6</span>
+                      <%else if topseedinfo.IPv6==0%>
+                          <span class="PrivateBTFontRed">IPv4</span>
+                      <%else%>
+                          <span class="PrivateBTFontRed">IPv4/IPv6</span>
+                      <%/if%>
+                    <%/if%>
+                    
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/TopSeed.png" title="置顶种子" />
+                    
+                    <br/>
+                    <span class="xg1">
+                        <%set {aspxrewriteurl} = this.UserInfoAspxRewrite({topseedinfo.Uid})%>
+                        <a href="{forumpath}userinfo-{topseedinfo.Uid}.aspx">{topseedinfo.UserName}</a> 
+                        {topseedinfo.Dis_PostDateTime} ({topseedinfo.Replies})
+                    </span>
+                </div>
+                <%/loop%>
+                
+                
+                <%loop (PTSeedinfoShort) seedinfo seedinfolist%>
+                <div class="bm_c<%if {evenpage}==true%> even<%else%> add<%/if%><%set {evenpage} = !{evenpage}%>">
+
+                    <a href="?type={seedinfo.Dis_EngTypeName}"  style="text-decoration:none">
+                        <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/{seedinfo.Type}.png" title="{seedinfo.Dis_ChnTypeName}" /></td>
+                    </a>
+
+
+                    <a  onclick="atarget(this)" href="{forumpath}showtopic-{seedinfo.TopicId}.aspx">
+                    <%if seedinfo.DownloadRatio==0f%>
+                      <span style="color:#00F">{seedinfo.TopicTitle}</span>
+                    <%else if seedinfo.DownloadRatio==0.3f%>
+                      <span style="color:#04A">{seedinfo.TopicTitle}</span>
+                    <%else if seedinfo.DownloadRatio==0.6f%>
+                      <span style="color:#088">{seedinfo.TopicTitle}</span>
+                    <%else if seedinfo.DownloadRatio>1.0f||seedinfo.UploadRatio<1.0f%>
+                      <span style="color:#888">{seedinfo.TopicTitle}</span>
+                    <%else%>
+                      <span style="color:#000">{seedinfo.TopicTitle}</span>
+                    <%/if%>
+                    </a>
+                    
+                    <%if {downloadratio}<seedinfo.DownloadRatio%>
+                        <%if downloadratio==0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D0.png" title="全站优惠，蓝种，不计下载{seedinfo.Dis_DownloadRatioNote}"/>
+                        <%else if downloadratio==0.3f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D3.png" title="全站优惠，按30%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                        <%else if downloadratio==0.6f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D6.png" title="全站优惠，按60%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                        <%/if%>
+                    <%else%>
+                        <%if seedinfo.DownloadRatio==1.0f%>
+                        <%else if seedinfo.DownloadRatio==0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D0.png" title="蓝种，不计下载{seedinfo.Dis_DownloadRatioNote}"/>
+                        <%else if seedinfo.DownloadRatio==0.3f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D3.png" title="按30%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                        <%else if seedinfo.DownloadRatio==0.6f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D6.png" title="按60%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                        <%else if seedinfo.DownloadRatio==2.0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D20.png" title="按200%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                        <%else if seedinfo.DownloadRatio==3.0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D30.png" title="按300%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                        <%/if%>
+                    <%/if%>
+                    
+                    <%if {uploadratio}>seedinfo.UploadRatio%>
+                        <%if uploadratio==3.0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U30.png" title="按300%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%else if uploadratio==2.0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U20.png" title="按200%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%else if uploadratio==1.6f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U16.png" title="按160%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%else if uploadratio==1.2f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U12.png" title="按120%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%/if%>   
+                    <%else%>
+                        <%if seedinfo.UploadRatio==1.0f%>
+                        <%else if seedinfo.UploadRatio==2.0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U20.png" title="按200%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%else if seedinfo.UploadRatio==1.6f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U16.png" title="按160%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%else if seedinfo.UploadRatio==1.2f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U12.png" title="按120%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%else if seedinfo.UploadRatio==0.6f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U6.png" title="按60%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%else if seedinfo.UploadRatio==0.3f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U3.png" title="按30%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%else if seedinfo.UploadRatio==0f%>
+                            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U0.png" title="按0%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                        <%/if%>
+                    <%/if%> 
+                    
+                    <%if seedinfo.Upload!=0%>
+                      <%if seedinfo.IPv6==seedinfo.Upload%>
+                          <span class="PrivateBTFontRed">IPv6</span>
+                      <%else if seedinfo.IPv6==0%>
+                          <span class="PrivateBTFontRed">IPv4</span>
+                      <%else%>
+                          <span class="PrivateBTFontRed">IPv4/IPv6</span>
+                      <%/if%>
+                    <%/if%>
+                    
+                    <br/>
+                    <span class="xg1">
+                        <%set {aspxrewriteurl} = this.UserInfoAspxRewrite({seedinfo.Uid})%>
+                        <a href="{forumpath}userinfo-{seedinfo.Uid}.aspx">{seedinfo.UserName}</a> 
+                        {seedinfo.Dis_PostDateTime} ({seedinfo.Replies})
+                    </span>
+                </div>
+                <%/loop%>
+                
+                
+             </div>
+         </div>
+
+        <%if {pagecount}!=1%>
+            <div class="pg">
+                {pagenumbers}
+                {nextpage}
+            
+            <%if {pagecount}>8%>
+                <input type="text"  value="{pageid}" style="text-align:center;" onKeyDown="pageinputOnKeyDown(this,event);" size="2" maxlength="10" />/{pagecount}
+                      <script type="text/javascript">
+                          function pageinputOnKeyDown(obj, event) {
+                              if (event.keyCode == 13) {
+                              <%if {topictypeid}<0%>
+                                    window.location = '{forumpath}showforum-{forumid}-' + (parseInt(obj.value) > 0 ? parseInt(obj.value) : 1) + '{config.extname}';
+                              <%else%>
+                                    window.location = '{forumpath}showforum.aspx?forumid={forumid}&page=' + (parseInt(obj.value) > 0 ? parseInt(obj.value) : 1) + '&typeid={topictypeid}';
+                              <%/if%>
+                              }
+                              return (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 97 && event.keyCode <= 105) || event.keyCode == 8;
+                          }
+                      </script>
+            <%/if%>
+            </div>
+        <%/if%>
+    <%/if%>
+    
+    
+<%else%>
+    <%if {needlogin} || {userid}<1%>
+      <%template _login%>
+    <%else%>
+      <%template _errmsgbox%>
+    <%/if%>
+<%/if%>
+<%template _copyright%>
+<%template _footer%>

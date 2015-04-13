@@ -1,0 +1,14 @@
+<%template _pageheader%>
+<body>
+<div class="hd"><a href="{forumpath}">未来花园BT - 手机版</a></div>
+<div class="wp">
+<div class="pd2">
+<%if {userid}>0&&{pagename}!="login.aspx"&&{pagename}!="logout.aspx"&&{pagename}!="register.aspx"&&{pagename}!="cngilogin.aspx"%>
+<a href="userinfo-{userid}.aspx">{username}</a><span class="pipe">|</span>
+<a href="usercpinbox.aspx">短消息<%if {oluserinfo.newpms}>0%><span style="color:#F00">({oluserinfo.newpms}新!)</span><%/if%></a><span class="pipe">|</span>
+<a href="usercpnotice.aspx?op=markall&filter=all">通知<%if {oluserinfo.newnotices}>0%><span style="color:#F00">({oluserinfo.newnotices}新!)</span><%/if%></a><span class="pipe">|</span>
+<a href="{forumpath}logout.aspx?userkey={userkey}">退出</a>
+<%else%>
+欢迎！<span class="pipe">|</span>请先登录。
+<%/if%>
+</div>

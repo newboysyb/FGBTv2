@@ -1,0 +1,176 @@
+﻿<%template _header%>
+<%if {userid}>0 && {page_err}==0%>
+
+    <div id="nav">
+       &raquo; {ShowForumAspxRewrite(forum.Pathlist.Trim(),forumid,forumpageid)}
+    </div>
+    
+    <div class="tz mtn">
+        <%if {canreply}&&{topic.SeedId}<1%>
+            <div class="tz pbn">
+                <a href="postreply.aspx?forumid={forumid}&topicid={topic.tid}" title="发帖" >回复</a>
+                <span class="pipe">|</span>
+                <a href="posttopic.aspx?forumid={forumid}" title="发帖" >发帖</a>
+            </div>
+        <%/if%>
+        
+        <div class="vt">
+            <div class="bm">
+                <div class="bm_h">
+                    {topic.title}
+                </div>
+                <div class="bm_inf">
+                    <font class="xg1">查看{topicviews}<span class="pipe">|</span>回复{topic.Replies}</font>
+                </div>
+                
+                <%if {pagecount}!=1%>
+                    <div class="pg">
+                        {pagenumbers}
+                        {nextpage}
+                    
+                    <%if {pagecount}>8%>
+                        <input type="text"  value="{pageid}" style="text-align:center;" onKeyDown="pageinputOnKeyDown(this,event);" size="2" maxlength="10" />/{pagecount}
+                              <script type="text/javascript">
+                                  function pageinputOnKeyDown(obj, event) {
+                                      if (event.keyCode == 13) {
+                                          var typeid = getQueryString("typeid");
+                                          typeid = typeid == "" ? -1 : parseInt(typeid);
+                                          if (parseInt('{config.aspxrewrite}') == 1 && typeid <0) {
+                                              window.location = 'showtopic-{topicid}-' + (parseInt(obj.value) > 0 ? parseInt(obj.value) : 1) + '{config.extname}';
+                                          }
+                                          else {
+                                              (typeid > 0) ? window.location = 'showtopic.aspx?topicid={topicid}&page=' + (parseInt(obj.value) > 0 ? parseInt(obj.value) : 1) + '&typeid=' + typeid : window.location = 'showtopic.aspx?topicid={topicid}&page=' + (parseInt(obj.value) > 0 ? parseInt(obj.value) : 1);
+                                          }
+                                      }
+                                      return (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 97 && event.keyCode <= 105) || event.keyCode == 8;
+                                  }
+                              </script>
+                    <%/if%>
+                    </div>
+                <%/if%>
+                
+                <%loop (ShowtopicPagePostInfo) post postlist%>
+                <div id="post_{post.pid}" class="bm_c bm_c_bg">
+                    <div class="bm_user">
+                        <em>{post.id}</em>楼 
+                        <%set {aspxrewriteurl} = this.UserInfoAspxRewrite({post.posterid})%>
+                        <a href="{aspxrewriteurl}" target="_blank">{post.poster}</a> 
+                        <%if {topic.posterid}=={post.posterid}%>
+                        <span class="pipe">|</span><a href="showtopic.aspx?topicid={topic.tid}&forumpage={forumpageid}&onlyauthor=1&posterid={topic.posterid}">只看楼主</a>  
+                        <%else%>
+                        <span class="pipe">|</span><a href="showtopic.aspx?topicid={topic.tid}&forumpage={forumpageid}&onlyauthor=2&posterid={post.posterid}">只看该用户</a>  
+                        <%/if%>
+                        <br/>
+                        <%set (string){postdatec} = ForumUtils.ConvertDateTime({post.postdatetime})%>
+                        <em id="authorposton{post.pid}"><font class="xs0 xg1">{postdatec}</font></em>
+                    </div>    
+                </div>
+                <div>
+                    <div class="pbody">
+                        <div class="mes">
+                            <div id="postmessage_{post.pid}" class="postmessage">
+                                <%if {post.id}==1%>
+                                    <%if {topic.Special}==1%>
+                                        [该主题为投票主题，登陆电脑版查看详细信息]<br/>
+                                    <%else if {topic.Special}==2%>
+                                        [该主题为悬赏主题，登陆电脑版查看详细信息]<br/>
+                                    <%else if {topic.Special}==3%>
+                                        [该主题为悬赏主题，登陆电脑版查看详细信息]<br/>
+                                    <%else if {topic.Special}==4%>
+                                        [该主题为辩论主题，登陆电脑版查看详细信息]<br/>
+                                    <%else%>
+                                    <%/if%>
+                                <%/if%>
+                                <%if {post.id}>1&&{post.title}!=""%><em><font class="xg1">{post.title}</font></em><br/><%/if%>
+                                {post.message}
+                                
+                                
+                                
+                                
+                                
+                                <%if {attachmentlist.count}>0%>
+                                    <%set (int){currentattachcount} = 0%>
+                                    <%loop (ShowtopicPageAttachmentInfo) attachtemp attachmentlist%>
+                                        <%if {attachtemp.pid}=={post.pid}%>
+                                            <%set {currentattachcount} = {currentattachcount} + 1%>
+                                        <%/if%>
+                                    <%/loop%>
+                                    <%if  {currentattachcount}>0%>
+                                        <%set (int){getattachperm} = attachmentlist[0].Getattachperm%>
+                                        <%if {getattachperm}==1%>
+                                                <%loop (ShowtopicPageAttachmentInfo) attachment attachmentlist%>
+                                                    <%if {attachment.pid}=={post.pid}%>
+                                                        <%if {attachment.allowread}==1%>
+                                                            <%template _attachmentinfo%>
+                                                        <%else%>
+                                                            <%if {userid>0}%>
+                                                                附件: <em>你的下载权限 {usergroupinfo.readaccess} 低于此附件所需权限 {attachment.readperm}, 你无权查看此附件</em>
+                                                            <%else%>
+                                                                附件: <em>你需要登录才可以下载或查看附件。</em>
+                                                            <%/if%>
+                                                        <%/if%>
+                                                    <%/if%>
+                                                <%/loop%>
+                                        <%else%>
+                                        附件: <em>你需要登录才可以下载或查看附件。</em>
+                                        <%/if%>
+                                    <%/if%>
+                                <%/if%>
+                            </div> 
+                        </div>     
+                        <div class="box pd2 mbn">
+                            <a href="postreply.aspx?topicid={topicid}&postlayer={post.id}&postid={post.pid}&poster={Utils.UrlEncode(post.Poster)}&forumpage={forumpageid}">回复</a>
+                            <!--<a href="postreply.aspx?topicid={topicid}&postid={post.pid}&forumpage={forumpageid}&quote=yes">引用</a>-->
+                            <%if {post.posterid}=={userid}%>
+                                <a href="editpost.aspx?topicid={topicid}&postid={post.pid}&forumpage={forumpageid}&pageid={pageid}">编辑</a>
+                            <%/if%>
+                        </div>
+                    </div>
+                </div>
+                <%/loop%>
+                
+                <%if {pagecount}!=1%>
+                    <div class="pg">
+                        {pagenumbers}
+                        {nextpage}
+                    
+                    <%if {pagecount}>8%>
+                        <input type="text"  value="{pageid}" style="text-align:center;" onKeyDown="pageinputOnKeyDown(this,event);" size="2" maxlength="10" />/{pagecount}
+                              <script type="text/javascript">
+                                  function pageinputOnKeyDown(obj, event) {
+                                      if (event.keyCode == 13) {
+                                          var typeid = getQueryString("typeid");
+                                          typeid = typeid == "" ? -1 : parseInt(typeid);
+                                          if (parseInt('{config.aspxrewrite}') == 1 && typeid <0) {
+                                              window.location = 'showtopic-{topicid}-' + (parseInt(obj.value) > 0 ? parseInt(obj.value) : 1) + '{config.extname}';
+                                          }
+                                          else {
+                                              (typeid > 0) ? window.location = 'showtopic.aspx?topicid={topicid}&page=' + (parseInt(obj.value) > 0 ? parseInt(obj.value) : 1) + '&typeid=' + typeid : window.location = 'showtopic.aspx?topicid={topicid}&page=' + (parseInt(obj.value) > 0 ? parseInt(obj.value) : 1);
+                                          }
+                                      }
+                                      return (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 97 && event.keyCode <= 105) || event.keyCode == 8;
+                                  }
+                              </script>
+                    <%/if%>
+                    </div>
+                <%/if%>
+                
+            </div>
+        </div>       
+        <%if {canreply}&&{userid}>0%>
+            <div class="box">
+                快速回复：
+                <%template _quickreply%>
+            </div> 
+        <%/if%>
+    </div> 
+<%else%>
+    <%if {needlogin} || {userid}<1%>
+      <%template _login%>
+    <%else%>
+      <%template _errmsgbox%>
+    <%/if%>
+<%/if%>
+
+<%template _copyright%>
+<%template _footer%>

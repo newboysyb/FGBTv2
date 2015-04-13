@@ -1,0 +1,74 @@
+﻿<%template _header%>
+<script type="text/javascript" src="{jsdir}/bbcode.js"></script>
+<script type="text/javascript" src="{jsdir}/editor.js"></script>
+<script type="text/javascript"  src="{jsdir}/template_calendar.js"></script>
+<script type="text/javascript" src= "{jsdir}/template_attach.js"></script>
+<div class="wrap cl pageinfo">
+	<div id="nav">
+	<%if {usergroupinfo.allowsearch}>0%>
+		<%template _quicksearch%>
+	<%/if%>
+		<a href="{config.forumurl}" class="title">{config.forumtitle}</a> &raquo; <%if {forum.Pathlist}!=""%>{ShowForumAspxRewrite(forum.Pathlist.Trim(),forumid,forumpageid)} &raquo; <%/if%>
+        <%if {topic}!=null%>
+            <a href="{ShowTopicAspxRewrite(topicid,0)}">{topic.title}</a> &raquo; &nbsp;
+        <%/if%>
+        <strong>编辑种子</strong>
+    </div>
+</div>
+<script type="text/javascript">
+var postminchars = parseInt({config.minpostsize});
+var postmaxchars = parseInt({config.maxpostsize});
+var disablepostctrl = parseInt({disablepostctrl});
+var tempaccounts = false;
+var forumpath = "{forumpath}";
+var posturl=forumpath+'edit.aspx?type={publishtype}seedid={seedid}';
+</script>
+<%if page_err==0%>
+<%if {ispost}%>
+	<%template _msgbox%>
+<%else%>
+<div class="wrap cl post">
+	<script type="text/javascript">
+		function geteditormessage(theform)
+		{
+			var message = wysiwyg ? html2bbcode(getEditorContents()) : (!theform.parseurloff.checked ? parseurl(theform.message.value) : theform.message.value);
+			theform.message.value = message;
+		}
+	</script>
+    <form method="post" name="postform" id="postform" action="" enctype="multipart/form-data" onsubmit="return checkinput(this);">
+    <%csharp%>
+    string formatNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+    <%/csharp%>
+    <input type="hidden" name="posttime" id="posttime" value="{formatNow}" />
+	<%template _seedpost%>
+	<div id="specialposttable"  style="display: none;">	
+		<div class="PrivateBTexfm cl">
+			<%template _seedpublish%>
+		</div>
+  </div>
+    <input type="hidden" name="aid" id="aid" value="0">
+    <input type="hidden" name="isdeleteatt" id="isdeleteatt" value="0">
+    <p class="textmsg" id="divshowuploadmsg" style="display: none"></p>
+    <p class="textmsg succ" id="divshowuploadmsgok" style="display: none"></p>
+    <input type="hidden" name="uploadallowmax" value="10">
+    <input type="hidden" name="uploadallowtype" value="jpg,gif">
+    <input type="hidden" name="thumbwidth" value="300">
+    <input type="hidden" name="thumbheight" value="250">
+    <input type="hidden" name="noinsert" value="0">
+	<script type="text/javascript">
+		isfirstpost  = {postinfo.layer} == 0 ? 1 : 0;
+		$('postform').onsubmit = function() { return validate($('postform'));};
+		function deleteatt(aid){
+			document.getElementById('isdeleteatt').value = 1;
+			document.getElementById('aid').value = aid;
+			document.getElementById('isdeleteatt').form.submit();
+		}
+    </script>
+    </form>
+<%template _postattachments%>
+<%/if%>
+<%else%>
+    <%template _errmsgbox%>
+<%/if%>
+<%template _copyright%>
+<%template _footer%>

@@ -1,0 +1,75 @@
+﻿<%template _header%>
+
+    <div id="nav">
+        &raquo; <a href="">用户中心</a> &raquo; <strong>发件箱</strong>
+    </div>
+    <%if page_err==0%>
+        <%if ispost%>
+            <%template _msgbox%>
+            <a href="usercpsentbox.aspx" title="" >返回发件箱</a>
+        <%else%>	
+           
+            <form id="pmform" name="pmform" method="post" action=""> 
+            
+            <div class="tz pbn">
+                <a href="usercppostpm.aspx" >写短消息</a> <span class="pipe">|</span> 
+                <a href="usercpinbox.aspx" >收件箱</a> <span class="pipe">|</span> 
+                <input type="submit" id="msgdel" name="msgdel" value="删除选中" />
+            </div>
+            
+            
+                <div class="vt">
+                    <div class="bm">
+                        <div class="bm_h">
+                            发件箱
+                        </div>
+                        
+                        <div class="bm_inf">
+                            <font class="xg1">共有短消息:{usedmsgcount}条<span class="pipe">|</span>上限:{maxmsg}条</font>
+                        </div>
+                        <%if {pmcount}>0%>
+                            <%if {pagecount}!=1%>
+                                <div class="pg">
+                                    {pagenumbers}，{pageid}/{pagecount}页
+                                </div>
+                            <%/if%>
+                            
+                            <%loop (PrivateMessageInfo) pm PrivateMessages.GetPrivateMessageCollection(userid,1,100,pageid,2)%>
+                                <div class="bm_c bm_c_bg">
+                                    <div class="bm_user">
+                                        <input name="pmitemid" id="id{pm.pmid}" type="checkbox" value="{pm.pmid}" style="margin-top:2px;"/>
+                                        <img src="{imagedir}/pm_{pm.new}.gif" <%if {pm.new}==1%>title="未读"<%else%>title="已读"<%/if%>/>
+                                        <%set {aspxrewriteurl} = this.UserInfoAspxRewrite({pm.msgfromid})%>
+                                        <%set (string){postdatec} = ForumUtils.ConvertDateTime({pm.postdatetime})%>
+                                        <font class="xg1">
+                                            <a href="{aspxrewriteurl}" target="_blank">{pm.msgfrom}</a>
+                                            {postdatec}
+                                        </font>
+                                        <br/>
+                                        <a href="usercpshowpm.aspx?pmid={pm.pmid}">{pm.subject}</a>
+                                        <br/> 
+                                        <em><a href="usercpshowpm.aspx?pmid={pm.pmid}"><font class="xs0 xg1"><%getsubstring(Utils.RemoveHtml({pm.message}),40,"...")%></font></a></em>
+                                    </div>    
+                                </div>
+
+                            
+
+                            <%/loop%>
+                            
+                            <%if {pagecount}!=1%>
+                                <div class="pg">
+                                    {pagenumbers}，{pageid}/{pagecount}页
+                                </div>
+                            <%/if%>
+                        <%else%> 
+                            发件箱暂无短消息
+                        <%/if%> 
+                    </div>
+                </div>    
+            </form>
+        <%/if%>
+		<%else%>
+        <%template _errmsgbox%>
+		<%/if%>
+<%template _copyright%>
+<%template _footer%>

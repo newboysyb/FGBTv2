@@ -1,0 +1,16 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\bin\ReleaseTracker\Discuz.Data.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\bin\ReleaseTracker\Discuz.Data.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\bin\ReleaseTracker\Discuz.Cache.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\bin\ReleaseTracker\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\bin\ReleaseTracker\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\bin\ReleaseTracker\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\bin\ReleaseTracker\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\bin\ReleaseTracker\Discuz.Cache.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\bin\ReleaseTracker\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\bin\ReleaseTracker\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\bin\ReleaseTracker\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\bin\ReleaseTracker\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\bin\ReleaseTracker\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\obj\ReleaseTracker\Discuz.Data.csprojResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\obj\ReleaseTracker\Discuz.Data.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data\obj\ReleaseTracker\Discuz.Data.pdb

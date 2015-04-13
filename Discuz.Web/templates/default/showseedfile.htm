@@ -1,0 +1,78 @@
+<%template _header%>	
+    <%if page_err==0%>
+	    <div id="floatlayout_topicadmin">
+          <h3 class="flb">
+            <em id="return_emailfriend">种子包含文件列表</em>
+            <span><a href="javascript:;" class="flbc" onclick="hideWindow('showseedfile{seedid}')" title="关闭(ESC)">关闭</a></span>
+          </h3>
+          <h3 class="flb">
+              <em id="em1">
+                  <a href="showtopic-{seedinfo.TopicId}.aspx">
+                  <%if {seedinfo.DownloadRatio}==0%>
+                      <font style="color:#00F">{seedinfo.TopicTitle}</font>
+                  <%else%>
+                      {seedinfo.TopicTitle}
+                  <%/if%>
+                  </a>
+              </em>
+          </h3>
+          <h3 class="flb">
+              <em id="em1">
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/{seedinfo.Type}.png" title="{PrivateBT.Type2Name(seedinfo.Type)}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <a href="{forumpath}downloadseed.aspx?seedid={seedinfo.SeedId}">
+                      <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/download.gif" title="下载种子"/>
+                  </a>
+                  <%if {rationote}!=""%>&nbsp;&nbsp;&nbsp;&nbsp;{rationote}<%/if%>
+              </em>
+          </h3>
+          <div class="PrivateBTInfoFileListBorder" id="PrivateBTInfoListBorder_showseedfile{seedid}">
+              <div class="PrivateBTInfoListBorder2" id="PrivateBTInfoListBorder2_showseedfile{seedid}">
+                 <!--  列表开始 -->
+                 <table class="PrivateBTFileListTable">
+                     <tr class="PrivateBTFileListTitle">
+                        <td width="100px">文件大小</td>
+                        <td width="100px" class="PrivateBTInfoListR">文件类型</td>
+                        <td align="left">路径/文件名</td>
+                     </tr>
+                     <%if {seedfilelist.Rows.Count}==0%><tr class="PrivateBTFileList"><td colspan="3" align="left">未能查找到该种子包含文件信息，请下载种子查看</td></tr><%/if%>
+                     <%loop seedfile seedfilelist%>
+                     <tr class="PrivateBTFileList">
+                        <td>{seedfile[size]}</td>
+                        <td class="PrivateBTInfoListR">{seedfile[filetype]}</td>
+                        <td align="left">{seedfile[filename]}</td>
+                     </tr>
+                     <%/loop%>
+                     <tr class="PrivateBTFileListTitle">
+                        <td width="100px">文件大小</td>
+                        <td width="100px" class="PrivateBTInfoListR">文件类型</td>
+                        <td align="left">路径/文件名</td>
+                     </tr>
+                 </table>
+                 <!--  列表结束 -->
+              </div>
+          </div>
+          
+          
+          <h3 class="PrivateBTInfoListNote">
+              正在上传：{seedinfo.Upload}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              正在下载：{seedinfo.Download}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              累计完成：{seedinfo.Finished}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              累计流量：{PTTools.Upload2Str(seedinfo.Traffic,false)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              存活时间：{PTTools.Minutes2String(seedinfo.Live/60.0)}
+          </h3>
+     </div>
+    <%else%>
+     <div id="floatlayout_topicadmin">
+          <h3 class="flb">
+              <em id="return_emailfriend">种子包含文件列表</em>
+              <span><a href="javascript:;" class="flbc" onclick="hideWindow('showseedfile{seedid}')" title="关闭">关闭</a></span>
+          </h3>
+          <div id="PrivateBTInfoListBorder">
+              <div id="PrivateBTInfoListBorder2">
+                  <%template _btinfolisterrmsgbox%>
+              </div>
+          </div>
+    </div>     
+    <%/if%>
+<%template _copyright%>
+<%template _footer%>

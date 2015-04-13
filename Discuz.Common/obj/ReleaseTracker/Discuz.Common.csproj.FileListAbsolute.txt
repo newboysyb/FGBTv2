@@ -1,0 +1,5 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Common\bin\ReleaseTracker\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Common\bin\ReleaseTracker\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Common\obj\ReleaseTracker\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Common\obj\ReleaseTracker\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Common\obj\ReleaseTracker\Discuz.Common.csprojResolveAssemblyReference.cache

@@ -1,0 +1,260 @@
+﻿<div id="editorbox">
+	<div class="edt_main">
+	<div class="edt_content cl">
+		<%if {special}=="" && {topic.special}>0%>
+			<%if {topic.special}==1 %><%set {special} = "poll"%><%/if%>
+			<%if {topic.special}==2 || {topic.special}==3%><%set {special} = "bonus"%><%/if%>
+			<%if {topic.special}==4%><%set {special} = "debate"%><%/if%>
+		<%/if%>
+		<%set (bool){adveditor} = ({special}!="" || {topic.special}>0)&&{isfirstpost}%>
+		<%set (string){action} = pagename.Replace("post","").Replace(".aspx","").Replace("topic","newthread")%>
+		<%set (string){actiontitle} = ""%>
+		<ul class="f_tab cl mbw">
+			<%if {pagename}=="publish.aspx"%>
+					<%set {actiontitle} = "发布" + {typedescription} + "种子"%>
+
+              <li<%if {publishtype}=="movie"%> class="cur_tab"<%/if%>><a onclick="switchpost('publish.aspx?type=movie')" href="javascript:;">&nbsp;&nbsp;电影&nbsp;&nbsp;</a></li>
+              <li<%if {publishtype}=="tv"%> class="cur_tab"<%/if%>><a onclick="switchpost('publish.aspx?type=tv')" href="javascript:;">&nbsp;&nbsp;剧集&nbsp;&nbsp;</a></li>
+              <li<%if {publishtype}=="comic"%> class="cur_tab"<%/if%>><a onclick="switchpost('publish.aspx?type=comic')" href="javascript:;">&nbsp;&nbsp;动漫&nbsp;&nbsp;</a></li>
+              <li<%if {publishtype}=="music"%> class="cur_tab"<%/if%>><a onclick="switchpost('publish.aspx?type=music')" href="javascript:;">&nbsp;&nbsp;音乐&nbsp;&nbsp;</a></li>
+              <li<%if {publishtype}=="game"%> class="cur_tab"<%/if%>><a onclick="switchpost('publish.aspx?type=game')" href="javascript:;">&nbsp;&nbsp;游戏&nbsp;&nbsp;</a></li>
+              <li<%if {publishtype}=="discovery"%> class="cur_tab"<%/if%>><a onclick="switchpost('publish.aspx?type=discovery')" href="javascript:;">&nbsp;&nbsp;纪录&nbsp;&nbsp;</a></li>
+              <li<%if {publishtype}=="sport"%> class="cur_tab"<%/if%>><a onclick="switchpost('publish.aspx?type=sport')" href="javascript:;">&nbsp;&nbsp;体育&nbsp;&nbsp;</a></li>
+              <li<%if {publishtype}=="entertainment"%> class="cur_tab"<%/if%>><a onclick="switchpost('publish.aspx?type=entertainment')" href="javascript:;">&nbsp;&nbsp;综艺&nbsp;&nbsp;</a></li>
+              <li<%if {publishtype}=="software"%> class="cur_tab"<%/if%>><a onclick="switchpost('publish.aspx?type=software')" href="javascript:;">&nbsp;&nbsp;软件&nbsp;&nbsp;</a></li>
+              <li<%if {publishtype}=="staff"%> class="cur_tab"<%/if%>><a onclick="switchpost('publish.aspx?type=staff')" href="javascript:;">&nbsp;&nbsp;学习&nbsp;&nbsp;</a></li>
+              <li<%if {publishtype}=="video"%> class="cur_tab"<%/if%>><a onclick="switchpost('publish.aspx?type=video')" href="javascript:;">&nbsp;&nbsp;视频&nbsp;&nbsp;</a></li>
+              <li<%if {publishtype}=="other"%> class="cur_tab"<%/if%>><a onclick="switchpost('publish.aspx?type=other')" href="javascript:;">&nbsp;&nbsp;其他&nbsp;&nbsp;</a></li>
+
+			<%else if {pagename}=="edit.aspx"%>
+			<%set {actiontitle} = "编辑" + {typedescription} + "种子"%>
+			<%set {isfirstpost} = true%>
+          <%if {canchangetype}%>
+                  <li<%if {publishtype}=="movie"%> class="cur_tab"<%/if%>><a onclick="switchpost('edit.aspx?type=movie&seedid={seedinfo.SeedId}')" href="javascript:;" title="">&nbsp;&nbsp;电影&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="tv"%> class="cur_tab"<%/if%>><a onclick="switchpost('edit.aspx?type=tv&seedid={seedinfo.SeedId}')" href="javascript:;" title="">&nbsp;&nbsp;剧集&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="comic"%> class="cur_tab"<%/if%>><a onclick="switchpost('edit.aspx?type=comic&seedid={seedinfo.SeedId}')" href="javascript:;" title="">&nbsp;&nbsp;动漫&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="music"%> class="cur_tab"<%/if%>><a onclick="switchpost('edit.aspx?type=music&seedid={seedinfo.SeedId}')" href="javascript:;" title="">&nbsp;&nbsp;音乐&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="game"%> class="cur_tab"<%/if%>><a onclick="switchpost('edit.aspx?type=game&seedid={seedinfo.SeedId}')" href="javascript:;" title="">&nbsp;&nbsp;游戏&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="discovery"%> class="cur_tab"<%/if%>><a onclick="switchpost('edit.aspx?type=discovery&seedid={seedinfo.SeedId}')" href="javascript:;" title="">&nbsp;&nbsp;纪录&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="sport"%> class="cur_tab"<%/if%>><a onclick="switchpost('edit.aspx?type=sport&seedid={seedinfo.SeedId}')" href="javascript:;" title="">&nbsp;&nbsp;体育&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="entertainment"%> class="cur_tab"<%/if%>><a onclick="switchpost('edit.aspx?type=entertainment&seedid={seedinfo.SeedId}')" href="javascript:;" title="">&nbsp;&nbsp;综艺&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="software"%> class="cur_tab"<%/if%>><a onclick="switchpost('edit.aspx?type=software&seedid={seedinfo.SeedId}')" href="javascript:;" title="">&nbsp;&nbsp;软件&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="staff"%> class="cur_tab"<%/if%>><a onclick="switchpost('edit.aspx?type=staff&seedid={seedinfo.SeedId}')" href="javascript:;" title="">&nbsp;&nbsp;学习&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="video"%> class="cur_tab"<%/if%>><a onclick="switchpost('edit.aspx?type=video&seedid={seedinfo.SeedId}')" href="javascript:;" title="">&nbsp;&nbsp;视频&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="other"%> class="cur_tab"<%/if%>><a onclick="switchpost('edit.aspx?type=other&seedid={seedinfo.SeedId}')" href="javascript:;" title="">&nbsp;&nbsp;其他&nbsp;&nbsp;</a></li>
+          <%else%>
+                  <li<%if {publishtype}=="movie"%> class="cur_tab"<%/if%>><a title="" style="cursor:default;">&nbsp;&nbsp;电影&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="tv"%> class="cur_tab"<%/if%>><a title="" style="cursor:default;">&nbsp;&nbsp;剧集&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="comic"%> class="cur_tab"<%/if%>><a title="" style="cursor:default;">&nbsp;&nbsp;动漫&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="music"%> class="cur_tab"<%/if%>><a title="" style="cursor:default;">&nbsp;&nbsp;音乐&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="game"%> class="cur_tab"<%/if%>><a title="" style="cursor:default;">&nbsp;&nbsp;游戏&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="discovery"%> class="cur_tab"<%/if%>><a title="" style="cursor:default;">&nbsp;&nbsp;纪录&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="sport"%> class="cur_tab"<%/if%>><a title="" style="cursor:default;">&nbsp;&nbsp;体育&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="entertainment"%> class="cur_tab"<%/if%>><a title="" style="cursor:default;">&nbsp;&nbsp;综艺&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="software"%> class="cur_tab"<%/if%>><a title="" style="cursor:default;">&nbsp;&nbsp;软件&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="staff"%> class="cur_tab"<%/if%>><a title="" style="cursor:default;">&nbsp;&nbsp;学习&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="video"%> class="cur_tab"<%/if%>><a title="" style="cursor:default;">&nbsp;&nbsp;视频&nbsp;&nbsp;</a></li>
+                  <li<%if {publishtype}=="other"%> class="cur_tab"<%/if%>><a title="" style="cursor:default;">&nbsp;&nbsp;其他&nbsp;&nbsp;</a></li>
+          <%/if%>
+			<%/if%>
+		</ul>
+		<%set (char){comma} = ','%>
+		<%set (string){editorid} = "e"%>
+		<%set (int){thumbwidth} = 400%>
+		<%set (int){thumbheight} = 300%>
+		<div id="postbox">
+		<div class="pbt cl">
+			<input type="hidden" name="iconid" id="iconid" value="{topic.iconid}" />
+		<%if {special}=="" && {isfirstpost}%>
+		<div class="ftid">
+			<a id="icon" class="z" onmouseover="InFloat='floatlayout_{action}';showMenu(this.id)"><img id="icon_img" src="{posticondir}/{topic.iconid}.gif" style="margin-top:4px;"/></a>
+		</div>
+		<ul id="icon_menu" class="sltm" style="display:none">
+		<%set (string){icons} = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15"%>
+		<%loop (string) id icons.Split(comma)%>
+			<li><a href="javascript:;"><img onclick="switchicon({id}, this)" src="{posticondir}/{id}.gif" alt="" /></a></li>
+		<%/loop%>
+		</ul>
+		<%/if%>
+		<%if {forum.applytopictype}==1 && {topictypeselectoptions}!=""&&{isfirstpost}%>
+			<div class="ftid">
+				<select name="typeid" id="typeid">{topictypeselectoptions}</select>
+			</div>
+            <script type="text/javascript" reload="1">$('typeid').value = '{topic.typeid}';</script>
+			<script type="text/javascript">simulateSelect("typeid");</script>
+		<%/if%>
+		<%if !{isfirstpost} && ({topic.special==4}||{special}=="debate")%>
+			<div class="ftid">
+				<select id="debateopinion" name="debateopinion">
+					<option value="0">观点</option>
+					<option value="1">正方</option>
+					<option value="2">反方</option>
+				</select>
+			</div>
+			<script type="text/javascript">simulateSelect("debateopinion");</script>
+			<script type="text/javascript" reload="1">$('debateopinion').selectedIndex = parseInt(getQueryString("debate"));</script>
+		<%/if%>
+			<span class="z">
+            <input name="{config.antispamposttitle}" type="text" id="title" value="种子标题将由分类信息自动生成，请直接填写分类信息表，粗体项目为必填内容" class="txt postpx" style="width:770px;"/>
+		<%if {action}=="reply" || {postinfo.layer}>0%>
+			<cite class="tips">(可选)</cite>
+		<%/if%>
+		<%if {canhtmltitle}%><a href="###" id="titleEditorButton" onclick="RootTitleEditor();" class="xg2" style="margin-left:10px;">高级编辑</a><%/if%>
+            </span>
+		<%if {needaudit}%><em class="needverify">需审核</em><%/if%>
+		</div>
+		<%if {canhtmltitle}%>
+		<script type="text/javascript" src="{jsdir}/simplyeditor.js" reload="1"></script>
+		<div class="pbt cl" id="editorDiv" style="display: none;">
+			<div class="title_editor" id="titleEditorDiv">
+                <script type="text/javascript">
+                    var titleEditor;
+                    function RootTitleEditor(){
+                        if($('editorDiv').style.display == 'none')
+                        AdvancedTitleEditor();
+                        else
+                        TextTitleBox();
+                    }
+                    function AdvancedTitleEditor() {
+                        $('editorDiv').style.display = '';
+                        $('title').style.display = 'none';
+                        if(titleEditor==null){
+                            titleEditor = new SimplyEditor('htmltitle', 'titleEditorDiv', '{cssdir}', '{htmltitle}');
+                        }
+                        $('titleEditorButton').innerHTML='普通编辑';
+                    }
+                    function TextTitleBox(){
+                        $('editorDiv').style.display = 'none';
+                        $('title').style.display = '';
+                        $('titleEditorButton').innerHTML='高级编辑';
+                    }
+//                    $('titleEditorButton').onclick = function () {
+//                        AdvancedTitleEditor();
+//                    };
+                    <%if {htmltitle}!=""%>
+			            AdvancedTitleEditor();
+			        <%/if%>
+                </script>
+			</div>
+		</div>
+		<%/if%>
+		<%if {adveditor}%>
+		<div id="specialpost" class="pbt cl"></div>
+		<script type="text/javascript" reload="1">
+			_attachEvent(window, "load", function(){ 
+			if($('specialposttable')) {
+				$('specialpost').innerHTML = $('specialposttable').innerHTML;
+				$('specialposttable').innerHTML = '';
+			}
+			});
+		</script>
+		<%/if%>
+		<%template _subeditor%>
+		<%if {pagename}=="publish.aspx" || ({pagename}=="edit.aspx"&&{isfirstpost})%>
+			<%if {enabletag}%>
+			<div class="pbt cl margint">
+				<p><strong>标签(Tags):</strong>(用空格隔开多个标签，最多可填写 5 个)</p>
+				<p><input type="text" name="tags" id="tags" class="txt" value="{topictags}" tabindex="1" /><button name="addtags" type="button" onclick="relatekw();return false">+可用标签</button> <span id="tagselect"></span></p>
+			</div>
+			<%/if%>
+		<%/if%>
+		<div id="moreinfo"></div>
+		<div style="clear:both;"></div>
+		<div class="pbt cl margint">
+			<div class="custominfoarea" id="custominfoarea" style="display: none;"></div>
+			<%if {postinfo.layer}==0 && {forum.applytopictype}==1%>
+			<input type="hidden" id="postbytopictype" name="postbytopictype" value="{forum.postbytopictype}" tabindex="3">
+			<%/if%>
+			<script type="text/javascript">
+				function RunMutiUpload() {
+				if ($('MultiUploadFile').content != null)
+					$('MultiUploadFile').content.MultiFileUpload.GetAttachmentList();	
+				}
+				/*checkLength($('title'), 255);//检查标题长度*/
+				function switchpost(href) {
+				    editchange = false;
+				    saveData(undefined,'postform','{config.antispamposttitle}', '{config.antispampostmessage}');
+				    location.href = href;
+				    doane();
+				}
+				
+                if (getQueryString('cedit') == '' && loadUserdata('forum')){
+                    $('rstnotice').style.display = '';
+                }
+			</script>
+			<button type="submit" id="postsubmit" value="true"<%if {pagename}=="publish.aspx"%> name="topicsubmit"<%else if {pagename}=="postreply.aspx"%> name="replysubmit"<%else if {pagename}=="edit.aspx"%> name="editsubmit"<%/if%> tabindex="1" class="pn"><span>{actiontitle}</span></button>
+      <span id="more_2">
+          <%if {pagename}=="edit.aspx"&&{seedinfo.Uid}!={userid}%>
+              <%if {(DateTime.Now-seedinfo.PostDateTime).TotalDays}<14%>
+                  <input name="sendmessage" type="checkbox" id="sendmessage" checked="checked" value="1"/> 发送短消息通知，通知将自动包含标题变动信息，若有其他要说明的信息可填写于右侧理由框内
+              <%else%>
+                  <input name="sendmessage" type="checkbox" id="sendmessage" value="1"/> 发送短消息通知，通知将自动包含标题变动信息，若有其他要说明的信息可填写于右侧理由框内
+              <%/if%>
+          <%/if%>
+          <%if {userinfo.Spaceid}>0 && {special}==""&&{action}=="newthread"&&{config.enablespace}==1%><input type="checkbox" name="addtoblog" /> 添加到个人空间<%/if%>
+			</span>
+			<%if {isseccode}%><span style="position:relative"><%template _vcode%></span><%/if%>
+		</div>
+		</div>
+	</div>
+	</div>
+    <script type="text/javascript">
+        var topicreadperm = [
+            {readaccess:'',grouptitle:'不限'},
+            <%loop (UserGroupInfo) userGroupInfo userGroupInfoList%>
+            <%if {userGroupInfo.Readaccess}!=0%>
+            {readaccess:'{userGroupInfo.Readaccess}',grouptitle:'{Utils.RemoveHtml(userGroupInfo.Grouptitle)}'},
+            <%/if%>
+            <%/loop%>
+            {readaccess:'255',grouptitle:'最高权限'}
+        ];
+    </script>
+	<div class="edt_app">
+		<%if {pagename}=="publish.aspx" || ({pagename}=="edit.aspx"&&{isfirstpost})%>
+		<%if {userid}!=-1 && {usergroupinfo.Allowsetreadperm}==1%>
+			<p><strong>阅读权限:</strong></p>
+			<p class="mbn">
+                <em class="ftid">
+                    <select name="topicreadperm" id="topicreadperm" class="ps" style="width:90px"></select>
+                </em>
+                <script type="text/javascript">
+                    for (var i = 0 ; i < topicreadperm.length ; i++) {
+                        var option = new Option(topicreadperm[i].grouptitle, topicreadperm[i].readaccess);
+                        option.title = "阅读权限:" + topicreadperm[i].readaccess;
+                        $('topicreadperm').options.add(option);
+                        if(topicreadperm[i].readaccess == {topic.readperm})
+                            $('topicreadperm').options.selectedIndex = i;
+                    }
+                    simulateSelect("topicreadperm");
+                </script>
+                <img src="{forumpath}images/common/faq.gif" alt="Tip" class="mtn vm" style="margin: 0;" onmouseover="showTip(this)" tip="阅读权限按由高到低排列，高于或等于选中组的用户才可以阅读。" />
+            </p>
+		<%/if%>
+		<%/if%>
+		<h4 style="clear:both;">发帖选项:</h4>
+		<p class="mbn">
+            <input type="checkbox" value="1" name="htmlon" id="htmlon"  onclick="alloweditorhtml()" <%if {usergroupinfo.allowhtml}!=1%>disabled<%/if%> <%if {htmlon}==1%>checked<%/if%> /><label for="htmlon">html 代码</label>
+            <img src="{forumpath}images/common/warning.gif" alt="Tip" class="mtn vm" style="margin: 0;vertical-align: top;" onmouseover="showTip(this)" tip="使用html代码可能会与表情符冲突，如“:D”等表情符。建议在使用html代码时勾选“禁用表情”。" />
+        </p>
+		<p class="mbn"><input type="checkbox" id="allowimgcode" disabled<%if {allowimg}==1%> checked="checked"<%/if%> /><label for="allowimgcode">[img] 代码</label></p>
+		<p class="mbn"><input type="checkbox" value="1" name="parseurloff" id="parseurloff" <%if {parseurloff}==1%>checked<%/if%> /><label for="parseurloff">禁用 网址自动识别</label></p>
+		<p class="mbn"><input type="checkbox" value="1" name="smileyoff" id="smileyoff" <%if {smileyoff}==1%>checked<%/if%><%if {forum.allowsmilies}!=1%>disabled<%/if%> /><label for="smileyoff">禁用 表情</label></p>
+		<p class="mbn"><input type="checkbox" value="1" name="bbcodeoff" id="bbcodeoff" <%if {bbcodeoff}==1%> checked<%/if%>	<%if {usergroupinfo.allowcusbbcode}!=1%> disabled<%else if {forum.allowbbcode}!=1%> disabled<%/if%> /><label for="bbcodeoff">禁用 论坛代码</label></p>
+		<p class="mbn"><input type="checkbox" value="1" name="usesig" id="usesig" <%if {usesig}==1%>checked<%/if%> /><label for="usesig">使用个人签名</label></p>
+		<%if {pagename}=="postreply.aspx"%>
+		<p class="mbn"><input type="checkbox" name="emailnotify" id="emailnotify" <%if {config.replyemailstatus}==1%> checked<%/if%> /><label for="emailnotify">发送邮件告知楼主</label></p>
+		<p class="mbn"><input type="checkbox" name="postreplynotice" id="postreplynotice" <%if {config.replynotificationstatus}==1%> checked <%/if%>/><label for="emailnotify">发送论坛通知给楼主</label></p>
+		<%/if%>
+		<%if {pagename}=="publish.aspx" || ({pagename}=="edit.aspx"&&{isfirstpost})%>
+		<%if {special}==""&&{Scoresets.GetCreditsTrans()}!=0 && {usergroupinfo.maxprice}>0%>
+			<p style="clear:both;"><strong>售价</strong>({userextcreditsinfo.name}):</p>
+			<p><input type="text" name="topicprice" value="{topic.price}" class="txt"  size="6"/> {userextcreditsinfo.unit} <br/>最高 {usergroupinfo.maxprice} {userextcreditsinfo.unit}售价只允许非负整数, 单个主题最大收入 {Scoresets.GetMaxIncPerTopic()}{userextcreditsinfo.unit}</p>
+		<%/if%>
+		<%/if%>
+    <%if {pagename}=="edit.aspx"&&{seedinfo.Uid}!={userid}%>
+        编辑理由：<label>最多500个字符，还可输入<strong><span id="chLeft">500</span></strong></label><br/>
+        <textarea class="txtarea" name="editreason" id="editreason" style="width:150px;height:300px;"></textarea>
+        <script type="text/javascript">checkLength($('editreason'), 500); //检查内容长度</script>
+    <%/if%>
+	</div>
+</div>

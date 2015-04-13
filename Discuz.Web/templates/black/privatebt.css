@@ -1,0 +1,446 @@
+/*reg*/
+.ihome_reg_alert{ font-weight:bold; color:#C00}
+
+/*=========================================================================================================*/
+
+
+/*通用格式*/
+.PTalL{text-align:left;}
+.PTalR{text-align:right;}
+.PTpdL{padding-left:10px;}
+.PTpdR{padding-right:10px;}
+
+/*下一页按钮*/
+.big_nextbtn{text-align:center;width:100%;height:auto;border:solid #CCC 1px;background-color:#FFF;margin-bottom:10px;padding-top:13px;padding-bottom:13px;cursor: pointer;}
+.big_nextbtn:hover{text-align:center;width:100%;height:auto;border:solid #369 1px;background-color:#EEE;margin-bottom:10px;padding-top:13px;padding-bottom:13px;cursor: pointer;}
+.big_nextbtn a:link{text-decoration:none;}
+
+/*签到*/
+.fgbtcheckin{position:relative;margin:5px;padding:5px;text-align:center;text-decoration:none;font:bold 14px/25px Arial, sans-serif;color:#572;background: #cd6;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;border:#572 2px solid;}
+.fgbtcheckin:hover{position:relative;margin:5px;padding:5px;text-align:center;text-decoration:none;font:bold 14px/25px Arial, sans-serif;color:#350;background: #ac4;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;border:#350 2px solid;}
+.fgbtcheckintoday{position:relative;margin:5px;padding:5px;text-align:center;text-decoration:none;font:bold 14px/25px Arial, sans-serif;color:#BBB;background: #FFF;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;border:#BBB 2px solid;}
+.fgbtcheckintoday:hover{position:relative;margin:5px;padding:5px;text-align:center;text-decoration:none;font:bold 14px/25px Arial, sans-serif;color:#BBB;background: #FFF;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;border:#BBB 2px solid;}
+
+
+/*发布时间高亮*/
+span.PrivateBTPostDateTimeHighlightNow{color:#F00;}
+span.PrivateBTPostDateTimeHighlightSec{color:#F00;}
+span.PrivateBTPostDateTimeHighlightMin{color:#F00;}
+span.PrivateBTPostDateTimeHighlightHour{color:#F00;}
+span.PrivateBTPostDateTimeHighlightDay{color:#00C;}
+span.PrivateBTPostDateTimeHighlightYesterday{color:#00C;}
+/*新通知标记*/
+span.PrivateBTNewNotice{ color:#990;}
+span.PrivateBTNoticeMarkAll{ float:right;}
+
+/*快速表情*/
+div.PrivateBTQuickSmilesShowDiv{ border:1px #CCC solid; margin-bottom:10px;}
+table.BTQuickTable{ width:100%; }
+td.BTQuickTableTD{ height:30px; text-align:center;}
+img.BTQuickTableIMAGE{cursor: pointer; height:40px; width:40px;}
+
+/*Selection from old dnt3.1 templates 最顶部工具栏【编辑】*/
+
+#submenu{height:28px;line-height:28px;background:#181713 url(images/submenubg.gif) repeat-x 50% 100%; overflow:hidden;}
+.submenuright{ float:right;  }
+
+/*版头尺寸限定*/
+#forumheader #rules{ width:100%; overflow:hidden; max-height:250px;}
+
+/*showtopic*/
+img.PTAvatar120{ width:120px; height:120px;}
+/*showtopiclist*/
+span.PTGrayFont{ color:#360;}
+span.PTGrayFont a{ color:#360;}
+
+/*AT用户*/
+a.atuser:link{ font-weight:700;}
+a.atuser:hover{ font-weight:700; color:#A60;}
+
+/*quick search 快速搜索*/
+#quicksearch_textinput{ width: 160px;}
+
+/*=========================================================================================================*/
+/*导航菜单*/
+span.PrivateBTNavList{margin-left:26px; margin-right:26px; }
+
+
+/*=========================================================================================================*/
+/*今日十大*/
+div.PrivateBTTodayTop{ height:280px; overflow:hidden;}
+div.PrivateBTTopLeft{ height:280px;  width:39.9%; overflow:hidden; float:left;}
+div.PrivateBTTopRight{ height:280px; width:59.9%; overflow:hidden; float:right;}
+table.PrivateBTTopRight{ border:none;}
+.PrivateBTTopDiv{ border:none;}
+
+
+/*=========================================================================================================*/
+/**/
+span.PrivateBTFontLargeLow{ font-size:small; font-weight:bold; position:absolute; margin-top:15px;}
+.PrivateBTBold { font-weight:bold;}
+
+
+/*=========================================================================================================*/
+/*showseeds popup detail page*/
+
+div.IPShowHeader{ float:right; text-align:right;padding:25px 9px 25px 0px;}
+span.InTopicAdmin{ float:right; color:#666}
+span.InTopicAdmin a{color:#666}
+span.StatsGray{ color:#666;}
+span.SeedGray{ color:#AAA;}
+span.BTBlue{ color:#00F}
+strong{ font-weight:700;}
+
+span.PrivateBTFontGray{ color:#666}
+
+
+
+.btpublishtype { margin-right: 0; background:url(images/buttonbg2.gif) no-repeat 0 0; color: #FFF; width:77px; height:27px; font-weight:bold; border:0;}
+.btpublishtypeselected { margin-right: 0; background:url(images/buttonbg.gif) no-repeat 0 0; color: #FFF; width:77px; height:27px; font-weight:bold; border:0;}
+
+div.PrivateBTInfoFloatMid{ width:100%; top:50%; position:relative; background-color:#FFF; margin:0px; padding:0px;}
+div.PrivateBTInfoFloatMid2{ top:-50%; position:relative; margin:0; padding:0;}
+div.PrivateBTInfoFloat{ 
+position:absolute;
+left:50%;
+top:50%;
+border:none;
+background:#7FCAE2; /*filter:alpha(opacity=80); -moz-opacity:.8; opacity:0.8;*/
+z-index:9998;
+overflow:hidden;
+text-align:center;
+visibility:hidden;
+padding:0px;
+margin:0;
+}
+div.PrivateBTInfoFloatMask{ 
+position:absolute;
+left:50%;
+top:50%;
+border:none;
+background:#7FCAE2; filter:alpha(opacity=90); -moz-opacity:.9; opacity:0.9;
+z-index:9997;
+overflow:hidden;
+text-align:center;
+visibility:hidden;
+padding:0px;;
+margin:0;
+}
+div.PrivateBTInfoCloseBtn{ background:#DDD; margin:-1px; color:#888; margin-top:-2px;}
+
+/*showseeds popup detail page*/
+/*=========================================================================================================*/
+
+
+/*共用*/
+div.PrivateBTListBorder{ background-color:#7FCAE2;}/*7FCAE2*/
+div.PrivateBTList{ background-color:#F1F5FA; padding:10px;}/*F1F5FA*/
+div.PrivateBTInfoListTitle{ border:0px; padding:0px; margin:0px; overflow:scroll; overflow-x:hidden;}
+div.PrivateBTInfoListBorder2{ }
+h3.PrivateBTInfoListNote{ margin:10px;}
+
+
+
+/*专用*/
+div.PrivateBTInfoPeerListBorder{border:#AAE solid 1px; padding:0px;}
+div.PrivateBTInfoFileListBorder{border:#CFDFDF solid 1px; padding:0px; margin:10px; height:25px; overflow:scroll; overflow-x:hidden;}
+div.PrivateBTInfoOpListBorder{border:#FCA solid 1px; padding:0px;}
+
+table.PrivateBTPeerListTable{border:#AAE solid 1px; overflow:hidden; background:#FFF; text-align:right; width:100% }
+table.PrivateBTFileListTable{border:#CFDFDF solid 1px; overflow:hidden; background:#FFF; text-align:right; width:100% }
+table.PrivateBTOpListTable{border:#FCA solid 1px; overflow:hidden; background:#FFF; text-align:right; width:100% }
+
+/*贴内种子信息显示*/
+div.PrivateBTSeedInfoTable{border:1px #EB2 solid; overflow:auto;}
+div.PrivateBTSeedInfoTable_s{border:1px #2AC solid; overflow:auto;}
+	table.PrivateBTSeedInfoTable{border:none;}
+	table.PrivateBTSeedInfoTable_s{border:none;}
+		tr.PrivateBTSeedInfoListTitle{border:none; overflow:hidden; background:#EB2;}
+		tr.PrivateBTSeedInfoListTitle_S{border:none; overflow:hidden; background:#2AC;}
+			tr.PrivateBTSeedInfoListTitle td{border:none;line-height:24px; font-weight:700; padding-left:15px; color:#FFF; background-color:#EB2}
+			tr.PrivateBTSeedInfoListTitle td a{font-weight:normal; color:#FFF; text-decoration:none;}
+			tr.PrivateBTSeedInfoListTitle td a:hover{font-weight:normal; color:#FFF; text-decoration:underline;}
+			tr.PrivateBTSeedInfoListTitle_s td{border:none;line-height:24px; font-weight:700; padding-left:15px; color:#FFF; background-color:#2AC}
+			tr.PrivateBTSeedInfoListTitle_s td a{font-weight:normal; color:#FFF; text-decoration:none;}
+			tr.PrivateBTSeedInfoListTitle_s td a:hover{font-weight:normal; color:#FFF; text-decoration:underline;}
+		
+		tr.PrivateBTSeedInfoList{border:none; overflow:hidden; background:#FFD; width:300px;}
+		tr.PrivateBTSeedInfoList_s{border:none; overflow:hidden; background:#DFF; width:300px;}
+		tr.PrivateBTSeedInfoListDownLink{border:none; overflow:hidden; background:#FEA; width:300px;}
+		tr.PrivateBTSeedInfoListDownLink_s{border:none; overflow:hidden; background:#AEF; width:300px;}
+		tr.PrivateBTSeedInfoList:hover{border:none; overflow:hidden; background:#FFF;}
+		tr.PrivateBTSeedInfoList_s:hover{border:none; overflow:hidden; background:#FFF;}
+		tr.PrivateBTSeedInfoListDownLink:hover{border:none; overflow:hidden; background:#FFF;}
+		tr.PrivateBTSeedInfoListDownLink_s:hover{border:none; overflow:hidden; background:#FFF;}
+		tr.PrivateBTSeedInfoList td{ line-height:24px; border-top:1px #EB2 solid; border-bottom:none;  padding-left:15px;}
+		tr.PrivateBTSeedInfoList_s td{ line-height:24px; border-top:1px #2AC solid; border-bottom:none;  padding-left:15px;}
+		tr.PrivateBTSeedInfoListDownLink td{ line-height:24px; border-top:1px #EB2 solid; border-bottom:none;  padding-left:15px;}
+		tr.PrivateBTSeedInfoListDownLink_s td{ line-height:24px; border-top:1px #2AC solid; border-bottom:none;  padding-left:15px;}
+		tr.PrivateBTSeedInfoListOn td{ line-height:24px; padding-left:15px;}
+		tr.PrivateBTSeedInfoListOn_s td{ line-height:24px; padding-left:15px;}
+			
+			tr.PrivateBTSeedInfoList a{ text-decoration:none;}
+			tr.PrivateBTSeedInfoList a:hover{ text-decoration:underline;}
+			tr.PrivateBTSeedInfoList_s a{ text-decoration:none;}
+			tr.PrivateBTSeedInfoList_s a:hover{ text-decoration:underline;}
+			
+			.PrivateBTLink_GreenBold{ color:#0A0; font-weight:700;}
+			a.PrivateBTLink_GreenBold{ color:#0A0; font-weight:700;}
+			
+			td.PrivateBTSeedInfoListA { width:12%;}
+			td.PrivateBTSeedInfoListB { width:20%;}
+			td.PrivateBTSeedInfoListC { width:15%;}
+			td.PrivateBTSeedInfoListD { width:53%;}
+
+tr.PrivateBTPeerListTitle{border:none 0px; overflow:hidden; background:#AAE;}
+tr.PrivateBTFileListTitle{border:none 0px; overflow:hidden; background:#CFDFDF;}
+tr.PrivateBTOpListTitle{border:none 0px; overflow:hidden; background:#FCA;}
+
+		.threadstamp { position:absolute; right:150px; top:400px;}/*【BT修改】鉴定图章位置修正*/
+		.threadstampseed { position:absolute; right:150px; top:300px;}/*【BT修改】鉴定图章位置修正*/
+		.threadstampseed2 { position:absolute; right:150px; top:400px;}/*【BT修改】鉴定图章位置修正*/
+
+tr.PrivateBTPeerList{border:none 0px; overflow:hidden; background:#EEF;}
+tr.PrivateBTFileList{border:none 0px; overflow:hidden; background:#E6F6F6;}
+tr.PrivateBTOpList{border:none 0px; overflow:hidden; background:#FED;}
+
+tr.PrivateBTPeerList:hover{border:none 0px; overflow:hidden; background:#FFF;}
+tr.PrivateBTFileList:hover{border:none 0px; overflow:hidden; background:#FFF;}
+tr.PrivateBTOpList:hover{border:none 0px; overflow:hidden; background:#FFF;}
+
+tr.PrivateBTPeerListTitle td{ border:none 0px; line-height:24px;}
+tr.PrivateBTFileListTitle td{ border:none 0px; line-height:24px;}
+tr.PrivateBTOpListTitle td{ border:none 0px; line-height:24px;}
+
+tr.PrivateBTPeerList td{ line-height:24px; border-top:1px #AAE solid; border-bottom:1px #AAE solid}
+tr.PrivateBTFileList td{ line-height:24px; border-top:1px #CFDFDF solid; border-bottom:1px #CFDFDF solid}
+tr.PrivateBTOpList td{ line-height:24px; border-top:1px #FCA solid; border-bottom:1px #FCA solid}
+
+tr.PrivateBTPeerListOn td{ line-height:24px;}
+tr.PrivateBTFileListOn td{ line-height:24px;}
+tr.PrivateBTOpListOn td{ line-height:24px;}
+
+td.PrivateBTInfoListR{ padding-right:15px;*padding-right:30px;}/*Firefox IE hack*/
+
+/*种子详细信息列表页面链接样式*/
+span.PrivateBTPeerListLink{ color:#77C; font-weight: bold}
+span.PrivateBTFileListLink{ color:#79B; font-weight: bold}
+span.PrivateBTPeerHistoryListLink{ color:#77C; font-weight: bold}
+span.PrivateBTSeedOpListLink{ color:#FA6; font-weight: bold}
+span.PrivateBTSeedInfoListLink{ color:#777; font-weight: bold}
+
+span.PrivateBTPeerListLink a{ cursor:pointer;color:#77C}
+span.PrivateBTFileListLink a{ cursor:pointer;color:#79B}
+span.PrivateBTPeerHistoryListLink a{ cursor:pointer;color:#77C}
+span.PrivateBTSeedOpListLink a{ cursor:pointer;color:#F97}
+span.PrivateBTSeedInfoListLink a{ cursor:pointer;color:#777}
+
+tr.PrivateBTSeedInfoList span.blue{ color:#06F; font-weight: bold}
+tr.PrivateBTSeedInfoListOn span.blue{ color:#06F; font-weight: bold}
+tr.PrivateBTSeedInfoList span.red{ color:#C30; font-weight: bold}
+tr.PrivateBTSeedInfoListOn span.red{ color:#C30; font-weight: bold}
+tr.PrivateBTSeedInfoList a{ cursor:pointer;}
+tr.PrivateBTSeedInfoListOn a{ cursor:pointer;}
+tr.PrivateBTSeedInfoList_s span.blue{ color:#06F; font-weight: bold}
+tr.PrivateBTSeedInfoListOn_s span.blue{ color:#06F; font-weight: bold}
+tr.PrivateBTSeedInfoList_s span.red{ color:#C30; font-weight: bold}
+tr.PrivateBTSeedInfoListOn_s span.red{ color:#C30; font-weight: bold}
+tr.PrivateBTSeedInfoList_s a{ cursor:pointer;}
+tr.PrivateBTSeedInfoListOn_s a{ cursor:pointer;}
+
+/*种子详细命名信息*/
+div.PrivateSeedInfoTableMovieBorder{border:#555 solid 1px; padding:0px;}
+	table.PrivateBTSeedInfoTableMovie{border:#555 solid 1px; overflow:hidden; background:#FFF; text-align:left; width:100% }
+		tr.PrivateBTSeedInfoTableTitleMovie{border:none 0px; overflow:hidden; background:#DDD;}
+		tr.PrivateBTSeedInfoTableTitleMovie td{ font-weight:700; padding-left:15px; color:#DDD}
+		tr.PrivateBTSeedInfoTableListMovie {border:none 0px; overflow:hidden; background:#DDD;}
+		tr.PrivateBTSeedInfoTableListMovie:hover {border:none 0px; overflow:hidden; background:#FFF;}
+		tr.PrivateBTSeedInfoTableListMovie td { line-height:24px; border-top:1px #555 solid; border-bottom:1px #555 solid;  padding-left:15px;}
+		tr.PrivateBTSeedInfoTableListMovie:hover  td { line-height:24px; border-top:1px #555 solid; border-bottom:1px #555 solid;  padding-left:15px;}
+
+/*共享率保护限制*/
+div.PrivateBTSeedInfoTableAlert{border:1px #F00 dashed; overflow:auto;}
+	table.PrivateBTSeedInfoTableAlert{border:none;}
+		tr.PrivateBTSeedInfoListTitleAlert{border:none; overflow:hidden; background:#FFF; }
+			tr.PrivateBTSeedInfoListTitleAlert td{border:none;line-height:24px; font-weight:700; padding-left:15px; color:#C00}
+			tr.PrivateBTSeedInfoListTitleAlert td a{font-weight:bold; color:#C00; text-decoration:none;}
+			tr.PrivateBTSeedInfoListTitleAlert td a:hover{font-weight:bold; color:#C00; text-decoration:underline;}
+			tr.PrivateBTSeedInfoListTitleAlert td em{font-weight:normal; color:#666;}
+
+
+
+
+/*=========================================================================================================*/
+
+a.PrivateBTLink_black{color:#000 !important}
+
+
+span.PrivateBTFontPurpleBold{ font-weight:bold; color:#88C}
+span.PrivateBTFontCyanBold{ font-weight:bold; color:#899}
+span.PrivateBTFontLightBlueBold{ font-weight:bold; color:#09C;}
+span.PrivateBTFontOrangeBold{ font-weight:bold; color:#F60}
+span.PrivateBTFontRed{color:#F00}
+span.PrivateBTFontRedBold{color:#F00; font-weight:bold;}
+
+span.PrivateBTFontLightBlueBold img{display:inline; width:auto; height:auto; margin:0 auto; margin-top:0px; position:relative; margin-bottom:-2px; }
+span.PrivateBTFontOrangeBold img{display:inline; width:auto; height:auto; margin:0 auto; margin-top:0px; position:relative; margin-bottom:-2px; }
+
+img.PrivateBTInlineIMG{ margin-bottom:-3px;}
+img.PrivateBTInlineIMGPointer{ margin-bottom:-3px; cursor:pointer;}
+img.PrivateBTInlineIMG24x24{ margin-bottom:-3px; height:24px; width:24px; }
+
+/*=========================================================================================================*/
+/*showseeds seedlist 种子列表页面181713*/
+
+table.ShowseedsMainTable{ }
+table.ShowseedsMainTable tr{ }
+
+tr.PrivateBTSeedListOn td{ background-color:#181713 !important;}
+tr.PrivateBTSeedListBar td{ line-height:20px !important;}
+
+tr.PrivateBTSeedList td{ background-color:#181713 !important;}
+tr.PrivateBTSeedListTop td{ background-color:#181713 !important;}
+tr.PrivateBTSeedListUpload td{ background-color:#182713 !important;}
+tr.PrivateBTSeedListDownload td{ background-color:#281713 !important;}
+tr.PrivateBTSeedListFinished td{ background-color:#181723 !important;}
+tr.PrivateBTSeedListPublish td{ background-color:#282723 !important;}
+
+tr.PrivateBTSeedList:hover td{ background-color:#383733 !important;}
+tr.PrivateBTSeedListTop:hover td{ background-color:#383733 !important;}
+tr.PrivateBTSeedListUpload:hover td{ background-color:#383733 !important;}
+tr.PrivateBTSeedListDownload:hover td{ background-color:#383733 !important;}
+tr.PrivateBTSeedListFinished:hover td{ background-color:#383733 !important;}
+tr.PrivateBTSeedListPublish:hover td{ background-color:#383733 !important;}
+
+
+
+.PrivateBTSeedListAuthor{ text-align:right; }
+.PrivateBTSeedListAuthor em{font-size: 11px;color:#999;font-family:Arial,sans-serif; padding-right:10px; }
+.PrivateBTSeedListAuthor cite{display:block; text-align:right; margin-right:10px; margin-left:10px;overflow:hidden;white-space:nowrap; }
+.PrivateBTSeedListAuthor a{overflow:hidden; white-space:nowrap; width:100px;}
+.PrivateBTSeedListReplies em{ color:#369; font-size:12px;}
+.PrivateBTSeedListReplies{ text-align:right; font-size:11px; color:#999}
+.PrivateBTSeedListTitle{ text-align:left;}
+.PrivateBTSeedListTitleSpan{ min-width:500px; overflow:hidden; display:block; white-space:nowrap}
+.PrivateBTSeedListFile{ text-align:right; color:#999; cursor:pointer;font-weight:normal;}
+.PrivateBTSeedListFile:hover{ text-decoration:underline;}
+.PrivateBTSeedListSize{ text-align:right; color:#666; font-size:11px;  font-weight:bold;}
+.PrivateBTSeedListSeeds{ text-align:right; cursor:pointer;}
+.PrivateBTSeedListSeeds:hover{ text-decoration:underline;}
+.PrivateBTSeedListDown{ text-align:right;  cursor:pointer; font-size:11px; color:#999}
+.PrivateBTSeedListFinished{ text-align:right;}
+.PrivateBTSeedListLive{ text-align:right; color:#999; font-size:11px;}
+.PrivateBTSeedListType{text-align:right;}
+.PrivateBTSeedListOp{text-align:center;}
+.PrivateBTSeedListGrayL{text-align:left; color:#666}
+.PrivateBTSeedListGrayL a{text-align:left; color:#666; cursor:pointer;}
+.PrivateBTSeedListGrayLS{text-align:left; color:#666; width:60px;}
+.PrivateBTSeedListGrayLS span{text-align:left; color:#666;  padding-left:10px;}
+.PrivateBTSeedListGrayRS{text-align:right; color:#666; width:60px;}
+.PrivateBTSeedListGrayRS a{text-align:right; color:#666; cursor:pointer;}
+.PrivateBTSeedListGrayR{text-align:right; color:#666; width:70px;}
+.PrivateBTSeedListGrayR a{text-align:right; color:#666; cursor:pointer;}
+.PrivateBTSeedListGrayREnd{text-align:right; color:#666; padding-right:10px; width:130px;}
+.PrivateBTSeedListGrayREnd a{text-align:right; color:#666; padding-right:10px; cursor:pointer;}
+
+
+/*=========================================================================================================*/
+/*showseeds search*/
+div.PrivateBTSeedSearchForm{ width:100%; text-align:right;}
+  #PrivateBTSeedSearchFormShowButton{ cursor:pointer;}
+	div.PrivateBTseedsearchdiv{ width:760px; height:60px; padding:15px; text-align:left; margin-left:auto; margin-right:auto;}
+	div.PrivateBTseedsearchdiv input{ height:16px;}
+	div.PrivateBTseedsearchdiv1{ width:760px; float:left;}
+	div.PrivateBTseedsearchdiv2{ width:425px; float:left; padding-top:10px;}
+	div.PrivateBTseedsearchdiv3{ width:220px; float:right; padding-top:10px; text-align:right;}
+	#divnotinkeyword{display:block;}
+		
+		span.PrivateBTseedsearchText{  font-weight:600; color:#C36; padding-right:10px; float:left;}
+		#PrivateBTSeedSearchhidekeywords{ width:400px; color:#AAA; float:left; display:inline; height:20px; background-color:#181713; border-color:#666;}
+		#PrivateBTSeedSearchhidenotinkeywords{ width:200px; float:left; display:inline; height:20px;}
+		#PrivateBTSeedSearchhideusername{ width:200px; color:#AAA; float:left; display:inline; height:20px; background-color:#181713; border-color:#666;}
+		#PrivateBTSeedSearchKeywordType{ text-align:left; cursor:pointer; background-color:#181713;}
+		input.PrivateBTSeedSearchInput{ vertical-align:middle; width:200px; border:none;}
+
+		/*select*/
+		.select_typeid{margin-right:6px; display:inline; float:right; margin-top:0px;}
+		.select_typeid select{height:20px;}
+		.select_typeid a{display:block;overflow:hidden;text-indent:4px;padding-right:17px;width:77px;height:20px;*padding-top:2px;*height:18px;text-decoration:none !important;color:#AAA !important;border:1px solid;border-color:#999 #CCC #CCC #999;background:#181713 url(images/newarow.gif) no-repeat 100% 0;}
+		.select_typeid a:hover{text-decoration:none;border:1px solid #09C;background-position:100% -20px;}
+		.select_postinfo .select_typeid a{line-height:20px;*line-height:18px;}
+		.select_typeid ul{margin:-22px 0 0;border:1px solid #09C;background:#181713 url(images/newarow.gif) no-repeat 100% -20px;}
+		* html .float_typeid ul{margin-top:-23px;}
+		.select_typeid ul li{margin:0 4px;color:#AAA;cursor:pointer;}
+		.select_typeid ul li:hover{color:#09C;}
+		.select_typeid select{width:94px;}
+		
+		.PrivateBTSeedSearchButton {background: #181713;border: 1px #09C solid;color: #09C;cursor :pointer; height:24px; width:96px; font-weight:700; margin-right:6px; margin-top:0px; float:right;}
+
+
+
+
+div.PrivateBTSeedSearchAlert{color:#FFF;font-weight:bold;font-size:14px; background-color:#CCC; vertical-align:bottom; height:19px; vertical-align:middle; padding:5px; float:right;}
+	
+
+select.PrivateBTSeedSearchSelect{ line-height:30px; height:21px; vertical-align:middle; background-color:#181713}
+
+div.PrivateBTSearchTips{  position:absolute; display:none;border:1px solid #ccc;padding:0px 3px;color:#f00;height:20px;line-height:20px;background:#fcfcfc; text-align:left}
+div.PrivateBTSearchMenu{ position:absolute; display:none;background-color: #F5FAFE; padding: 4px; width: 75px; text-align: center; border: 1px solid #111; border-top: 0;}
+div.PrivateBTSearchMenuShow{ position:absolute;  display:inline;background-color: #F5FAFE; padding: 4px; width: 75px; text-align: center; border: 1px solid #111; border-top: 0;}
+div.PrivateBTSearchTipsShow{ position:absolute;  display:inline;border:1px solid #ccc;padding:0px 3px;color:#f00;height:40px;line-height:20px;background:#fcfcfc; text-align:left}
+div.PrivateBTSeedSearchNumPerPage{ float:right; display:inline; margin:0 auto;}
+
+/*=========================================================================================================*/
+/*userinfo*/
+tr.PrivateBTUserinfoTR{ background: #F9FCFF; }
+tr.PrivateBTUserinfoTR1{ background: #F9FCFF; }
+tr.PrivateBTUserinfoTROn{ background: #E5EAEE; }
+tr.PrivateBTUserinfoTROn1{ background: #E5EAEE; }
+tr.PrivateBTUserinfoTR th{ font-weight:bold; color:#09C; width:200px;}
+tr.PrivateBTUserinfoTR1 th{ font-weight:bold; color:#F60; width:200px;}
+tr.PrivateBTUserinfoTROn th{ font-weight:bold; color:#09C;}
+tr.PrivateBTUserinfoTROn1 th{ font-weight:bold; color:#F60;}
+tr.PrivateBTUserinfoTR td{ font-weight:bold; color:#09C;}
+tr.PrivateBTUserinfoTR1 td{ font-weight:bold; color:#F60; }
+tr.PrivateBTUserinfoTROn td{ font-weight:bold; color:#09C; }
+tr.PrivateBTUserinfoTROn1 td{ font-weight:bold; color:#F60; }
+
+
+#quickpostbttest{ height:100px; color:transparent}
+
+
+
+
+
+
+
+
+/*=========================================================================================================*/
+/*publish发种页面*/
+
+	/*继承自dnt3.6模板，修改*/
+	.PrivateBTexfm{background:#181713;border:1px dashed #C2D5E3;margin:0px;padding:0px;}
+	
+div.PublishTable{ border:1px solid #F00; width:100%; background-color:#FC6;}
+
+table.PublishTable{float:left; font-weight:normal; border:0px #999 solid; margin-bottom:7px; margin-top:7px; width:100%; table-layout:fixed;}
+table.PublishTable .PublishBar{ height:10px; line-height:5px; font-size:1px;}
+table.PublishTable .PublishBar th{ width:100px; border:none;}
+table.PublishTable td{ font-weight:normal; padding:5px; padding-left:15px;}
+table.PublishTable td a{ text-decoration:none;}
+table.PublishTable th{ font-weight:normal; padding:7px; padding-left:15px; border-right:1px dashed #C2D5E3;}
+table.PublishTable Warning{ border-bottom:1px dashed #CCC;}
+table.PublishTable .PublishWarning{ border-bottom:1px dashed #C2D5E3; margin-bottom:7px;margin-top:7px;}
+table.PublishTable span.Warning{ color:#444;}
+table.PublishTable .b{ font-weight:bold;}
+table.PublishTable input{ height:20px; background:#FFF;border-color:#707070 #CECECE #CECECE #707070;border-style:solid;border-width:1px;color:#666666;font-size:14px;padding:2px 4px;line-height:18px;cursor:pointer;}
+table.PublishTable file{height:16px;}
+table.PublishTable .hideinputfile{ position:absolute;opacity:0; filter:alpha(opacity=0);-moz-opacity:0; height:27px; width:490px; margin-left:0px; margin-top:-1px;}
+table.PublishTable .file_btn{height:28px; width:85px; margin-top:0px;  background:#E5EDF2;border-color:#C2D5E3 #336699 #336699 #C2D5E3;border-style:solid;border-width:1px;color:#369;cursor:pointer;font-size:14px;font-weight:700;height:26px;line-height:26px;margin-right:3px;overflow:visible;vertical-align:top;z-index:0;}
+table.PublishTable .file_show{}
+table.PublishTable .PublishTag{ cursor:pointer; color:#09B}
+
+
+
+.btpublishtype {  color: #09C;  cursor: pointer; font-weight:normal}
+.btpublishtypeselected { color: #000; font-weight:bold; }

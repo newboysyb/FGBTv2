@@ -1,0 +1,20 @@
+﻿      <tbody><tr align="right">
+          <td class="PrivateBTSeedListGrayLS"><span>类别</span></td>
+          <td class="PrivateBTSeedListGrayR"><a onclick="PrivateBTChangeOrderby('size')" title="点击按照种子包含的文件大小排序">大小</a>/<a onclick="PrivateBTChangeOrderby('file')" title="点击按照种子包含的文件数排序">文件</a></td>
+          <td class="PrivateBTSeedListGrayRS"><a onclick="PrivateBTChangeOrderby('seed')" title="点击按照正在做种的人数排序">种子</a>/<a onclick="PrivateBTChangeOrderby('completed')" title="点击按照正在下载的人数排序">下载</a></td>
+          <td class="PrivateBTSeedListGrayRS"><a onclick="PrivateBTChangeOrderby('finished')" title="点击按照种子的完成数排序">完成</a>/<a onclick="PrivateBTChangeOrderby('live')" title="点击按照种子的生存时间排序">存活</a></td>
+          <%if {useradminid}>0 && {ismoder}%>
+            <td width="70px"></td>
+          <%else%>
+            <td width="50px"></td>
+          <%/if%>
+          <td class="PrivateBTSeedListGrayL">种子名称</td>
+          <%if {showkeepreward}==false%>
+          <td class="PrivateBTSeedListGrayR">回复/查看</td>
+          <td class="PrivateBTSeedListGrayREnd"><a onclick="PrivateBTChangeOrderby('time')" title="点击按照种子种子发布的时间排序">发布者/发布时间</a></td>
+          <%else%>
+          <td width="120px" style="text-align: right;color:#666">真实上传/保种时间</td>
+          <td class="PrivateBTSeedListGrayREnd">保种奖励/保种系数</td>
+          <%/if%>
+        </tr>
+      </tbody>

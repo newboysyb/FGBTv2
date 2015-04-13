@@ -1,0 +1,5 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Data.SqlServer.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Data.SqlServer.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\obj\Release\Discuz.Data.SqlServer.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\obj\Release\Discuz.Data.SqlServer.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Data.SqlServer\obj\Release\Discuz.Data.SqlServer.csprojResolveAssemblyReference.cache

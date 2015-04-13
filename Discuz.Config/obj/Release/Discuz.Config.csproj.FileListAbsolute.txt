@@ -1,0 +1,10 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Config\bin\Release\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Config\bin\Release\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Config\bin\Release\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Config\bin\Release\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Config\bin\Release\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Config\obj\Release\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Config\obj\Release\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Config\bin\Release\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Config\bin\Release\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Config\obj\Release\Discuz.Config.csprojResolveAssemblyReference.cache

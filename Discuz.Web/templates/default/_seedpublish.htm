@@ -1,0 +1,629 @@
+﻿<table class="PublishTable" summary="post" cellspacing="0" cellpadding="0" id="newpost">
+			<%if {publishnote}!=""%><tbody><tr class="PublishBar"><th></th><td></td></tr><tr class="PublishWarning"><td colspan = "2" class="PublishWarning">{publishnote}</td></tr></tbody><%/if%>
+			<tbody>
+        <tr class="PublishBar"><th></th><td></td></tr>
+				<tr class="PublishWarning"><td colspan="2" class="PublishWarning"><span class="Warning">请勿发布重复种子<%if {pagename}=="edit.aspx"%><b>&nbsp;&nbsp;&nbsp;如果不需要更换种子，“种子文件”一栏请留空</b><%/if%><br/>
+          种子信息中不要出现任何全角字符，主观描述，以及其他用于引起别人注意的字符，包括但不限于【】，〖〗，『』，“非常好看”，“强烈推荐” 等<br/>
+          发种者有义务尽可能长时间连续做种，发种后不做种者会被删除种子并扣除一定的上传流量作为惩罚，发种前请熟悉发种教程。</span>
+        </td></tr><tr class="PublishBar"><th></th><td> 
+			<%if {publishtype}=="movie"%>
+					</td></tr><tr><th><span class="b">种子文件</span></th><td>
+					<input class="hideinputfile" name="movie_file" type="file" id="movie_file" size="1" onchange="checkfiletype(this)" onblur="checkfiletypeempty(this)" title="" />
+          <input class="file_show" name="file_show" type="text" id="file_show" size="60" onclick="$('movie_file').click();"   />
+          <input class="file_btn" type="button" onclick="$('movie_file').click();" value="选择种子" style="z-index:999;" />&nbsp;&nbsp;&nbsp;种子文件文件最大为4MB&nbsp;&nbsp;&nbsp;<input class="file_btn" id="autofillbtn" type="button" onclick="fgbtshowwindow('seedautofillw','tools/ajax.aspx?t=seedautofill&reason=movie');" value="自动标签" style="z-index:999;display:none;" />
+					
+					</td></tr><tr><th><span class="b">中文名</span></th><td>
+					<input name="movie_cname" type="text" id="movie_cname" size="60" onkeyup="filltitle()" title="" value="{seedinfo.Info1}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "movie_cname"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th><span class="b">英文名</span></th><td>
+					<input name="movie_ename" type="text" id="movie_ename" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info2}" />&nbsp;&nbsp;&nbsp;请填写附带有发布组名的完整名称&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "movie_ename"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">IMDb编号</span></th><td>
+					<input name="movie_imdb" type="text" id="movie_imdb" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info3}" />&nbsp;&nbsp;&nbsp;不是评分！形如tt012345格式<%set {infoselectionstring} = "movie_imdb"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">电影类别</span></th><td>
+					<input name="movie_type" type="text" id="movie_type" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info4}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "movie_type"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">分辨率</span></th><td>
+					<input name="movie_resolution" type="text" id="movie_resolution" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info5}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "movie_resolution"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th>视频格式</th><td>
+					<input name="movie_video" type="text" id="movie_video" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info6}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "movie_video"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th>音频格式</th><td>
+					<input name="movie_audio" type="text" id="movie_audio" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info7}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "movie_audio"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th>导演</th><td>
+					<input name="movie_director" type="text" id="movie_director" size="30" onkeyup="filltitle()" title=""  value="{seedinfo.Info8}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "movie_director"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th>演员</th><td>
+					<input name="movie_actor" type="text" id="movie_actor" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info9}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "movie_actor"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">发行年份</span></th><td>
+					<input name="movie_year" type="text" id="movie_year" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info10}" />&nbsp;&nbsp;&nbsp;只填写数字年份，以IMDb数据为准，下同，有多个数据时，以"/"分隔<%set {infoselectionstring} = "movie_year"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">制片国家/地区</span></th><td>
+					<input name="movie_region" type="text" id="movie_region" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info11}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "movie_region"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th><span class="b">语言</span></th><td>
+					<input name="movie_language" type="text" id="movie_language" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info12}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "movie_language"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">字幕</span></th><td>
+					<input name="movie_subtitle" type="text" id="movie_subtitle" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info13}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "movie_subtitle"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">分级</span></th><td>
+					<input name="movie_rank" type="text" id="movie_rank" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info14}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "movie_rank"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+			<%else if {publishtype}=="tv"%>
+					</td></tr><tr><th><span class="b">种子文件</span></th><td>
+					<input class="hideinputfile" name="tv_file" type="file" id="tv_file" size="60" onchange="checkfiletype(this)" onblur="checkfiletypeempty(this)" title="" />
+					<input class="file_show" name="file_show" type="text" id="file_show" size="60" onclick="$('tv_file').click();"   />
+          <input class="file_btn" type="button" onclick="$('tv_file').click();" value="选择种子" style="z-index:999;" />&nbsp;&nbsp;&nbsp;种子文件文件最大为4MB
+					
+					</td></tr><tr><th><span class="b">国家/地区</span></th><td>
+					<input name="tv_region" type="text" id="tv_region" size="30" onkeyup="filltitle()" title=""  value="{seedinfo.Info1}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "tv_region"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">中文名</span></th><td>
+					<input name="tv_cname" type="text" id="tv_cname" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info2}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "tv_cname"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th><span class="b">英文名</span></th><td>
+					<input name="tv_ename" type="text" id="tv_ename" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info3}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "tv_ename"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th>季度信息</th><td>
+					<input name="tv_season" type="text" id="tv_season" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info4}" />&nbsp;&nbsp;&nbsp;填写格式S01E01，S01，S01~S04，S01E02~05&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "tv_season"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">语言</span></th><td>
+					<input name="tv_language" type="text" id="tv_language" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info5}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "tv_language"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">分辨率</span></th><td>
+					<input name="tv_resolution" type="text" id="tv_resolution" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info6}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "tv_resolution"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">字幕</span></th><td>
+					<input name="tv_subtitle" type="text" id="tv_subtitle" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info7}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "tv_subtitle"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+			<%else if {publishtype}=="comic"%>
+					</td></tr><tr><th><span class="b">种子文件</span></th><td>
+					<input class="hideinputfile" name="comic_file" type="file" id="comic_file" size="60" onchange="checkfiletype(this)" onblur="checkfiletypeempty(this)" title="" />					
+					<input class="file_show" name="file_show" type="text" id="file_show" size="60" onclick="$('comic_file').click();"   />
+          <input class="file_btn" type="button" onclick="$('comic_file').click();" value="选择种子" style="z-index:999;" />&nbsp;&nbsp;&nbsp;种子文件文件最大为4MB
+					
+					</td></tr><tr><th><span class="b">国家/地区</span></th><td>
+					<input name="comic_region" type="text" id="comic_region" size="30" onkeyup="filltitle()" title=""  value="{seedinfo.Info1}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "comic_region"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">中文名</span></th><td>
+					<input name="comic_cname" type="text" id="comic_cname" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info2}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "comic_cname"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th><span class="b">英文名</span></th><td>
+					<input name="comic_ename" type="text" id="comic_ename" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info3}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "comic_ename"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th>季度信息</th><td>
+					<input name="comic_season" type="text" id="comic_season" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info4}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "comic_season"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">类别</span></th><td>
+					<input name="comic_type" type="text" id="comic_type" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info5}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "comic_type"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">语言</span></th><td>
+					<input name="comic_language" type="text" id="comic_language" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info6}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "comic_language"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">视频格式</span></th><td>
+					<input name="comic_format" type="text" id="comic_format" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info7}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "comic_format"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">片源</span></th><td>
+					<input name="comic_source" type="text" id="comic_source" size="10" onkeyup="filltitle()" title="zzz"  value="{seedinfo.Info8}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "comic_source"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">字幕</span></th><td>
+					<input name="comic_subtitle" type="text" id="comic_subtitle" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info9}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "comic_subtitle"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">字幕组</span></th><td>
+					<input name="comic_subtitlegroup" type="text" id="comic_subtitlegroup" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info10}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "comic_subtitlegroup"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">发行时间</span></th><td>
+					<input name="comic_year" type="text" id="comic_year" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info11}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "comic_year"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+			<%else if {publishtype}=="music"%>
+					</td></tr><tr><th><span class="b">种子文件</span></th><td>
+					<input class="hideinputfile" name="music_file" type="file" id="music_file" size="60" onchange="checkfiletype(this)" onblur="checkfiletypeempty(this)" title="" />
+					<input class="file_show" name="file_show" type="text" id="file_show" size="60" onclick="$('music_file').click();"   />
+          <input class="file_btn" type="button" onclick="$('music_file').click();" value="选择种子" style="z-index:999;" />&nbsp;&nbsp;&nbsp;种子文件文件最大为4MB
+					
+					</td></tr><tr><th><span class="b">国家/地区</span></th><td>
+					<input name="music_region" type="text" id="music_region" size="30" onkeyup="filltitle()" title=""  value="{seedinfo.Info1}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "music_region"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">类别</span></th><td>
+					<input name="music_type" type="text" id="music_type" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info2}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "music_type"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">艺术家</span></th><td>
+					<input name="music_artist" type="text" id="music_artist" size="30" onkeyup="filltitle()" title=""  value="{seedinfo.Info3}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "music_artist"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th><span class="b">专辑名</span></th><td>
+					<input name="music_name" type="text" id="music_name" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info4}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "music_name"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">发行时间</span></th><td>
+					<input name="music_year" type="text" id="music_year" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info5}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "music_year"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">语言</span></th><td>
+					<input name="music_language" type="text" id="music_language" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info6}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "music_language"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">文件格式</span></th><td>
+					<input name="music_format" type="text" id="music_format" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info7}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "music_format"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">码率</span></th><td>
+					<input name="music_bps" type="text" id="music_bps" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info8}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "music_bps"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th>发行</th><td>
+					<input name="music_company" type="text" id="music_company" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info9}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "music_company"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+			<%else if {publishtype}=="game"%>
+					</td></tr><tr><th><span class="b">种子文件</span></th><td>
+					<input class="hideinputfile" name="game_file" type="file" id="game_file" size="60" onchange="checkfiletype(this)" onblur="checkfiletypeempty(this)" title="" />
+					<input class="file_show" name="file_show" type="text" id="file_show" size="60" onclick="$('game_file').click();"   />
+          <input class="file_btn" type="button" onclick="$('game_file').click();" value="选择种子" style="z-index:999;" />&nbsp;&nbsp;&nbsp;种子文件文件最大为4MB
+					
+					</td></tr><tr><th><span class="b">平台</span></th><td>
+					<input name="game_platform" type="text" id="game_platform" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info1}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "game_platform"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">中文名</span></th><td>
+					<input name="game_cname" type="text" id="game_cname" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info2}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "game_cname"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th><span class="b">英文名</span></th><td>
+					<input name="game_ename" type="text" id="game_ename" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info3}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "game_ename"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">类别</span></th><td>
+					<input name="game_type" type="text" id="game_type" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info4}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "game_type"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">语言</span></th><td>
+					<input name="game_language" type="text" id="game_language" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info5}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "game_language"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">文件格式</span></th><td>
+					<input name="game_format" type="text" id="game_format" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info6}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "game_format"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th>制作公司</th><td>
+					<input name="game_company" type="text" id="game_company" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info7}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "game_company"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th>国家/地区</th><td>
+					<input name="game_region" type="text" id="game_region" size="30" onkeyup="filltitle()" title=""  value="{seedinfo.Info8}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "game_region"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+			<%else if {publishtype}=="discovery"%>
+					</td></tr><tr><th><span class="b">种子文件</span></th><td>
+					<input class="hideinputfile" name="discovery_file" type="file" id="discovery_file" size="60" onchange="checkfiletype(this)" onblur="checkfiletypeempty(this)" title="" />
+					<input class="file_show" name="file_show" type="text" id="file_show" size="60" onclick="$('discovery_file').click();"   />
+          <input class="file_btn" type="button" onclick="$('discovery_file').click();" value="选择种子" style="z-index:999;" />&nbsp;&nbsp;&nbsp;种子文件文件最大为4MB
+					
+					</td></tr><tr><th><span class="b">中文名</span></th><td>
+					<input name="discovery_cname" type="text" id="discovery_cname" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info1}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "discovery_cname"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th><span class="b">英文名</span></th><td>
+					<input name="discovery_ename" type="text" id="discovery_ename" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info2}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "discovery_ename"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">类别</span></th><td>
+					<input name="discovery_type" type="text" id="discovery_type" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info3}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "discovery_type"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">语言</span></th><td>
+					<input name="discovery_language" type="text" id="discovery_language" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info4}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "discovery_language"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">文件格式</span></th><td>
+					<input name="discovery_format" type="text" id="discovery_format" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info5}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "discovery_format"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">分辨率</span></th><td>
+					<input name="discovery_resolution" type="text" id="discovery_resolution" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info6}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "discovery_resolution"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">字幕</span></th><td>
+					<input name="discovery_subtitle" type="text" id="discovery_subtitle" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info7}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "discovery_subtitle"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+			<%else if {publishtype}=="sport"%>
+					</td></tr><tr><th><span class="b">种子文件</span></th><td>
+					<input class="hideinputfile" name="sport_file" type="file" id="sport_file" size="60" onchange="checkfiletype(this)" onblur="checkfiletypeempty(this)" title="" />
+					<input class="file_show" name="file_show" type="text" id="file_show" size="60" onclick="$('sport_file').click();"   />
+          <input class="file_btn" type="button" onclick="$('sport_file').click();" value="选择种子" style="z-index:999;" />&nbsp;&nbsp;&nbsp;种子文件文件最大为4MB，电子竞技相关请发“其他”类
+					
+					</td></tr><tr><th><span class="b">时间</span></th><td>
+					<input name="sport_year" type="text" id="sport_year" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info1}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "sport_year"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">中文名</span></th><td>
+					<input name="sport_cname" type="text" id="sport_cname" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info2}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "sport_cname"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th>英文名</th><td>
+					<input name="sport_ename" type="text" id="sport_ename" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info3}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "sport_ename"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">类别</span></th><td>
+					<input name="sport_type" type="text" id="sport_type" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info4}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "sport_type"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">语言/解说人</span></th><td>
+					<input name="sport_language" type="text" id="sport_language" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info5}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "sport_language"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">文件格式</span></th><td>
+					<input name="sport_format" type="text" id="sport_format" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info6}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "sport_format"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">分辨率</span></th><td>
+					<input name="sport_resolution" type="text" id="sport_resolution" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info7}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "sport_resolution"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">字幕</span></th><td>
+					<input name="sport_subtitle" type="text" id="sport_subtitle" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info8}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "sport_subtitle"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+			<%else if {publishtype}=="entertainment"%>
+					</td></tr><tr><th><span class="b">种子文件</span></th><td>
+					<input class="hideinputfile" name="entertainment_file" type="file" id="entertainment_file" size="60" onchange="checkfiletype(this)" onblur="checkfiletypeempty(this)" title="" />
+					<input class="file_show" name="file_show" type="text" id="file_show" size="60" onclick="$('entertainment_file').click();"   />
+          <input class="file_btn" type="button" onclick="$('entertainment_file').click();" value="选择种子" style="z-index:999;" />&nbsp;&nbsp;&nbsp;种子文件文件最大为4MB
+					
+					</td></tr><tr><th><span class="b">国家/地区</span></th><td>
+					<input name="entertainment_region" type="text" id="entertainment_region" size="30" onkeyup="filltitle()" title=""  value="{seedinfo.Info2}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "entertainment_region"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th><span class="b">中文名</span></th><td>
+					<input name="entertainment_cname" type="text" id="entertainment_cname" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info3}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "entertainment_cname"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th>英文名</th><td>
+					<input name="entertainment_ename" type="text" id="entertainment_ename" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info1}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "entertainment_ename"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">发行时间</span></th><td>
+					<input name="entertainment_year" type="text" id="entertainment_year" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info4}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "entertainment_year"%>{PrivateBT.InfoSelectionList(infoselectionstring)} 形如20100101格式
+					</td></tr><tr><th><span class="b">简介</span></th><td>
+					<input name="entertainment_brief" type="text" id="entertainment_brief" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info5}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "entertainment_brief"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">语言</span></th><td>
+					<input name="entertainment_language" type="text" id="entertainment_language" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info6}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "entertainment_language"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">文件格式</span></th><td>
+					<input name="entertainment_format" type="text" id="entertainment_format" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info7}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "entertainment_format"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">分辨率</span></th><td>
+					<input name="entertainment_resolution" type="text" id="entertainment_resolution" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info8}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "entertainment_resolution"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">字幕</span></th><td>
+					<input name="entertainment_subtitle" type="text" id="entertainment_subtitle" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info9}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "entertainment_subtitle"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+			<%else if {publishtype}=="software"%>
+					</td></tr><tr><th><span class="b">种子文件</span></th><td>
+					<input class="hideinputfile" name="software_file" type="file" id="software_file" size="60" onchange="checkfiletype(this)" onblur="checkfiletypeempty(this)" title="" />
+          <input class="file_show" name="file_show" type="text" id="file_show" size="60" onclick="$('software_file').click();"   />
+          <input class="file_btn" type="button" onclick="$('software_file').click();" value="选择种子" style="z-index:999;" />&nbsp;&nbsp;&nbsp;种子文件文件最大为4MB
+          
+          </td></tr><tr><th><span class="b">中文名</span></th><td>
+					<input name="software_cname" type="text" id="software_cname" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info1}" />&nbsp;&nbsp;&nbsp;包括版本号&nbsp;&nbsp;<%set {infoselectionstring} = "software_cname"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th>英文名</th><td>
+					<input name="software_ename" type="text" id="software_ename" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info2}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "software_ename"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">语言</span></th><td>
+					<input name="software_language" type="text" id="software_language" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info3}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "software_language"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">软件类型</span></th><td>
+					<input name="software_type" type="text" id="software_type" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info4}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "software_type"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">文件格式</span></th><td>
+					<input name="software_format" type="text" id="software_format" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info5}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "software_format"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th>发行时间</th><td>
+					<input name="software_year" type="text" id="software_year" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info6}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "software_year"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+			<%else if {publishtype}=="staff"%>
+					</td></tr><tr><th><span class="b">种子文件</span></th><td>
+					<input class="hideinputfile" name="staff_file" type="file" id="staff_file" size="60" onchange="checkfiletype(this)" onblur="checkfiletypeempty(this)" title="" />
+          <input class="file_show" name="file_show" type="text" id="file_show" size="60" onclick="$('staff_file').click();"   />
+          <input class="file_btn" type="button" onclick="$('staff_file').click();" value="选择种子" style="z-index:999;" />&nbsp;&nbsp;&nbsp;种子文件文件最大为4MB
+          
+          </td></tr><tr><th><span class="b">中文名</span></th><td>
+					<input name="staff_cname" type="text" id="staff_cname" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info1}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "staff_cname"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th>英文名</th><td>
+					<input name="staff_ename" type="text" id="staff_ename" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info2}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "staff_ename"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">类别</span></th><td>
+					<input name="staff_type" type="text" id="staff_type" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info3}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "staff_type"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">语言</span></th><td>
+					<input name="staff_language" type="text" id="staff_language" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info4}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "staff_language"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">文件格式</span></th><td>
+					<input name="staff_format" type="text" id="staff_format" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info5}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "staff_format"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th>发行时间</th><td>
+					<input name="staff_year" type="text" id="staff_year" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info6}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "staff_year"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+			<%else if {publishtype}=="video"%>
+					</td></tr><tr><th><span class="b">种子文件</span></th><td>
+					<input class="hideinputfile" name="video_file" type="file" id="video_file" size="60" onchange="checkfiletype(this)" onblur="checkfiletypeempty(this)" title="" />
+					<input class="file_show" name="file_show" type="text" id="file_show" size="60" onclick="$('video_file').click();"   />
+          <input class="file_btn" type="button" onclick="$('video_file').click();" value="选择种子" style="z-index:999;" />&nbsp;&nbsp;&nbsp;种子文件文件最大为4MB
+					
+					</td></tr><tr><th>时间</th><td>
+					<input name="video_year" type="text" id="video_year" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info1}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "video_year"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">类别</span></th><td>
+					<input name="video_type" type="text" id="video_type" size="30" onkeyup="filltitle()" title=""  value="{seedinfo.Info9}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "video_type"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">国家/地区</span></th><td>
+					<input name="video_region" type="text" id="video_region" size="30" onkeyup="filltitle()" title=""  value="{seedinfo.Info2}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "video_region"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th><span class="b">中文名</span></th><td>
+					<input name="video_cname" type="text" id="video_cname" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info3}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "video_cname"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th>英文名</th><td>
+					<input name="video_ename" type="text" id="video_ename" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info4}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "video_ename"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">语言</span></th><td>
+					<input name="video_language" type="text" id="video_language" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info5}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "video_language"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">文件格式</span></th><td>
+					<input name="video_format" type="text" id="video_format" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info6}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "video_format"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">分辨率</span></th><td>
+					<input name="video_resolution" type="text" id="video_resolution" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info7}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "video_resolution"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">字幕</span></th><td>
+					<input name="video_subtitle" type="text" id="video_subtitle" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info8}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "video_subtitle"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+			<%else if {publishtype}=="other"%>
+					</td></tr><tr><th><span class="b">种子文件</span></th><td>
+					<input class="hideinputfile" name="other_file" type="file" id="other_file" size="60" onchange="checkfiletype(this)" onblur="checkfiletypeempty(this)" title="" />
+          <input class="file_show" name="file_show" type="text" id="file_show" size="60" onclick="$('other_file').click();"   />
+          <input class="file_btn" type="button" onclick="$('other_file').click();" value="选择种子" style="z-index:999;" />&nbsp;&nbsp;&nbsp;种子文件文件最大为4MB
+          
+          </td></tr><tr><th><span class="b">中文名</span></th><td>
+					<input name="other_cname" type="text" id="other_cname" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info1}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "other_cname"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+          </td></tr><tr><th>英文名</th><td>
+					<input name="other_ename" type="text" id="other_ename" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info2}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "other_ename"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th>简介</th><td>
+					<input name="other_brief" type="text" id="other_brief" size="60" onkeyup="filltitle()" title=""  value="{seedinfo.Info3}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "other_brief"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th><span class="b">文件格式</span></th><td>
+					<input name="other_format" type="text" id="other_format" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info4}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "other_format"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+					</td></tr><tr><th>发行时间</th><td>
+					<input name="other_year" type="text" id="other_year" size="10" onkeyup="filltitle()" title=""  value="{seedinfo.Info5}" />&nbsp;&nbsp;&nbsp;<%set {infoselectionstring} = "other_year"%>{PrivateBT.InfoSelectionList(infoselectionstring)}
+			<%else%>
+
+			<%/if%>
+			
+</td></tr></tbody></table>
+<script type="text/javascript">
+
+var inputvar = null;
+checkfileempty();
+function checkfileempty()
+{
+    if(inputvar != null)
+    {
+        if(!inputvar.value) { $("file_show").value="";} 
+        else
+        { 
+            var filename = input.value.split("\\");
+            var len = filename.length;
+            $("file_show").value = filename[len-1];
+        } 
+        setTimeout(checkfileempty,2000);
+    }
+    else $("file_show").value="";
+}
+function checkfiletypeempty(input)
+{
+    if(!input.value) $("file_show").value="";
+}
+
+function checkfiletype(input)
+{
+  inputvar = input;
+  setTimeout(checkfileempty,2000);
+  if(!input.value) return;
+  if(input.value.length > 8)
+  {
+    if(input.value.slice(input.value.length - 8) == ".torrent") 
+    {
+        var filename = input.value.split("\\");
+        var len = filename.length;
+        $("file_show").value = filename[len-1];
+        posted = 0;
+        if(input.id == "movie_file") $("autofillbtn").style.display = "";
+        return;
+
+    }
+  }
+  if(input.id == "movie_file") $("autofillbtn").style.display = "none";
+  alert("只能选择.torrent类型的文件");
+}
+
+function do_seedautofill()
+{
+   var seedname = escape($("movie_file").value);
+   var message = escape($("seedautofill_area").value);
+   _sendRequest('/tools/sessionajax.aspx?t=seedautofill', do_seedautofill_callback, true, 'seedname='+ seedname + "&message=" + escape(message));
+   hideWindow('seedautofillw');
+}
+function do_seedautofill_callback(doc)
+{
+  var obj =  eval('(' + doc + ')');
+  $("movie_cname").value = obj.cname;
+  $("movie_ename").value = obj.ename;
+  $("movie_imdb").value = obj.imdb;
+  $("movie_type").value = obj.type;
+  $("movie_resolution").value = obj.resolution;
+  $("movie_year").value = obj.year;
+  $("movie_region").value = obj.region;
+  $("movie_language").value = obj.language;
+  $("movie_subtitle").value = obj.subtitle;
+  $("movie_rank").value = obj.rank;
+  editdoc.body.innerHTML = unescape(obj.message);
+}
+//检查输入
+var posted = 0;
+function checkinput(input)
+{
+    if(posted > 0){alert("您已提交，请勿重复提交。如填写信息不全，请修改后再次尝试提交");return false;}
+    else {posted = 1;}
+    
+      //alert("check begin");
+      <%if {publishtype}=="movie"%>
+          <%if {pagename}=="publish.aspx"%>
+              if ($("movie_file").value == "") {alert("请选择种子！");return false;}
+              if ($("movie_file").value.slice($("movie_file").value.length - 8) != ".torrent") {alert("种子文件只能选择.torrent类型的文件！");return false;}
+          <%/if%>
+          if ($("movie_cname").value == "") {alert("请填写中文名称！");return false;}
+          if ($("movie_ename").value == "") {alert("请填写英文名称！");return false;}
+          if ($("movie_imdb").value == "") {alert("请填写IMDb编号！");return false;}
+          if ($("movie_type").value == "") {alert("请填写电影类型！");return false;}
+          if ($("movie_resolution").value == "") {alert("请填写分辨率！");return false;}
+          if ($("movie_year").value == "") {alert("请填写年份！");return false;}
+          if ($("movie_region").value == "") {alert("请填写国家地区！");return false;}
+          if ($("movie_language").value == "") {alert("请填写电影语言！");return false;}
+          if ($("movie_subtitle").value == "") {alert("请填写字幕情况！");return false;}
+          if ($("movie_rank").value == "") {alert("请填写电影分级！");return false;}
+  		<%else if {publishtype}=="tv"%>
+          <%if {pagename}=="publish.aspx"%>
+              if ($("tv_file").value == "") {alert("请选择种子！");return false;}
+              if ($("tv_file").value.slice($("tv_file").value.length - 8) != ".torrent") {alert("种子文件只能选择.torrent类型的文件！");return false;}
+          <%/if%>
+          if ($("tv_cname").value == "") {alert("请填写中文名称！");return false;}
+          if ($("tv_ename").value == "") {alert("请填写英文名称！");return false;}
+          if ($("tv_resolution").value == "") {alert("请填写分辨率！");return false;}
+          if ($("tv_language").value == "") {alert("请填写语言！");return false;}
+          if ($("tv_subtitle").value == "") {alert("请填写字幕情况！");return false;}
+          if ($("tv_region").value == "") {alert("请填写国家地区！");return false;}
+			<%else if {publishtype}=="comic"%>
+          <%if {pagename}=="publish.aspx"%>
+              if ($("comic_file").value == "") {alert("请选择种子！");return false;}
+              if ($("comic_file").value.slice($("comic_file").value.length - 8) != ".torrent") {alert("种子文件只能选择.torrent类型的文件！");return false;}
+          <%/if%>
+          if ($("comic_cname").value == "") {alert("请填写中文名称！");return false;}
+          if ($("comic_ename").value == "") {alert("请填写英文名称！");return false;}
+          if ($("comic_type").value == "") {alert("请填写类别！");return false;}
+          if ($("comic_format").value == "") {alert("请填写视频格式！");return false;}
+          if ($("comic_year").value == "") {alert("请填写年份！");return false;}
+          if ($("comic_region").value == "") {alert("请填写国家地区！");return false;}
+          if ($("comic_language").value == "") {alert("请填写语言！");return false;}
+          if ($("comic_subtitle").value == "") {alert("请填写字幕情况！");return false;}
+          if ($("comic_subtitlegroup").value == "") {alert("请填写字幕组！");return false;}
+          if ($("comic_source").value == "") {alert("请填写片源！");return false;}
+			<%else if {publishtype}=="music"%>
+          <%if {pagename}=="publish.aspx"%>
+              if ($("music_file").value == "") {alert("请选择种子！");return false;}
+              if ($("music_file").value.slice($("music_file").value.length - 8) != ".torrent") {alert("种子文件只能选择.torrent类型的文件！");return false;}
+          <%/if%>
+          if ($("music_name").value == "") {alert("请填写专辑名称！");return false;}
+          if ($("music_type").value == "") {alert("请填写类别！");return false;}
+          if ($("music_artist").value == "") {alert("请填写艺术家！");return false;}
+          if ($("music_year").value == "") {alert("请填写年份！");return false;}
+          if ($("music_region").value == "") {alert("请填写国家地区！");return false;}
+          if ($("music_language").value == "") {alert("请填写语言！");return false;}
+          if ($("music_format").value == "") {alert("请填写文件格式！");return false;}
+          if ($("music_bps").value == "") {alert("请填写码率！");return false;}
+			<%else if {publishtype}=="game"%>
+			    <%if {pagename}=="publish.aspx"%>
+              if ($("game_file").value == "") {alert("请选择种子！");return false;}
+              if ($("game_file").value.slice($("game_file").value.length - 8) != ".torrent") {alert("种子文件只能选择.torrent类型的文件！");return false;}
+          <%/if%>
+          if ($("game_cname").value == "") {alert("请填写中文名称！");return false;}
+          if ($("game_ename").value == "") {alert("请填写英文名称！");return false;}
+          if ($("game_type").value == "") {alert("请填写类别！");return false;}
+          if ($("game_language").value == "") {alert("请填写语言！");return false;}
+          if ($("game_format").value == "") {alert("请填写文件格式！");return false;}
+          if ($("game_platform").value == "") {alert("请填写平台！");return false;}
+			<%else if {publishtype}=="discovery"%>
+			    <%if {pagename}=="publish.aspx"%>
+              if ($("discovery_file").value == "") {alert("请选择种子！");return false;}
+              if ($("discovery_file").value.slice($("discovery_file").value.length - 8) != ".torrent") {alert("种子文件只能选择.torrent类型的文件！");return false;}
+          <%/if%>
+          if ($("discovery_cname").value == "") {alert("请填写中文名称！");return false;}
+          if ($("discovery_ename").value == "") {alert("请填写英文名称！");return false;}
+          if ($("discovery_type").value == "") {alert("请填写类别！");return false;}
+          if ($("discovery_resolution").value == "") {alert("请填写分辨率！");return false;}
+          if ($("discovery_format").value == "") {alert("请填写文件格式！");return false;}
+          if ($("discovery_language").value == "") {alert("请填写语言！");return false;}
+          if ($("discovery_subtitle").value == "") {alert("请填写字幕情况！");return false;}
+			<%else if {publishtype}=="sport"%>
+			    <%if {pagename}=="publish.aspx"%>
+              if ($("sport_file").value == "") {alert("请选择种子！");return false;}
+              if ($("sport_file").value.slice($("sport_file").value.length - 8) != ".torrent") {alert("种子文件只能选择.torrent类型的文件！");return false;}
+          <%/if%>
+          if ($("sport_cname").value == "") {alert("请填写中文名称！");return false;}
+          if ($("sport_type").value == "") {alert("请填写类别！");return false;}
+          if ($("sport_resolution").value == "") {alert("请填写分辨率！");return false;}
+          if ($("sport_format").value == "") {alert("请填写文件格式！");return false;}
+          if ($("sport_language").value == "") {alert("请填写语言！");return false;}
+          if ($("sport_subtitle").value == "") {alert("请填写字幕情况！");return false;}
+          if ($("sport_year").value == "") {alert("请填写时间！");return false;}
+			<%else if {publishtype}=="entertainment"%>
+			    <%if {pagename}=="publish.aspx"%>
+              if ($("entertainment_file").value == "") {alert("请选择种子！");return false;}
+              if ($("entertainment_file").value.slice($("entertainment_file").value.length - 8) != ".torrent") {alert("种子文件只能选择.torrent类型的文件！");return false;}
+          <%/if%>
+          if ($("entertainment_cname").value == "") {alert("请填写中文名称！");return false;}
+          if ($("entertainment_resolution").value == "") {alert("请填写分辨率！");return false;}
+          if ($("entertainment_year").value == "") {alert("请填写年份！");return false;}
+          if ($("entertainment_region").value == "") {alert("请填写国家地区！");return false;}
+          if ($("entertainment_language").value == "") {alert("请填写语言！");return false;}
+          if ($("entertainment_subtitle").value == "") {alert("请填写字幕情况！");return false;}
+          if ($("entertainment_format").value == "") {alert("请填写文件格式！");return false;}
+			<%else if {publishtype}=="software"%>
+			    <%if {pagename}=="publish.aspx"%>
+              if ($("software_file").value == "") {alert("请选择种子！");return false;}
+              if ($("software_file").value.slice($("software_file").value.length - 8) != ".torrent") {alert("种子文件只能选择.torrent类型的文件！");return false;}
+          <%/if%>
+          if ($("software_cname").value == "") {alert("请填写中文名称！");return false;}
+          if ($("software_type").value == "") {alert("请填写类别！");return false;}
+          if ($("software_format").value == "") {alert("请填写文件格式！");return false;}
+          if ($("software_language").value == "") {alert("请填写语言！");return false;}
+			<%else if {publishtype}=="staff"%>
+			    <%if {pagename}=="publish.aspx"%>
+              if ($("staff_file").value == "") {alert("请选择种子！");return false;}
+              if ($("staff_file").value.slice($("staff_file").value.length - 8) != ".torrent") {alert("种子文件只能选择.torrent类型的文件！");return false;}
+          <%/if%>
+          if ($("staff_cname").value == "") {alert("请填写中文名称！");return false;}
+          if ($("staff_type").value == "") {alert("请填写类别！");return false;}
+          if ($("staff_format").value == "") {alert("请填写文件格式！");return false;}
+          if ($("staff_language").value == "") {alert("请填写语言！");return false;}
+
+			<%else if {publishtype}=="video"%>
+			    <%if {pagename}=="publish.aspx"%>
+              if ($("video_file").value == "") {alert("请选择种子！");return false;}
+              if ($("video_file").value.slice($("video_file").value.length - 8) != ".torrent") {alert("种子文件只能选择.torrent类型的文件！");return false;}
+          <%/if%>
+          if ($("video_type").value == "") {alert("请填写类别！");return false;}
+          if ($("video_cname").value == "") {alert("请填写中文名称！");return false;}
+          if ($("video_resolution").value == "") {alert("请填写分辨率！");return false;}
+          if ($("video_region").value == "") {alert("请填写国家地区！");return false;}
+          if ($("video_language").value == "") {alert("请填写语言！");return false;}
+          if ($("video_subtitle").value == "") {alert("请填写字幕情况！");return false;}
+          if ($("video_format").value == "") {alert("请填写文件格式！");return false;}
+			<%else if {publishtype}=="other"%>
+			    <%if {pagename}=="publish.aspx"%>
+              if ($("other_file").value == "") {alert("请选择种子！");return false;}
+              if ($("other_file").value.slice($("other_file").value.length - 8) != ".torrent") {alert("种子文件只能选择.torrent类型的文件！");return false;}
+          <%/if%>
+          if ($("other_cname").value == "") {alert("请填写中文名称！");return false;}
+          if ($("other_format").value == "") {alert("请填写文件格式！");return false;}
+			<%/if%>
+  
+  //alert("check finished");
+  return validate(input);
+}
+//生成标题
+function filltitle()
+{
+//alert("test");
+  posted = 0;
+  var titlestring = "";
+      <%if {publishtype}=="movie"%>
+          if ($("movie_year").value != "") titlestring += "[" + $("movie_year").value + "]";
+          if ($("movie_region").value != "") titlestring += "[" + $("movie_region").value + "]";
+          if ($("movie_cname").value != "") titlestring += "[" + $("movie_cname").value + "]";
+          if ($("movie_ename").value != "") titlestring += "[" + $("movie_ename").value + "]";
+          if ($("movie_type").value != "") titlestring += "[" + $("movie_type").value + "]";
+          if ($("movie_subtitle").value != "") titlestring += "[" + $("movie_subtitle").value + "]";
+          if ($("movie_resolution").value != "") titlestring += "[" + $("movie_resolution").value + "]";
+          if ($("movie_rank").value != "") titlestring += "[" + $("movie_rank").value + "]";
+  		<%else if {publishtype}=="tv"%>
+  		    if ($("tv_region").value != "") titlestring += "[" + $("tv_region").value + "]";
+          if ($("tv_cname").value != "") titlestring += "[" + $("tv_cname").value + "]";
+          if ($("tv_ename").value != "") titlestring += "[" + $("tv_ename").value + "]";
+          if ($("tv_season").value != "") titlestring += "[" + $("tv_season").value + "]";
+          if ($("tv_subtitle").value != "") titlestring += "[" + $("tv_subtitle").value + "]";
+          if ($("tv_resolution").value != "") titlestring += "[" + $("tv_resolution").value + "]";
+			<%else if {publishtype}=="comic"%>
+			    if ($("comic_region").value != "") titlestring += "[" + $("comic_region").value + "]";
+			    if ($("comic_type").value != "") titlestring += "[" + $("comic_type").value + "]";
+          if ($("comic_cname").value != "") titlestring += "[" + $("comic_cname").value + "]";
+          if ($("comic_ename").value != "") titlestring += "[" + $("comic_ename").value + "]";
+          if ($("comic_season").value != "") titlestring += "[" + $("comic_season").value + "]";       
+          if ($("comic_subtitle").value != "") titlestring += "[" + $("comic_subtitle").value + "]";
+          if ($("comic_subtitlegroup").value != "") titlestring += "[" + $("comic_subtitlegroup").value + "]";
+          if ($("comic_source").value != "") titlestring += "[" + $("comic_source").value + "]";
+          if ($("comic_format").value != "") titlestring += "[" + $("comic_format").value + "]";  
+			<%else if {publishtype}=="music"%>
+					if ($("music_region").value != "") titlestring += "[" + $("music_region").value + "]";
+          if ($("music_type").value != "") titlestring += "[" + $("music_type").value + "]";
+          if ($("music_year").value != "") titlestring += "[" + $("music_year").value + "]";
+          if ($("music_artist").value != "") titlestring += "[" + $("music_artist").value + "]";
+          if ($("music_name").value != "") titlestring += "[" + $("music_name").value + "]";       
+          if ($("music_format").value != "") titlestring += "[" + $("music_format").value + "]";
+          if ($("music_bps").value != "") titlestring += "[" + $("music_bps").value + "]";
+          if ($("music_company").value != "") titlestring += "[" + $("music_company").value + "]";
+			<%else if {publishtype}=="game"%>
+					if ($("game_platform").value != "") titlestring += "[" + $("game_platform").value + "]";
+          if ($("game_cname").value != "") titlestring += "[" + $("game_cname").value + "]";
+          if ($("game_ename").value != "") titlestring += "[" + $("game_ename").value + "]";
+          if ($("game_type").value != "") titlestring += "[" + $("game_type").value + "]";
+          if ($("game_language").value != "") titlestring += "[" + $("game_language").value + "]";       
+          if ($("game_format").value != "") titlestring += "[" + $("game_format").value + "]";
+			<%else if {publishtype}=="discovery"%>
+					if ($("discovery_type").value != "") titlestring += "[" + $("discovery_type").value + "]";
+          if ($("discovery_cname").value != "") titlestring += "[" + $("discovery_cname").value + "]";
+          if ($("discovery_ename").value != "") titlestring += "[" + $("discovery_ename").value + "]";
+          if ($("discovery_subtitle").value != "") titlestring += "[" + $("discovery_subtitle").value + "]";       
+          if ($("discovery_resolution").value != "") titlestring += "[" + $("discovery_resolution").value + "]";
+          if ($("discovery_format").value != "") titlestring += "[" + $("discovery_format").value + "]";
+			<%else if {publishtype}=="sport"%>
+					if ($("sport_type").value != "") titlestring += "[" + $("sport_type").value + "]";
+          if ($("sport_year").value != "") titlestring += "[" + $("sport_year").value + "]";
+          if ($("sport_cname").value != "") titlestring += "[" + $("sport_cname").value + "]";
+          if ($("sport_ename").value != "") titlestring += "[" + $("sport_ename").value + "]";
+          if ($("sport_language").value != "") titlestring += "[" + $("sport_language").value + "]";
+          if ($("sport_resolution").value != "") titlestring += "[" + $("sport_resolution").value + "]";       
+          if ($("sport_format").value != "") titlestring += "[" + $("sport_format").value + "]";
+			<%else if {publishtype}=="entertainment"%>
+				  if ($("entertainment_region").value != "") titlestring += "[" + $("entertainment_region").value + "]";
+          if ($("entertainment_cname").value != "") titlestring += "[" + $("entertainment_cname").value + "]";
+          if ($("entertainment_ename").value != "") titlestring += "[" + $("entertainment_ename").value + "]";
+          if ($("entertainment_brief").value != "") titlestring += "[" + $("entertainment_brief").value + "]";
+          if ($("entertainment_subtitle").value != "") titlestring += "[" + $("entertainment_subtitle").value + "]";
+			    if ($("entertainment_resolution").value != "") titlestring += "[" + $("entertainment_resolution").value + "]";       
+          if ($("entertainment_format").value != "") titlestring += "[" + $("entertainment_format").value + "]";
+			<%else if {publishtype}=="software"%>
+					if ($("software_type").value != "") titlestring += "[" + $("software_type").value + "]";
+          if ($("software_cname").value != "") titlestring += "[" + $("software_cname").value + "]";
+          if ($("software_ename").value != "") titlestring += "[" + $("software_ename").value + "]";
+          if ($("software_language").value != "") titlestring += "[" + $("software_language").value + "]";
+          if ($("software_format").value != "") titlestring += "[" + $("software_format").value + "]";       
+			<%else if {publishtype}=="staff"%>
+					if ($("staff_type").value != "") titlestring += "[" + $("staff_type").value + "]";
+          if ($("staff_cname").value != "") titlestring += "[" + $("staff_cname").value + "]";
+          if ($("staff_ename").value != "") titlestring += "[" + $("staff_ename").value + "]";
+          if ($("staff_language").value != "") titlestring += "[" + $("staff_language").value + "]";
+          if ($("staff_format").value != "") titlestring += "[" + $("staff_format").value + "]";
+			<%else if {publishtype}=="video"%>
+					if ($("video_region").value != "") titlestring += "[" + $("video_region").value + "]";
+          if ($("video_cname").value != "") titlestring += "[" + $("video_cname").value + "]";
+          if ($("video_ename").value != "") titlestring += "[" + $("video_ename").value + "]";
+          if ($("video_subtitle").value != "") titlestring += "[" + $("video_subtitle").value + "]";
+          if ($("video_resolution").value != "") titlestring += "[" + $("video_resolution").value + "]";
+          if ($("video_format").value != "") titlestring += "[" + $("video_format").value + "]";       
+			<%else if {publishtype}=="other"%>
+					if ($("other_cname").value != "") titlestring += "[" + $("other_cname").value + "]";
+					if ($("other_ename").value != "") titlestring += "[" + $("other_ename").value + "]";
+					if ($("other_brief").value != "") titlestring += "[" + $("other_brief").value + "]";
+          if ($("other_format").value != "") titlestring += "[" + $("other_format").value + "]";
+			<%/if%>
+			if(titlestring.replace(/(^\s*)|(\s*$)/g, "") == "")
+			{
+          $("title").value = "种子标题将由分类信息自动生成，请直接填写分类信息表，粗体项目为必填内容";
+          $("seedpostHideTitle") = "";
+			}
+			else 
+			{
+          $("title").value = "标题预览：" + titlestring;
+      }
+			if(titlestring.length > 255) alert("标题长度过长，请酌情删减分类信息!");
+}
+//便捷填空
+function addField(selection,category) 
+{
+	var target=$(category);
+			if(target.value==''){target.value = selection;}
+			else target.value+='/'+selection;
+	filltitle();
+}
+function replaceField(selection,category) 
+{
+	var target=$(category);
+  target.value = selection;
+  filltitle();
+}
+function autofill_showinput()
+{
+  
+}
+</script>

@@ -1,0 +1,40 @@
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Discuz.Control.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Discuz.Control.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Discuz.Data.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Discuz.Cache.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Discuz.Data.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Discuz.Cache.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\bin\ReleaseWeb\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\obj\ReleaseWeb\Discuz.Control.csprojResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\obj\ReleaseWeb\Discuz.Control.TabEditorForm.resources
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\obj\ReleaseWeb\Discuz.Control.csproj.GenerateResource.Cache
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\obj\ReleaseWeb\Discuz.Control.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Control\obj\ReleaseWeb\Discuz.Control.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Discuz.Control.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Discuz.Control.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Discuz.Data.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Discuz.Cache.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Discuz.Data.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Discuz.Cache.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\bin\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\obj\ReleaseWeb\Discuz.Control.csprojResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\obj\ReleaseWeb\Discuz.Control.TabEditorForm.resources
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\obj\ReleaseWeb\Discuz.Control.csproj.GenerateResource.Cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\obj\ReleaseWeb\Discuz.Control.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Control\obj\ReleaseWeb\Discuz.Control.pdb

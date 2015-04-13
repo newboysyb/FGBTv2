@@ -1,0 +1,302 @@
+﻿<%template _header%>
+<%if !{issubmit}%>
+    <%if page_err==0%>
+    <div id="floatlayout_mods">
+      <h3 class="flb"> 
+      <em id="return_mods">{operationtitle} [ 同时操作：{alltopiccount} ]</em>
+      <%if {infloat}==1%>
+        <span class="y">
+          <a title="关闭" onclick="hideWindow('mods');if(navigator.userAgent.indexOf('Firefox')>=0) window.location.reload(true);" class="flbc" href="javascript:;">关闭</a>
+        </span>
+      <%/if%>
+      </h3>
+      <div class="c cl">
+      <%if {infloat}==1%>
+      <form id="moderate_admin" name="moderate_admin" method="post" onsubmit="ajaxpost('moderate_admin', 'return_mods', 'return_mods', 'onerror');return false;" action="{rooturl}seedadmin.aspx?action=moderate&operation={operation}&infloat=1">
+      <%else%>
+      <form id="moderate_admin" name="moderate_admin" method="post" action="seedadmin.aspx?action=moderate&operation={operation}">
+      <%/if%>
+      <input type="hidden" name="topicid" value="{topiclist}" />
+      <input type="hidden" name="forumid" value="{forumid}" />
+        <%if {config.aspxrewrite}==1%>
+      <input type="hidden" id="referer" name="referer" value="showforum-{forumid}{config.extname}" />
+        <%else %>	
+      <input type="hidden" id="referer" name="referer" value="showforum.aspx?forumid={forumid}">
+        <%/if%>	
+        <script type="text/javascript">
+          var re = getQueryString("referer");
+          if (re != "")
+          {
+            $("referer").value = unescape(re);
+          }
+        </script>
+        
+        {alltopictitle}
+        
+      <!--操作面板开始-->	
+        
+        <%if {operation}=="seedratio"%>
+          <div class="topicadminlow detailopt">
+              <br/>下载流量系数 蓝种（流量系数为0）操作最长有效期为种子发布起60天
+              <ul class="inlinelist">
+                  <li><label><input type="radio" value="0" name="downratio" class="radio" />0</label></li>
+                  <li><label><input type="radio" value="1" name="downratio" class="radio" />0.3</label></li>
+                  <li><label><input type="radio" value="2" name="downratio" class="radio" />0.6</label></li>
+                  <li><label><input type="radio" value="3" name="downratio" class="radio" checked="checked"/>1.0</label></li>
+                  <li><label><input type="radio" value="4" name="downratio" class="radio" />2.0</label></li>
+                  <li><label><input type="radio" value="5" name="downratio" class="radio" />3.0</label></li>
+             </ul>
+         </div>
+         <div class="topicadminlow detailopt">
+              <br/>下载流量系数有效期  流量系数为0、0.3的种子在过期之后，4G以上种子仍将保持0.6下载，其余过期后恢复为1
+              <br/>有效期选择为（永久/60天）时，蓝种为自发布起60天，0.3系数为设置之日起60天，其余为永久
+              <ul class="inlinelist">
+                  <li><label><input type="radio" value="0" name="downratioexpire" class="radio" checked="checked"/>永久/60天</label></li>
+                  <li><label><input type="radio" value="1" name="downratioexpire" class="radio" />30天</label></li>
+                  <li><label><input type="radio" value="2" name="downratioexpire" class="radio" />14天</label></li>
+                  <li><label><input type="radio" value="3" name="downratioexpire" class="radio" />7天</label></li>
+                  <li><label><input type="radio" value="4" name="downratioexpire" class="radio" />3天</label></li>
+                  <li><label><input type="radio" value="5" name="downratioexpire" class="radio" />1天</label></li>
+             </ul>
+         </div>
+         <div class="topicadminlow detailopt">
+              <br/>上传流量系数 不推荐设置为大于1的值
+              <ul class="inlinelist">
+                  <li><label><input type="radio" value="0" name="upratio" class="radio" />0</label></li>
+                  <li><label><input type="radio" value="1" name="upratio" class="radio" />0.3</label></li>
+                  <li><label><input type="radio" value="2" name="upratio" class="radio" />0.6</label></li>
+                  <li><label><input type="radio" value="3" name="upratio" class="radio" checked="checked"/>1.0</label></li>
+                  <li><label><input type="radio" value="4" name="upratio" class="radio" />1.2</label></li>
+                  <li><label><input type="radio" value="5" name="upratio" class="radio" />1.6</label></li>
+             </ul>
+          </div>
+         <div class="topicadminlow detailopt">
+              <br/>上传流量系数有效期 过期后上传系数将恢复为1
+              <ul class="inlinelist">
+                  <li><label><input type="radio" value="0" name="upratioexpire" class="radio" checked="checked"/>永久</label></li>
+                  <li><label><input type="radio" value="1" name="upratioexpire" class="radio" />30天</label></li>
+                  <li><label><input type="radio" value="2" name="upratioexpire" class="radio" />14天</label></li>
+                  <li><label><input type="radio" value="3" name="upratioexpire" class="radio" />7天</label></li>
+                  <li><label><input type="radio" value="4" name="upratioexpire" class="radio" />3天</label></li>
+                  <li><label><input type="radio" value="5" name="upratioexpire" class="radio" />1天</label></li>
+             </ul>
+         </div>
+          
+        <%/if%>
+        <%if {operation}=="seedaward"%>
+         <div class="topicadminlow detailopt">
+              <br/>奖励/处罚
+              <ul class="inlinelist">
+                  <li class="wide"><label><input type="radio" value="0" name="award" class="radio" />奖励20G（需管理员批准）</label></li>
+                  <li class="wide"><label><input type="radio" value="1" name="award" class="radio" />奖励10G（慎重使用）</label></li>
+                  <li class="wide"><label><input type="radio" value="2" name="award" class="radio" />奖励5G</label></li>
+                  <li class="wide"><label><input type="radio" value="3" name="award" class="radio" checked="checked"/>奖励2G</label></li>
+                  <li class="wide"><label><input type="radio" value="4" name="award" class="radio" />扣罚2G</label></li>
+                  <li class="wide"><label><input type="radio" value="5" name="award" class="radio" />扣罚5G</label></li>
+                  <li class="wide"><label><input type="radio" value="6" name="award" class="radio" />扣罚10G</label></li>
+                  <li class="wide"><label><input type="radio" value="7" name="award" class="radio" />扣罚20G</label></li>
+             </ul>
+         </div>
+        <%/if%>
+        
+        <%if {operation}=="seedmove"%>
+          <div class="topicadminlow detailopt">
+              <br/>移动种子到
+              <ul class="inlinelist">
+                  <li class="wide"><label><input type="radio" value="0" name="moveto" class="radio" checked="checked" /><img class="PrivateBTInlineIMGPointer" src="{forumurl}templates/{templatepath}/images/bt/1.png"  style="width:50px" /></label></li>
+                  <li class="wide"><label><input type="radio" value="1" name="moveto" class="radio" /><img class="PrivateBTInlineIMGPointer" src="{forumurl}templates/{templatepath}/images/bt/2.png" style="width:50px" /></label></li>
+                  <li class="wide"><label><input type="radio" value="2" name="moveto" class="radio" /><img class="PrivateBTInlineIMGPointer" src="{forumurl}templates/{templatepath}/images/bt/3.png" style="width:50px" /></label></li>
+                  <li class="wide"><label><input type="radio" value="3" name="moveto" class="radio" /><img class="PrivateBTInlineIMGPointer" src="{forumurl}templates/{templatepath}/images/bt/4.png" style="width:50px" /></label></li>
+                  <li class="wide"><label><input type="radio" value="4" name="moveto" class="radio" /><img class="PrivateBTInlineIMGPointer" src="{forumurl}templates/{templatepath}/images/bt/5.png" style="width:50px" /></label></li>
+                  <li class="wide"><label><input type="radio" value="5" name="moveto" class="radio" /><img class="PrivateBTInlineIMGPointer" src="{forumurl}templates/{templatepath}/images/bt/6.png" style="width:50px" /></label></li>
+                  <li class="wide"><label><input type="radio" value="6" name="moveto" class="radio" /><img class="PrivateBTInlineIMGPointer" src="{forumurl}templates/{templatepath}/images/bt/7.png" style="width:50px" /></label></li>
+                  <li class="wide"><label><input type="radio" value="7" name="moveto" class="radio" /><img class="PrivateBTInlineIMGPointer" src="{forumurl}templates/{templatepath}/images/bt/8.png" style="width:50px" /></label></li>
+                  <li class="wide"><label><input type="radio" value="8" name="moveto" class="radio" /><img class="PrivateBTInlineIMGPointer" src="{forumurl}templates/{templatepath}/images/bt/9.png" style="width:50px" /></label></li>
+                  <li class="wide"><label><input type="radio" value="9" name="moveto" class="radio" /><img class="PrivateBTInlineIMGPointer" src="{forumurl}templates/{templatepath}/images/bt/10.png" style="width:50px" /></label></li>
+                  <li class="wide"><label><input type="radio" value="10" name="moveto" class="radio" /><img class="PrivateBTInlineIMGPointer" src="{forumurl}templates/{templatepath}/images/bt/11.png" style="width:50px" /></label></li>
+                  <li class="wide"><label><input type="radio" value="11" name="moveto" class="radio" /><img class="PrivateBTInlineIMGPointer" src="{forumurl}templates/{templatepath}/images/bt/12.png" style="width:50px" /></label></li>
+             </ul>
+         </div>
+        <%/if%>
+        
+        <%if {operation}=="seeddelete"%>
+          <div class="topicadminlow detailopt">
+              <br/>删除种子（此选项功能暂不可用，等待完善）
+              <ul class="inlinelist">
+                  <li class="wide"><label><input type="radio" value="0" name="seeddelete" class="radio" checked="checked" />重复种子</label></li>
+                  <li class="wide"><label><input type="radio" value="1" name="seeddelete" class="radio" />违规种子</label></li>
+                  <li class="wide"><label><input type="radio" value="2" name="seeddelete" class="radio" />清理过期种子等</label></li>
+                  <li class="wide"><label><input type="radio" value="3" name="seeddelete" class="radio" />禁止发布的内容，禁止此种子再次发布</label></li>
+             </ul>
+         </div>
+         <div class="topicadminlow detailopt">
+              <br/>奖励/处罚
+              <ul class="inlinelist">
+                  <li class="wide"><label><input type="radio" value="0" name="award" class="radio"  checked="checked"/>不进行奖励/处罚</label></li>
+                  <li class="wide"><label><input type="radio" value="1" name="award" class="radio" />扣罚流量2G</label></li>
+                  <li class="wide"><label><input type="radio" value="2" name="award" class="radio" />扣罚流量5G</label></li>
+                  <li class="wide"><label><input type="radio" value="3" name="award" class="radio" />扣罚流量10G</label></li>
+                  <li class="wide"><label><input type="radio" value="4" name="award" class="radio" />扣罚流量20G</label></li>
+                  <li class="wide"><label><input type="radio" value="5" name="award" class="radio" />扣罚流量50G</label></li>
+                  <li class="wide"><label><input type="radio" value="6" name="award" class="radio" />扣罚流量100G</label></li>
+                  <li class="wide"><label><input type="radio" value="7" name="award" class="radio" />扣罚流量200G</label></li>
+                  <li class="wide"><label><input type="radio" value="8" name="award" class="radio" />扣罚流量500G</label></li>
+                  <li class="wide"><label><input type="radio" value="9" name="award" class="radio" />扣罚流量1T</label></li>
+             </ul>
+         </div>
+         <br/>
+         <span style="color:red">
+               请务必包含操作理由:如删种所引用的具体理由，而不仅仅写“违规”、“请仔细查看版规”，因为<br/>
+               <strong>理由会通过站内消息发送给所有曾经下载和正在下载、上传的人，而不仅仅是发布者</strong>
+         </span><br/>
+         <span style="color:blue">
+               请确保所引用的版规无差错、无歧义，并且它在版规中是<strong>确实存在的，请随时再次细读版规</strong>
+         </span>
+        <%/if%>
+        
+        <%if {operation}=="seedclose"%>
+        <!--关闭开始-->
+        <div class="topicadminlow">
+            <br/>
+            <ul style="margin: 5px 0pt;" class="inlinelist">
+                <li class="wide"><label><input type="radio" checked="checked" value="0" name="close" class="radio"/> 打开主题</label></li>
+                    <li class="wide"><label><input type="radio" value="1" name="close" class="radio"/> 关闭主题</label></li>
+            </ul>
+        </div>
+        <!--关闭结束-->
+        <%/if%>
+        
+        <%if {operation}=="seedban"%>
+        <!--关闭开始-->
+        <div class="topicadminlow">
+            <br/>
+            <ul style="margin: 5px 0pt;" class="inlinelist">
+                <li class="wide"><label><input id="banpost1" type="radio" value="0" name="banpost" class="radio" checked="checked"/> 解除屏蔽</label></li>
+                <li class="wide"><label><input id="banpost2" type="radio" value="-2" name="banpost" class="radio"/> 屏蔽种子</label></li>
+            </ul>
+        </div>
+        <!--关闭结束-->
+        <%/if%>
+        
+        <%if {operation}=="seeddigest"%>
+        <!--精华开始-->
+        <div class="topicadminlow">
+            <br/>
+            <ul class="inlinelist">
+                    <%if {digest}>0%><li class="wide"><label><input type="radio" value="0" name="level" class="radio"/> 解除精华</label></li><%/if%>
+                    <li class="wide"><label><input type="radio" value="1" name="level" class="radio"<%if {digest}<=1%> checked="checked"<%/if%>/> 一级精华</label></li>
+                    <li class="wide"><label><input type="radio" value="2" name="level" class="radio"<%if {digest}==2%> checked="checked"<%/if%>/> 二级精华</label></li>
+                    <li class="wide"><label><input type="radio" value="3" name="level" class="radio"<%if {digest}==3%> checked="checked"<%/if%>/> 三级精华</label></li>
+                </ul>
+        </div>
+        <!--精华结束-->
+        <%/if%>
+        
+        <%if {operation}=="seeddeleteself"%>
+        <!--自删除开始-->
+        <div class="topicadminlow">
+            <br/>
+            种子发布7天之内可以自行删除种子，<span style="color:#C00">自行删除种子将扣除10G上传</span><br/><br/>
+            如果种子发布有问题，您可以编辑替换之前的种子，而不是删除重发。
+        </div>
+        <!--自删除结束-->
+        <%/if%>
+        
+        <%if {operation}=="seededit"%>
+        <!--精华开始-->
+        <div class="topicadminlow">
+            <br/>正在为您跳转到种子编辑页面，请稍等...
+              <script type="text/javascript"  reload="1">
+                  $('return_mods').className='';
+                  location.href = 'edit.aspx?seedid={lastseedid}';	
+              </script>
+        </div>
+        <!--精华结束-->
+        <%/if%>
+        
+        <%if {operation}!="identify"&&{operation}!="bonus"&&{operation}!="cancelrate"&&{operation}!="seededit"%>
+        <!--操作说明开始-->
+        <div class="topicadminlog">
+            <h4>
+                <span class="hasdropdownbtn y"><a href="javascript:;" class="dropdownbtn" onclick="showselect(this, 'reason', 'reasonselect')">^</a></span>
+                <br/>操作说明：<label>最多500个字符，还可输入<strong><span id="chLeft">500</span></strong></label>（<a href="modcp.aspx?operation=editforum">预设操作说明请访问板块编辑页面</a>）
+            </h4>
+            <p>
+              <textarea onkeyup="seditor_ctlent(event, '$(\'moderateform\').submit()')" class="txtarea" name="reason" id="reason" <%if {operation}=="rate"%>style="width:322px;"<%/if%>></textarea>
+                    <script type="text/javascript">checkLength($('reason'), 500); //检查评分内容长度</script>
+            </p>
+            <ul style="display: none;" id="reasonselect">
+            <%loop (string) opname operationlist%>
+              <li>opname</li>
+            <%/loop%>
+              <li>广告/SPAM</li>
+              <li>恶意灌水</li>
+              <li>违规内容</li>
+              <li>文不对题</li>
+              <li>重复发帖</li>
+              <li></li>
+              <li>我很赞同</li>
+              <li>精品文章</li>
+              <li>原创内容</li>
+            </ul>
+          </div>
+        <!--操作说明结束-->
+        <%/if%>
+        
+        <!--短消息通知开始-->
+        <%if {operation}!="seededit"%>
+        <p>
+                <button type="submit" class="pn" name="modsubmit"><span>确定</span></button>
+                <%if {operation}=="delete" || {operation}=="delposts"%>
+            <!--保留附件开始-->
+              <input name="reserveattach" type="checkbox" value="1" /> <label for="reserveattach">保留附件</label>
+            <!--保留附件结束-->
+            <%/if%>
+                <%if {issendmessage}%>
+                <input type="checkbox" disabled checked="checked"/>
+                <input name="sendmessage" type="hidden" id="sendmessage" value="1"/>
+            <%else%>
+                <input name="sendmessage" type="checkbox" id="sendmessage" value="1" checked="checked" disabled="disabled"/>
+            <%/if%> <label for="sendmessage">通知作者</label>
+            </p>
+            <%else%>
+            <div class="topic_msg">
+                <p style="float: right;">
+                    <input type="checkbox" class="checkbox" id="sendmessage" name="sendmessage" checked="checked" disabled="disabled"/> <label for="sendreasonpm">通知作者</label>  
+                    操作说明: <input class="txt" name="reason"/>
+                    <button name="ratesubmit" value="true" type="submit" class="submit">提交</button>
+                </p>
+                <label><input name="chkall" type="checkbox"  onclick="checkall(this.form, 'ratelogid')" /> 全选</label>
+            </div>
+            <%/if%>
+        <!--短消息通知结束-->
+      
+      </div>
+      <!--操作面板结束-->
+      
+        </form>
+      </div>
+    <%else%>
+         <%if {infloat}==1%>
+            <%if {titlemessage}%>
+                {msgbox_text}
+            <%else%>
+                 <em id="em1">{operationtitle}</em>&nbsp;&nbsp;&nbsp;{msgbox_text}
+            <%/if%>
+        <%else%>
+        <%template _errmsgbox%>
+        <%/if%>
+    <%/if%>
+<%else%>
+	<%if {infloat}==1%>
+	
+        <script type="text/javascript"  reload="1">
+            location.href = '{msgbox_url}';	
+			$('return_mods').className='';
+        </script>
+	<%else%>
+	    <%template _msgbox%>
+	<%/if%>
+<%/if%>
+<%template _copyright%>
+<%template _footer%>

@@ -1,0 +1,141 @@
+<%template _pageheader%>
+<body onkeydown="if(event.keyCode==27) return false;">
+<div id="append_parent"></div><div id="ajaxwaitid"></div>
+<div id="submenu">
+  <%if {userid}>0&&{pagename}!="login.aspx"&&{pagename}!="logout.aspx"&&{pagename}!="register.aspx"&&{pagename}!="cngilogin.aspx"%>
+	<div class="wrap s_clear">
+		  <span class="submenuright">
+        {ipaddress_note}
+    </span>
+		欢迎 <a href="{forumpath}userinfo.aspx?userid={userid}">{username}</a>
+  </div>
+  <%/if%>
+</div>
+
+<%if {headerad}!=""%>
+	<div id="ptnotice_headerbanner">{headerad}</div>
+<%/if%>
+<div id="hd">
+	<div class="wrap">
+		<div class="head cl">
+			<h2><a href="{forumpath}index.aspx" title="{config.forumtitle}"><img src="{imagedir}/logo.png" alt="{config.forumtitle}"/></a></h2>
+			<%if {userid}>0%>
+			<div id="um">
+				<div class="avt y"><a alt="用户名称" target="_blank" href="{forumpath}usercp.aspx"><img src="{useravatar}" onerror="this.onerror=null;this.src='{forumpath}images/common/noavatar_small.gif';" /></a></div>
+				<p>
+                    <%set (string){linktitle} = ""%>
+                    <%set (string){showoverflow} = ""%>
+                    <%if {oluserinfo.newpms}>0%>
+                        <%if {oluserinfo.newpms}>=1000%>
+                            <%set {showoverflow} = "大于"%>
+                        <%/if%>
+                        <%set {linktitle} = "您有"+{showoverflow}+{oluserinfo.newpms}+"条新短消息"%>
+                    <%else%>
+                        <%set {linktitle} = "您没有新短消息"%>
+                    <%/if%>
+					<a id="pm_ntc" href="{forumpath}usercpinbox.aspx" title="{linktitle}">短消息
+                    <%if {oluserinfo.newpms}>0 && {oluserinfo.newpms}<=1000%>
+                                ({oluserinfo.newpms}<%if {oluserinfo.newpms}>=1000%>1000+<%/if%>)
+                    <%/if%></a>
+                    <span class="pipe">|</span>
+                    <%set {showoverflow} = ""%>
+                    <%if {oluserinfo.newnotices}>0%>
+                        <%if {oluserinfo.newnotices}>=1000%>
+                            <%set {showoverflow} = "大于"%>
+                        <%/if%>
+                        <%set {linktitle} = "您有"+{showoverflow}+{oluserinfo.newnotices}+"条新通知"%>
+                    <%else%>
+                        <%set {linktitle} = "您没有新通知"%>
+                    <%/if%>
+					<a id="notice_ntc" href="{forumpath}usercpnotice.aspx?filter=all" title="{linktitle}">
+                        通知<%if {oluserinfo.newnotices}>0%>
+                                ({oluserinfo.newnotices}<%if {oluserinfo.newnotices}>=1000%>+<%/if%>)
+                            <%/if%>
+                    </a>
+                    <span class="pipe">|</span>
+					<a id="usercenter" class="drop" onmouseover="showMenu(this.id);" href="{forumpath}usercp.aspx">用户中心</a>
+					<%if {cngi_login}==true%>
+              <span class="pipe">|</span><a href="javascript:alert('CNGI登陆用户只有关闭浏览器才能退出登录，如果需要退出登录，请关闭浏览器')">退出</a>
+					<%else%>
+              <span class="pipe">|</span><a href="{forumpath}logout.aspx?userkey={userkey}">退出</a>
+          <%/if%>
+				</p>
+				{userinfotips}
+			</div> 
+			<div id="pm_ntc_menu" class="g_up" style="display:none;">
+				<div class="mncr"></div>
+				<div class="crly">
+					<div style="clear:both;font-size:0;"></div>
+					<span class="y"><a onclick="javascript:$('pm_ntc_menu').style.display='none';closenotice({oluserinfo.newpms});" href="javascript:;"><img src="{imagedir}/delete.gif" alt="关闭"/></a></span>
+					<a id="pmcountshow" href="{forumpath}usercpinbox.aspx">您有<%if {oluserinfo.newpms}>=1000%>大于<%/if%>{oluserinfo.newpms}条新消息</a>
+				</div>
+			</div>
+			<div id="notice_ntc_menu" class="g_up" style="display:none;">
+				<div class="mncr"></div>
+				<div class="crly">
+					<div style="clear:both;font-size:0;"></div>
+					<span class="y"><a onclick="javascript:$('notice_ntc_menu').style.display='none';closenotice({oluserinfo.newnotices});" href="javascript:;"><img src="{imagedir}/delete.gif" alt="关闭"/></a></span>
+					<a id="noticecountshow" href="{forumpath}usercpnotice.aspx?filter=all">您有<%if {oluserinfo.newnotices}>=1000%>大于<%/if%>{oluserinfo.newnotices}条新通知</a>
+				</div>
+			</div>
+
+            <span id="msgsoundplayerspanheader" style="display:hidden"></span>
+            <script type="text/javascript">
+                var pmcount = {oluserinfo.newpms};
+                var noticecount = {oluserinfo.newnotices};
+                var originalTitle =  document.title;
+                var playpmsound = <%if {oluserinfo.PMSound}>0%>true<%else%>false<%/if%>;
+                setnewpmnoticeposion({oluserinfo.newnotices}, {oluserinfo.newpms});
+                initpmnoticeupdate();
+
+            </script>
+            <%/if%>
+		</div>
+		<div id="menubar">
+			<a onMouseOver="showMenu(this.id, false);" href="javascript:void(0);" id="mymenu">我的中心</a>
+            <div class="popupmenu_popup headermenu_popup" id="mymenu_menu" style="display: none">
+                 <%if {userid}>0%>
+                    <ul class="sel_my">
+                      <li><a href="{forumpath}mytopics.aspx">我的主题</a></li>
+                      <li><a href="{forumpath}myposts.aspx">我的帖子</a></li>
+                      <li><a href="{forumpath}search.aspx?posterid=current&type=digest&searchsubmit=1">我的精华</a></li>
+                      <li><a href="{forumpath}myattachment.aspx">我的附件</a></li>
+                      <li><a href="{forumpath}usercpsubscribe.aspx">我的收藏</a></li>
+                    <%if {config.Enablespace}==1%>
+                          <li class="myspace"><a href="{forumpath}space/">我的空间</a></li>
+                    <%/if%>
+                    <%if {config.Enablealbum}==1%>
+                          <li class="myalbum"><a href="{forumpath}showalbumlist.aspx?uid={userid}">我的相册</a></li>
+                    <%/if%>
+                      </ul>
+                 <%else%>
+
+                 <%/if%>
+                 <%if {config.allowchangewidth}==1&&pagename!="website.aspx"%>
+                         <ul class="sel_mb">
+                      <li><a href="javascript:;" onclick="widthauto(this,'{cssdir}')"><%if {isnarrowpage}%>切换到宽版<%else%>切换到窄版<%/if%></a></li>
+                    </ul>
+                  <%/if%>
+            </div>
+            <ul id="usercenter_menu" class="p_pop" style="display:none;">
+                <li><a href="{forumpath}usercpprofile.aspx?action=avatar"><span class="PrivateBTNavList">设置头像</span></a></li>
+                <li><a href="{forumpath}usercpprofile.aspx"><span class="PrivateBTNavList">个人资料</span></a></li>
+                <li><a href="{forumpath}usercpnewpassword.aspx"><span class="PrivateBTNavList">更改密码</span></a></li>
+                <li><a href="{forumpath}usercp.aspx"><span class="PrivateBTNavList">用户组</span></a></li>
+                <li><a href="{forumpath}usercpcreaditstransferlog.aspx"><span class="PrivateBTNavList">积分</span></a></li>
+            </ul>
+			<ul id="menu" class="cl">
+				{mainnavigation}
+			</ul>
+		</div>
+	</div>
+</div>
+<%else%>
+<%csharp%>
+Response.Clear();
+Response.ContentType = "Text/XML";
+Response.Expires = 0;
+Response.Cache.SetNoStore();
+<%/csharp%>
+<?xml version="1.0" encoding="utf-8"?><root><![CDATA[
+<%/if%>

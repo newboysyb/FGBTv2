@@ -1,0 +1,749 @@
+﻿<%template _header%>
+<%template _PrivateBTShowFloatInfo%>
+
+<%if {infloat}!=1%>
+<div class="wrap cl pageinfo">
+	<div id="nav">
+		<%if {usergroupinfo.allowsearch}>0%>
+			<%template _quicksearch%>
+		<%/if%>
+		<a id="forumlist" href="{forumpath}" <%if {config.forumjump}==1%>onmouseover="showMenu(this.id);" onmouseout="showMenu(this.id);"<%/if%> class="title">{config.forumtitle}</a> &raquo; {forumnav}
+	</div>
+</div>
+<script type="text/javascript"  src="{jsdir}/ajax.js"></script>
+<%if {page_err}==0%>
+	<script type="text/javascript">
+	var templatepath = "{templatepath}";
+    var imagedir = "{imagedir}";
+	var fid = parseInt({forum.fid});
+	var postminchars = parseInt({config.minpostsize});
+	var postmaxchars = parseInt({config.maxpostsize});
+	var disablepostctrl = parseInt({disablepostctrl});
+	var forumurl = forumpath = "{forumpath}";
+	</script>
+<%/if%>
+<script type="text/javascript" src="{jsdir}/template_showforum.js"></script>
+<%if {page_err}==0%>
+<div class="wrap cl">
+<%template _pagewordadlist%>
+<%if {showforumlogin}==1%>
+	<div class="main">
+		<h3>本版块已经被管理员设置了密码</h3>
+		<form id="forumlogin" name="forumlogin" method="post" action="">
+		<table cellpadding="0" cellspacing="0" border="0" class="formtable">
+		<tbody>
+		<tr>
+			<th><label for="forumpassword">请输入密码</label></th>
+			<td><input name="forumpassword" type="password" id="forumpassword" size="20" class="txt"/></td>
+		</tr>
+		</tbody>
+		<%if {isseccode}%>	
+		<tbody>
+		<tr>
+			<th><label for="vcode">输入验证码</label></th>
+			<td>
+				<div style="position: relative;">
+				<%template _vcode%>
+				</div>
+		    </td>
+		</tr>
+		</tbody>
+		<%/if%>
+		<tbody>
+		<tr>
+			<th></th>
+			<td><input type="submit"  value="确定"/></td>
+		</tr>
+		</tbody>
+		</table>
+		</form>
+	</div>
+</div>
+<%else%>
+<div id="forumheader" class="main cl">
+	<span class="y o">
+        <%if {forum.rules}!=""%>
+        <img id="rules_img"  src="{imagedir}/collapsed_no.gif" alt="展开/收起" onclick="toggle_collapse('rules');"/>
+        <%/if%>
+    </span>
+	<%if {page_err}==0%>
+	<span class="y">
+	<%if {ismoder}%><a href="{forumurl}modcp.aspx?operation=attention&forumid={forumid}" target="_blank" class="f_bold">管理面板</a><%/if%>
+	</span>
+	<%/if%>
+	<div class="forumaction y">
+		<!--<a href="{forumpath}showforum.aspx?forumid={forumid}&filter=digest" class="digest">精华</a>-->
+		<%if {config.rssstatus}!=0&&{forum.allowrss}!=0%>		
+		<%set {aspxrewriteurl} = this.RssAspxRewrite({forum.fid})%>	
+		<a class="feed" target="_blank" href="{forumpath}tools/{aspxrewriteurl}">RSS</a>	
+		<%/if%>
+	</div>
+	<h1><%set {aspxrewriteurl} = this.ShowForumAspxRewrite({forum.fid},0)%>{forum.name}</h1>
+	<span class="forumstats">今日: <strong class="xi1">{forum.Todayposts}</strong><span class="pipe">|</span>主题: <strong class="xi1">{topiccount}</strong><span class="pipe">|</span>帖子: <strong class="xi1">{forum.Posts}</strong></span>
+	<p id="modedby">
+<%if {page_err}==0%>版主: <span class="f_c">
+	<%if {forum.moderators}!=""%>
+		{forum.moderators}
+	<%else%>
+		*空缺中*
+	<%/if%></span>
+<%/if%>
+	</p>
+<%if {forum.rules}!=""%>
+	<div id="rules">{forum.rules}</div>
+<%/if%>
+</div>
+<%if {forum.Subforumcount}>0&&{subforumlist.Count}>0%>
+	<%template _subforum%>
+<%/if%>
+
+<%template _seedsearch%>
+<%template _seedkeepreward%>
+
+<%if {forum.layer}!=0%>
+<div class="pages_btns cl">
+	<div class="pages">
+    <%if {keywords}!=""||{searchusername}!=""||{notinkeywords}!=""%>
+        <script type="text/javascript">
+            $('PrivateBTSeedSearchForm').style.display='';
+        </script>
+    <%else%>
+        <script type="text/javascript">
+            $('PrivateBTSeedSearchForm').style.display='none';
+        </script>
+        <cite class="z" id="PrivateBTSeedSearchFormShowButton"><a onclick="javascript:$('PrivateBTSeedSearchForm').style.display='';$('PrivateBTSeedSearchFormShowButton').style.display='none';"> 搜索种子 </a> &nbsp;&nbsp; </cite>
+    <%/if%>
+		<cite class="pageback z" id="visitedforums"<%if {showvisitedforumsmenu}%> onmouseover="$('visitedforums').id = 'visitedforumstmp';this.id = 'visitedforums';showMenu({'ctrlid':this.id, 'pos':'34'});"<%/if%>><a href="{forumpath}">返回</a></cite>
+		<%if {pagecount}!=1%>
+			{pagenumbers}
+			<%if {pagecount}>8%>
+			<kbd>
+			<input name="gopage" type="text" class="txt" id="pageidinput1" title="可以输入页码按回车键自动跳转" value="{pageid}" style="text-align:center;" onfocus="this.value=this.defaultValue;this.select();" onKeyDown="pageinputOnKeyDown(this,event);" size="2" maxlength="9" />/ {pagecount}</kbd>
+            <script type="text/javascript">
+                function pageinputOnKeyDown(obj, event) {
+                    if (event.keyCode == 13) 
+                    {
+                         window.location = 'showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&seedstat=0&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}&page=' + (parseInt(obj.value) > 0 ? parseInt(obj.value) : 1);
+                    }
+                    return (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 97 && event.keyCode <= 105) || event.keyCode == 8;
+                }
+            </script>
+			<%/if%>
+			{nextpage}
+		<%/if%>
+	</div>
+
+<span class="PrivateBTFontLargeLow"><span class="SeedGray">种子数：{seedinfocount}&nbsp;&nbsp;&nbsp;&nbsp;总容量：{totalsize}&nbsp;&nbsp;&nbsp;&nbsp;{addmessage}</span></span>
+</div>
+
+<!-- 分类选择区预留 -->
+
+<!-- END分类选择区预留 -->
+
+<ul id="rewardmenu_menu" class="p_pop"  style="display: none">
+	<li><a href="{forumpath}showforum.aspx?forumid={forumid}&filter=rewarding">进行中的悬赏</a></li>
+	<li><a href="{forumpath}showforum.aspx?forumid={forumid}&filter=rewarded">已结束的悬赏</a></li>
+</ul>
+<div class="main thread">
+	<form id="seedmoderate" name="seedmoderate" method="post" action="{forumpath}seedadmin.aspx?action=moderate&forumid={forumid}&infloat=1">
+		<div class="category">
+		<table summary="{forum.fid}" cellspacing="0" cellpadding="0">
+			<tr>
+			<th><span title="在新窗口中打开帖子" id="atarget" style="float:right;">新窗</span>
+			<%if {keywords}!=""%>
+			搜索字段: 
+        <a id="keywordselectmenu" onclick="showMenu(this.id);" href="javascript:;" class="drop xg2">
+            <%if {keywordsmode}==0||{keywordsmode}==1||{keywordsmode}==2%>仅种子标题<%else if {keywordsmode}==3%>标题和文件<%else if {keywordsmode}==4%>仅种子文件<%/if%>
+        </a>
+          <ul id="keywordselectmenu_menu" class="p_pop" style="display: none">
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode=1" <%if {keywordsmode}==0||{keywordsmode}==1||{keywordsmode}==2%>class="PrivateBTBold"<%/if%>>仅种子标题</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode=3" <%if {keywordsmode}==3%>class="PrivateBTBold"<%/if%>>标题和文件</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode=4" <%if {keywordsmode}==4%>class="PrivateBTBold"<%/if%>>仅种子文件</a></li>
+          </ul>
+        <span class="pipe">|</span>
+      <%/if%>
+        筛选: 
+        <a id="seedselectmenu" onclick="showMenu(this.id);" href="javascript:;" class="drop xg2">
+            <%if {seedstat}==0%>正常种子<%else if {seedstat}==1%>在线种子<%else if {seedstat}==3%>IPv6在线<%else if {seedstat}==4%>离线种子<%else if {seedstat}==5%>蓝色种子<%else if {seedstat}==6%>在线蓝种<%else if {seedstat}==7%>IPv6蓝种<%else if {seedstat}==8%>包含死种<%else if {seedstat}==9%>只看死种<%/if%>
+        </a>
+          <ul id="seedselectmenu_menu" class="p_pop" style="display: none">
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat=0&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {seedstat}==0%>class="PrivateBTBold"<%/if%>>正常种子</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat=1&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {seedstat}==1%>class="PrivateBTBold"<%/if%>>在线种子</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat=3&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {seedstat}==3%>class="PrivateBTBold"<%/if%>>IPv6在线</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat=4&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {seedstat}==4%>class="PrivateBTBold"<%/if%>>离线种子</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat=5&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {seedstat}==5%>class="PrivateBTBold"<%/if%>>蓝色种子</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat=6&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {seedstat}==6%>class="PrivateBTBold"<%/if%>>在线蓝种</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat=7&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {seedstat}==7%>class="PrivateBTBold"<%/if%>>IPv6蓝种</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat=8&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {seedstat}==8%>class="PrivateBTBold"<%/if%>>包含死种</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat=9&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {seedstat}==9%>class="PrivateBTBold"<%/if%>>只看死种</a></li>
+          </ul>
+        <span class="pipe">|</span>排序方式: 
+        <a id="seedordermenu" onclick="showMenu(this.id);" href="javascript:;" class="drop xg2">
+           <%if {orderby}==-1%>默认排序<%else if {orderby}==0%>发布时间<%else if {orderby}==1%>文件数量<%else if {orderby}==2%>文件大小<%else if {orderby}==3%>种子数量<%else if {orderby}==4%>正在下载<%else if {orderby}==5%>完成人数<%else if {orderby}==6%>总计流量<%else if {orderby}==7%>存活时间<%/if%>
+        </a>
+          <ul id="seedordermenu_menu" class="p_pop" style="display: none">
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby=-1&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {orderby}==-1%>class="PrivateBTBold"<%/if%>>默认排序</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby=0&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {orderby}==0%>class="PrivateBTBold"<%/if%>>发布时间</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby=1&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {orderby}==1%>class="PrivateBTBold"<%/if%>>文件数量</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby=2&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {orderby}==2%>class="PrivateBTBold"<%/if%>>文件大小</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby=3&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {orderby}==3%>class="PrivateBTBold"<%/if%>>种子数量</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby=4&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {orderby}==4%>class="PrivateBTBold"<%/if%>>正在下载</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby=5&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {orderby}==5%>class="PrivateBTBold"<%/if%>>完成人数</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby=6&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {orderby}==6%>class="PrivateBTBold"<%/if%>>总计流量</a></li>
+          <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby=7&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}" <%if {orderby}==7%>class="PrivateBTBold"<%/if%>>存活时间</a></li>
+          </ul>
+				<span class="pipe">|</span>排序:
+				<a id="directmenu" onclick="showMenu(this.id);" href="javascript:;" class="drop xg2"><%if {asc}==false%>按降序排列<%else%>按升序排列<%/if%></a>
+				<ul id="directmenu_menu" class="p_pop" style="display: none">
+				    <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc=False&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}"<%if {asc}==false%>class="PrivateBTBold"<%/if%>>按降序排列</a></li>
+				    <li><a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc=True&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}"<%if {asc}==true%>class="PrivateBTBold"<%/if%>>按升序排列</a></li>
+				</ul>
+				<%if showmode2link>0%>
+				<span class="pipe">|</span>
+				<a href="{forumpath}showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&notin={PTTools.Escape(notinkeywords)}&seedstat={seedstat}&userstat={userstat}&username={searchusername}&keywordsmode=2" class="PrivateBTBold" >使用模糊查询更多结果：{showmode2link}个种子</a>
+        <%/if%>
+			</th>
+			</tr>
+		</table>
+		</div>
+
+
+		<div class="threadlist">
+		<table summary="{forum.fid}" id="threadlist" cellspacing="0" cellpadding="0" class="ShowseedsMainTable">
+      
+      <%template _showseedstitle%>
+      
+      <!--Top Seed Begin-->
+      <%if keywords==""&&pageid==1&&topseedinfolist.Count>0&&searchusername==""%>
+      <%loop (PTSeedinfoShort) topseedinfo topseedinfolist%>			
+      <tbody>
+        <%if topseedinfo.Dis_UserDisplayStyle>10000%>
+        <tr class="PrivateBTSeedListUpload">
+        <%else if topseedinfo.Dis_UserDisplayStyle>1000%>
+        <tr class="PrivateBTSeedListDownload">
+        <%else if topseedinfo.Dis_UserDisplayStyle>100%>
+        <tr class="PrivateBTSeedListFinished">
+        <%else if topseedinfo.Dis_UserDisplayStyle>10%>
+        <tr class="PrivateBTSeedListPublish">
+        <%else%>
+        <tr class="PrivateBTSeedListTop">
+        <%/if%>
+          <td class="PrivateBTSeedListType">
+              <a href="?type={topseedinfo.Dis_EngTypeName}"  style="text-decoration:none">
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/{topseedinfo.Type}.png" title="{topseedinfo.Dis_ChnTypeName}" />
+              </a></td>
+          <td class="PrivateBTSeedListFile" title="文件总大小 {topseedinfo.Dis_Size}，种子包含的文件数 {topseedinfo.FileCount}，点击显示文件列表"  onclick="fgbtshowwindow('showseedfile{topseedinfo.SeedId}','showseedfile.aspx?seedid={topseedinfo.SeedId}')">
+             <span class="PrivateBTSeedListSize" align="right" title="">{topseedinfo.Dis_Size}</span><br/>
+             {topseedinfo.FileCount}</td>
+          <td class="PrivateBTSeedListSeeds" align="right" title="在线种子数 {topseedinfo.Upload}，正在下载 {topseedinfo.Download}，点击显示节点列表" onclick="fgbtshowwindow('showseedpeer{topseedinfo.SeedId}','showseedpeer.aspx?seedid={topseedinfo.SeedId}')">
+             {topseedinfo.Dis_UploadCount}<br/>
+             <span class="PrivateBTSeedListDown" align="right">{topseedinfo.Download}</span></td>
+          <td class="PrivateBTSeedListFinished" align="right" title="完成数 {topseedinfo.Finished}，存活时间 {topseedinfo.Dis_TimetoLive}，累计流量 {topseedinfo.Dis_DownloadTraffic}">
+            {topseedinfo.Finished}</br>
+            <span class="PrivateBTSeedListLive" align="right">{topseedinfo.Dis_TimetoLive}</span></td>
+          <td class="PrivateBTSeedListOp" align="center" style="color:#000">
+            <%if {useradminid}>0 && {ismoder}%>
+              <input type="checkbox" name="topicid" value="{topseedinfo.TopicId}"  onclick="modclick(this);" />
+            <%/if%>
+            
+            <a href="{forumpath}downloadseed.aspx?seedid={topseedinfo.SeedId}">
+            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/download.gif" title="下载种子"/></a></td>
+          <td class="PrivateBTSeedListTitle">
+            <a  onclick="atarget(this)" href="{forumpath}showtopic-{topseedinfo.TopicId}.aspx">
+            <%if topseedinfo.DownloadRatio==0f%>
+              <span style="color:#00F">{topseedinfo.TopicTitle}</span>
+            <%else if topseedinfo.DownloadRatio==0.3f%>
+              <span style="color:#04A">{topseedinfo.TopicTitle}</span>
+            <%else if topseedinfo.DownloadRatio==0.6f%>
+              <span style="color:#088">{topseedinfo.TopicTitle}</span>
+            <%else if topseedinfo.DownloadRatio>1.0f||topseedinfo.UploadRatio<1.0f%>
+              <span style="color:#888">{topseedinfo.TopicTitle}</span>
+            <%else%>
+              {topseedinfo.TopicTitle}
+            <%/if%>
+            </a>
+            <%if {downloadratio}<topseedinfo.DownloadRatio%>
+                <%if downloadratio==0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D0.png" title="全站优惠，蓝种，不计下载{topseedinfo.Dis_DownloadRatioNote}"/>
+                <%else if downloadratio==0.3f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D3.png" title="全站优惠，按30%计算下载流量{topseedinfo.Dis_DownloadRatioNote}" />
+                <%else if downloadratio==0.6f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D6.png" title="全站优惠，按60%计算下载流量{topseedinfo.Dis_DownloadRatioNote}" />
+                <%/if%>
+            <%else%>
+                <%if topseedinfo.DownloadRatio==1.0f%>
+                <%else if topseedinfo.DownloadRatio==0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D0.png" title="蓝种，不计下载{topseedinfo.Dis_DownloadRatioNote}"/>
+                <%else if topseedinfo.DownloadRatio==0.3f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D3.png" title="按30%计算下载流量{topseedinfo.Dis_DownloadRatioNote}" />
+                <%else if topseedinfo.DownloadRatio==0.6f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D6.png" title="按60%计算下载流量{topseedinfo.Dis_DownloadRatioNote}" />
+                <%else if topseedinfo.DownloadRatio==2.0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D20.png" title="按200%计算下载流量{topseedinfo.Dis_DownloadRatioNote}" />
+                <%else if topseedinfo.DownloadRatio==3.0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D30.png" title="按300%计算下载流量{topseedinfo.Dis_DownloadRatioNote}" />
+                <%/if%>
+            <%/if%>
+            
+            <%if {uploadratio}>topseedinfo.UploadRatio%>
+                <%if uploadratio==3.0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U30.png" title="按300%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                <%else if uploadratio==2.0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U20.png" title="按200%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                <%else if uploadratio==1.6f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U16.png" title="按160%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                <%else if uploadratio==1.2f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U12.png" title="按120%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                <%/if%>   
+            <%else%>
+                <%if topseedinfo.UploadRatio==1.0f%>
+                <%else if topseedinfo.UploadRatio==2.0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U20.png" title="按200%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                <%else if topseedinfo.UploadRatio==1.6f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U16.png" title="按160%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                <%else if topseedinfo.UploadRatio==1.2f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U12.png" title="按120%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                <%else if topseedinfo.UploadRatio==0.6f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U6.png" title="按60%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                <%else if topseedinfo.UploadRatio==0.3f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U3.png" title="按30%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                <%else if topseedinfo.UploadRatio==0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U0.png" title="按0%计算上传流量{topseedinfo.Dis_UploadRatioNote}" />
+                <%/if%>
+            <%/if%> 
+            
+            <%if topseedinfo.Upload!=0%>
+              <%if topseedinfo.IPv6==1%>
+                  <span class="PrivateBTFontRed" title="该种子只能通过IPv6下载">IPv6</span>
+              <%else if topseedinfo.IPv6==0%>
+                  <span class="PrivateBTFontRed" title="该种子只能通过IPv4下载">IPv4</span>
+              <%/if%>
+            <%/if%>
+            
+            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/TopSeed.png" title="置顶种子" />
+            
+            <%if {orderby}==6%>
+                  <span class="PrivateBTFontGray" title="累计流量">{topseedinfo.Dis_DownloadTraffic}</span>
+            <%/if%>
+            <%if {orderby}==7%>
+                  <span class="PrivateBTFontGray" title="存活时间">{topseedinfo.Dis_TimetoLive}</span>
+            <%/if%>
+            
+            
+            <%if {userid}<=2%>
+              <%if {topseedinfo.Dis_TrafficCheck}=="blue"%>
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/check_blue.png" title="上传比下载偏低"/>
+              <%else if {topseedinfo.Dis_TrafficCheck}=="green"%>
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/check_green.png" title="上传与下载相当"/>
+              <%else if {topseedinfo.Dis_TrafficCheck}=="yellow"%>
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/check_yellow.png" title="上传过多"/>
+              <%else%>
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/check_red.png" title="上传严重超过下载"/>
+              <%/if%>
+              <%if {topseedinfo.Rss_Acc}>0%>
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/speedup.png" title="早期加速RSS"/>
+              <%/if%>
+          <%/if%>
+          {topseedinfo.Dis_RatioNoteAdd}</td> 
+          <td class="PrivateBTSeedListReplies" align="right"><em>{topseedinfo.Replies}</em><br/>{topseedinfo.Views}</td>
+          <td class="PrivateBTSeedListAuthor" align="right">
+              <cite><a href="{forumpath}userinfo-{topseedinfo.Uid}.aspx" title="{topseedinfo.UserName}">{topseedinfo.UserName}</a></cite>
+              <em>{topseedinfo.Dis_PostDateTime}</em></td>
+        </tr>
+      </tbody>
+
+      <%/loop%>
+      
+      <%template _showseedstitle%>
+      
+      <%/if%>
+      <!--Top Seed End-->
+      
+      
+      
+      
+      
+      
+      <!--SeedList Begin-->
+      <%loop (PTSeedinfoShort) seedinfo seedinfolist%>		
+      <%if seedinfo.SeedId<0%>
+        <%template _showseedstitle%>
+      <%else%>
+      <tbody>
+        <%if seedinfo.Dis_UserDisplayStyle>10000%>
+        <tr class="PrivateBTSeedListUpload">
+        <%else if seedinfo.Dis_UserDisplayStyle>1000%>
+        <tr class="PrivateBTSeedListDownload">
+        <%else if seedinfo.Dis_UserDisplayStyle>100%>
+        <tr class="PrivateBTSeedListFinished">
+        <%else if seedinfo.Dis_UserDisplayStyle>10%>
+        <tr class="PrivateBTSeedListPublish">
+        <%else%>
+        <tr class="PrivateBTSeedList">
+        <%/if%>
+          <td  class="PrivateBTSeedListType">
+              <a href="?type={seedinfo.Dis_EngTypeName}"  style="text-decoration:none">
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/{seedinfo.Type}.png" title="{seedinfo.Dis_ChnTypeName}" /></td>
+              </a>
+          <td class="PrivateBTSeedListFile" title="文件总大小 {seedinfo.Dis_Size}，种子包含的文件数 {seedinfo.FileCount}，点击显示文件列表" onclick="fgbtshowwindow('showseedfile{seedinfo.SeedId}','showseedfile.aspx?seedid={seedinfo.SeedId}')">
+             <span class="PrivateBTSeedListSize">{seedinfo.Dis_Size}</span><br/>
+             {seedinfo.FileCount}</td>
+          <td class="PrivateBTSeedListSeeds" title="在线种子数 {seedinfo.Upload}，正在下载数 {seedinfo.Download}，点击显示节点列表" onclick="fgbtshowwindow('showseedpeer{seedinfo.SeedId}','showseedpeer.aspx?seedid={seedinfo.SeedId}')">
+            {seedinfo.Dis_UploadCount}<br/>
+            <span class="PrivateBTSeedListDown">{seedinfo.Download}</span></td>
+          <td class="PrivateBTSeedListFinished" title="完成数 {seedinfo.Finished}，存活时间 {seedinfo.Dis_TimetoLive}，累计流量 {seedinfo.Dis_DownloadTraffic}">
+            {seedinfo.Finished}</br>
+            <span class="PrivateBTSeedListLive" align="right">{seedinfo.Dis_TimetoLive}</span></td>
+          <td class="PrivateBTSeedListOp">
+            <%if {useradminid}>0 && {ismoder}%>
+              <input type="checkbox" name="topicid" value="{seedinfo.TopicId}"  onclick="modclick(this);" />
+            <%/if%>
+            
+            <a href="{forumpath}downloadseed.aspx?seedid={seedinfo.SeedId}">
+            <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/download.gif" title="下载种子"/></a></td>
+          <td class="PrivateBTSeedListTitle">
+            <a onclick="atarget(this)" href="{forumpath}showtopic-{seedinfo.TopicId}.aspx">
+            <%if seedinfo.DownloadRatio==0f%>
+              <span style="color:#00F">{seedinfo.TopicTitle}</span>
+            <%else if seedinfo.DownloadRatio==0.3f%>
+              <span style="color:#04A">{seedinfo.TopicTitle}</span>
+            <%else if seedinfo.DownloadRatio==0.6f%>
+              <span style="color:#088">{seedinfo.TopicTitle}</span>
+            <%else if seedinfo.DownloadRatio>1.0f||seedinfo.UploadRatio<1.0f%>
+              <span style="color:#888">{seedinfo.TopicTitle}</span>
+            <%else%>
+              {seedinfo.TopicTitle}
+            <%/if%>
+            </a>
+            <%if {downloadratio}<seedinfo.DownloadRatio%>
+                <%if downloadratio==0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D0.png" title="全站优惠，蓝种，不计下载{seedinfo.Dis_DownloadRatioNote}"/>
+                <%else if downloadratio==0.3f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D3.png" title="全站优惠，按30%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                <%else if downloadratio==0.6f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D6.png" title="全站优惠，按60%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                <%/if%>
+            <%else%>
+                <%if seedinfo.DownloadRatio==1.0f%>
+                <%else if seedinfo.DownloadRatio==0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D0.png" title="蓝种，不计下载{seedinfo.Dis_DownloadRatioNote}"/>
+                <%else if seedinfo.DownloadRatio==0.3f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D3.png" title="按30%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                <%else if seedinfo.DownloadRatio==0.6f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D6.png" title="按60%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                <%else if seedinfo.DownloadRatio==2.0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D20.png" title="按200%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                <%else if seedinfo.DownloadRatio==3.0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/D30.png" title="按300%计算下载流量{seedinfo.Dis_DownloadRatioNote}" />
+                <%/if%>
+            <%/if%>
+            
+            <%if {uploadratio}>seedinfo.UploadRatio%>
+                <%if uploadratio==3.0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U30.png" title="按300%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                <%else if uploadratio==2.0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U20.png" title="按200%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                <%else if uploadratio==1.6f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U16.png" title="按160%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                <%else if uploadratio==1.2f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U12.png" title="按120%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                <%/if%>   
+            <%else%>
+                <%if seedinfo.UploadRatio==1.0f%>
+                <%else if seedinfo.UploadRatio==2.0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U20.png" title="按200%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                <%else if seedinfo.UploadRatio==1.6f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U16.png" title="按160%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                <%else if seedinfo.UploadRatio==1.2f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U12.png" title="按120%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                <%else if seedinfo.UploadRatio==0.6f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U6.png" title="按60%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                <%else if seedinfo.UploadRatio==0.3f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U3.png" title="按30%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                <%else if seedinfo.UploadRatio==0f%>
+                    <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/U0.png" title="按0%计算上传流量{seedinfo.Dis_UploadRatioNote}" />
+                <%/if%>
+            <%/if%>
+
+            
+            <%if seedinfo.Upload!=0%>
+              <%if seedinfo.IPv6==1%>
+                  <span class="PrivateBTFontRed" title="该种子只能通过IPv6下载">IPv6</span>
+              <%else if seedinfo.IPv6==0%>
+                  <span class="PrivateBTFontRed" title="该种子只能通过IPv4下载">IPv4</span>
+              <%/if%>
+            <%/if%>      
+          
+            <%if {orderby}==6%>
+                  <span class="PrivateBTFontGray" title="累计流量">{seedinfo.Dis_DownloadTraffic}</span>
+            <%/if%>
+            <%if {orderby}==7%>
+                  <span class="PrivateBTFontGray" title="存活时间">{seedinfo.Dis_TimetoLive}</span>
+            <%/if%>
+          
+          <%if {userid}<=2%>
+              <%if {seedinfo.Dis_TrafficCheck}=="blue"%>
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/check_blue.png" title="上传比下载偏低"/>
+              <%else if {seedinfo.Dis_TrafficCheck}=="green"%>
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/check_green.png" title="上传与下载相当"/>
+              <%else if {seedinfo.Dis_TrafficCheck}=="yellow"%>
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/check_yellow.png" title="上传过多，注意作弊"/>
+              <%else%>
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/check_red.png" title="上传严重超过下载，核实作弊"/>
+              <%/if%>
+              <%if {seedinfo.Rss_Acc}>0%>
+                  <img class="PrivateBTInlineIMG" src="{forumurl}templates/{templatepath}/images/bt/speedup.png" title="早期加速RSS"/>
+              <%/if%>
+          <%/if%>       
+           {seedinfo.Dis_RatioNoteAdd}</td>    
+          <%if {showkeepreward}==false%>
+          <td class="PrivateBTSeedListReplies" align="right"><em>{seedinfo.Replies}</em><br/>{seedinfo.Views}</td>
+          <td class="PrivateBTSeedListAuthor" align="right">
+              <cite><a href="{forumpath}userinfo-{seedinfo.Uid}.aspx" title="{seedinfo.UserName}">{seedinfo.UserName}</a></cite>
+              <em>{seedinfo.Dis_PostDateTime}</em></td>
+          <%else%>
+          <td class="PrivateBTSeedListReplies" align="right"><em>{seedinfo.Dis_UserUpTraffic}</em><br/>{seedinfo.Dis_UserKeepTime}</td>
+          <td class="PrivateBTSeedListAuthor" align="right">
+              <cite><a href="showtopic-83062.aspx">{seedinfo.Dis_KeepReward_All}</a></cite>
+              <em>{seedinfo.Dis_KeepRewardFactor}</em></td>
+          <%/if%>
+        </tr>
+      </tbody>
+      <%/if%>
+      <%/loop%>
+      <!--SeedList End-->
+
+       
+       
+       
+       
+       
+    <%if {seedinfolist.Count}<=0%>
+    <tbody><tr><td colspan="8"><div class="zerothreads">没有查找到符合要求<span class="StatsGray">&nbsp;[&nbsp;<b>{searchstat}</b>&nbsp;]&nbsp;</span>的种子</div></td></tr></tbody>
+    <%/if%>
+    
+    <%template _showseedstitle%>
+    
+    </table>
+    
+        <%if {useradminid}>0 && {ismoder}%>
+            <div id="modlayer" style="display: none;">
+                <input type="hidden" name="optgroup" />
+                <input type="hidden" name="operat" />
+                <input type="hidden" name="winheight" />
+                <a class="collapse" href="javascript:;" onclick="$('modlayer').className='collapsed'">最小化</a>
+                <label><input class="checkbox" type="checkbox" name="chkall" onclick="if(!($('modcount').innerHTML = modclickcount = checkall(this.form, 'topicid'))) {$('modlayer').style.display = 'none';}" /> 全选</label>
+                <h4><span>选中</span><strong onmouseover="$('moremodoption').style.display='block'" onclick="$('modlayer').className=''" id="modcount"></strong><span>篇: </span></h4>
+                <p>
+                    <strong><a href="javascript:;" onclick="seedmodthreads(1, 'seeddelete');return false;">删除</a></strong>&nbsp;&nbsp;
+                    <strong><a href="javascript:;" onclick="seedmodthreads(1, 'seedban');return false;">屏蔽</a></strong>
+                    <span class="pipe">|</span>
+                    <strong><a href="javascript:;" onclick="seedmodthreads(1, 'seedtop');return false;">置顶</a></strong>&nbsp;&nbsp;
+                    <strong><a href="javascript:;" onclick="seedmodthreads(1, 'seedratio');return false;">流量系数</a></strong>
+                    <span class="pipe">|</span>
+                    <strong><a href="javascript:;" onclick="seedmodthreads(1, 'seedmove');return false;">移动</a></strong>&nbsp;&nbsp;
+                    <strong><a href="javascript:;" onclick="seedmodthreads(1, 'seededit');return false;">编辑</a></strong>
+
+                </p>
+                <div id="moremodoption">
+                    <a href="javascript:;" onclick="seedmodthreads(1, 'seeduntop');return false;">取消置顶</a>
+                    <span class="pipe">|</span>
+                    <a href="javascript:;" onclick="seedmodthreads(1, 'seedaward');return false;">奖励/处罚</a>
+                    <span class="pipe">|</span>
+                    <a href="javascript:;" onclick="seedmodthreads(1, 'seeddigest');return false;">精华</a>
+                    <span class="pipe">|</span>
+                    <a href="javascript:;" onclick="seedmodthreads(4, 'seedclose');return false;">关闭打开</a>
+                </div>
+            </div>
+        <%/if%>
+  </form>
+			
+
+        
+	</div>
+</div>
+
+<%if {nexturl}!=""%>
+<div class="big_nextbtn" title="点击 或 按键盘“右方向键” 显示下一页" onclick="location.href='{nexturl}'">
+  <a href="{nexturl}"><span style="font-size:large;">下&nbsp;&nbsp;一&nbsp;&nbsp;页&nbsp;&nbsp;▷ </span></a>
+</div>
+<%/if%>
+
+<div class="pages_btns cl">
+	<div class="pages">
+		<cite class="pageback z" id="visitedforums"<%if {showvisitedforumsmenu}%> onmouseover="$('visitedforums').id = 'visitedforumstmp';this.id = 'visitedforums';showMenu({'ctrlid':this.id, 'pos':'34'});"<%/if%>><a href="{forumpath}">返回</a></cite>
+		<%if {pagecount}!=1%>
+			{pagenumbers}
+			<%if {pagecount}>8%>
+			<kbd>
+			<input name="gopage" type="text" class="txt" id="pageidinput2" title="可以输入页码按回车键自动跳转" value="{pageid}" style="text-align:center;" onfocus="this.value=this.defaultValue;this.select();" onKeyDown="pageinputOnKeyDown(this,event);" size="2" maxlength="9" />/ {pagecount}</kbd>
+			<%/if%>
+			{nextpage}
+		<%/if%>
+	</div>
+<%if {userid}<0||{canposttopic}%>
+    <%set (string){newtopicurl} = ""%>
+    <%if {forum.allowspecialonly}<=0%>
+	    <%set {newtopicurl} = {forumpath} + "posttopic.aspx?forumid=" + {forum.fid} + "&forumpage=" + {pageid} %>
+    <%else if 1==({forum.allowpostspecial}&1)&&{usergroupinfo.allowpostpoll}==1%>
+        <%set {newtopicurl} = {forumpath} + "posttopic.aspx?forumid=" + {forum.fid} + "&type=poll&forumpage=" + {pageid} %>
+    <%else if 4==({forum.allowpostspecial}&4)&&{usergroupinfo.allowbonus}==1%>
+        <%set {newtopicurl} = {forumpath} + "posttopic.aspx?forumid=" + {forum.fid} + "&type=bonus&forumpage=" + {pageid} %>
+    <%else if 16==({forum.allowpostspecial}&16)&&{usergroupinfo.allowdebate}==1%>
+        <%set {newtopicurl} = {forumpath} + "posttopic.aspx?forumid=" + {forum.fid} + "&type=debate&forumpage=" + {pageid} %>
+    <%/if%>
+    <%set (string){newtopiconclick} = ""%>
+    <%if {forum.allowspecialonly}<=0&&{canposttopic}%>
+        <%set {newtopiconclick} = "showWindow('newthread', '" + {forumpath} + "showforum.aspx?forumid=" + {forum.fid} + "')"%>
+    <%/if%>
+    <%set (bool){allowpost}={userid}<=0&&(forum.Postperm==""?usergroupinfo.Allowpost==0:!Utils.InArray({usergroupid}.ToString(),{forum.Postperm}))%>
+    <%if {allowpost}%>
+        <%set {newtopiconclick} = "showWindow('login', '" + {forumpath} + "login.aspx');hideWindow('register');"%>
+    <%else%>
+        <%set {newtopiconclick} = "showWindow('newthread', '" + {forumpath} + "showforum.aspx?forumid=" + {forum.fid} + "')"%>
+    <%/if%>
+	<span <%if {userid}>0%> onmouseover="if($('newspecial2_menu')!=null&&$('newspecial_menu').childNodes.length>0)  showMenu(this.id);"<%/if%> id="newspecial2">
+        <a title="发新话题" id="newtopic2" href="{newtopicurl}" onclick="{newtopiconclick}">
+            <img alt="发新话题" src="{imagedir}/newtopic.png"  style="display:inline"/></a>
+    </span>
+<%/if%>
+</div>
+
+<%if {canquickpost}%>
+	<%template _quickpost%>
+<%/if%>
+<%if {config.whosonlinestatus}!=0 && {config.whosonlinestatus}!=1%>
+	<div class="bm cl" id="online">
+		<div class="bm_h">		
+			<span class="l_action" style="display:none">
+				<%if {request[showonline]}=="no"%>
+					<a href="showforum.aspx?forumid={forumid}&showonline=yes#online"><img src="{imagedir}/collapsed_no.gif" alt="收起" />
+				<%else%>
+					<a href="showforum.aspx?forumid={forumid}&showonline=no#online"><img src="{imagedir}/collapsed_yes.gif" alt="展开" />
+				<%/if%></a>
+			</span>
+			<h3>
+				<strong>在线用户</strong> - <em id="forumtotalonline">{forumtotalonline}</em> 人在线<span id="invisible"></span>
+			</h3>
+		</div>
+		<dl id="onlinelist">
+			<dt style="display:none">{onlineiconlist}</dt>
+			<%if {showforumonline}%>
+			<dd>
+			<ul class="userlist cl">
+				<%set (int){invisiblecount} = 0%>				
+				<%if {forumtotalonline}!=0%>				
+				<%loop (OnlineUserInfo) onlineuser onlineuserlist%>
+					<%if {onlineuser.invisible}==1%>
+						<%set {invisiblecount} = {invisiblecount} + 1%>
+						<li style="overflow:hidden;text-align:center;height:70px;width:80px;line-height:60px">(隐身会员)</li>
+					<%else%>
+						<li style="overflow:hidden;text-align:center;height:70px;width:80px">
+							<%set (string){avatarurl}=Avatars.GetAvatarUrl({onlineuser.userid}, AvatarSize.Small) %>
+								<img src="{avatarurl}" onerror="this.onerror=null;this.src='{imagedir}/noavatar_small.gif';"  alt="头像" id="memberinfo_{onlineuser[_id]}" style="border:1px solid #E8E8E8;padding:1px;width:48px;height:48px;" />
+							<%if {onlineuser.userid}==-1%>
+								<p>{onlineuser.username}</p>
+							<%else%>
+							   <%set {aspxrewriteurl} = this.UserInfoAspxRewrite({onlineuser.userid})%>
+								<p><a href="{forumpath}{aspxrewriteurl}" target="_blank">{onlineuser.username}</a></p>
+							<%/if%>
+						</li>
+					<%/if%>
+				<%/loop%>
+				<%if {invisiblecount}>0%>
+					<script type="text/javascript">$('invisible').innerHTML = '({invisiblecount}' + " 隐身)";</script>
+				<%/if%>				
+				<%else%>
+                  <script type="text/javascript">$('forumtotalonline').innerHTML = parseInt($('forumtotalonline').innerHTML)+1;</script>
+					<li style="overflow:hidden;text-align:center;height:70px;width:80px">
+						<%set (string){avatarurl}=Avatars.GetAvatarUrl({userid}, AvatarSize.Small) %>
+							<img src="{avatarurl}" onerror="this.onerror=null;this.src='{imagedir}/noavatar_small.gif';"  alt="头像" style="border:1px solid #E8E8E8;padding:1px;width:48px;height:48px;" />
+						<%if {userid}==-1%>
+							<p>{username}</p>
+						<%else%>
+						   <%set {aspxrewriteurl} = this.UserInfoAspxRewrite({userid})%>
+							<p><a href="{forumpath}{aspxrewriteurl}" target="_blank">{username}</a></p>
+						<%/if%>
+					</li>
+				<%/if%>
+			</ul>
+			</dd>
+			<%/if%>
+		</dl>
+	</div>
+	<%/if%>
+</div>
+<%if {userid<0}||{canposttopic}%>
+	<ul class="popupmenu_popup newspecialmenu" id="newspecial_menu" style="display: none">
+	<%if {forum.allowspecialonly}<=0%>
+	<li><a href="{forumpath}posttopic.aspx?forumid={forum.fid}&forumpage={pageid}" >发新主题</a></li>
+	<%/if%>
+	<%if ({forum.allowpostspecial}&1)==1 && {usergroupinfo.allowpostpoll}==1%>
+		<li class="poll"><a href="{forumpath}posttopic.aspx?forumid={forum.fid}&type=poll&forumpage={pageid}">发布投票</a></li>
+	<%/if%>
+	<%if ({forum.allowpostspecial}&4)==4 && {usergroupinfo.allowbonus}==1%>
+		<li class="reward"><a href="{forumpath}posttopic.aspx?forumid={forum.fid}&type=bonus&forumpage={pageid}">发布悬赏</a></li>
+	<%/if%>
+	<%if ({forum.allowpostspecial}&16)==16 && {usergroupinfo.allowdebate}==1%>
+		<li class="debate"><a href="{forumpath}posttopic.aspx?forumid={forum.fid}&type=debate&forumpage={pageid}" >发起辩论</a></li>
+	<%/if%>
+	</ul>
+	<ul class="popupmenu_popup newspecialmenu" id="newspecial2_menu" style="display: none">
+	</ul>
+    <ul class="popupmenu_popup newspecialmenu" id="seditor_newspecial_menu" style="display: none">
+	</ul>
+	<script type="text/javascript">
+	    $('newspecial2_menu').innerHTML = $('newspecial_menu').innerHTML;
+	    $('seditor_newspecial_menu').innerHTML = $('newspecial_menu').innerHTML;
+	</script>
+<%/if%>
+<%/if%>
+	<script type="text/javascript">
+		var maxpage = parseInt('{pagecount}');
+		var pageid = parseInt('{pageid}');
+		if(maxpage > 1) {
+			document.onkeyup = function(e){
+				e = e ? e : window.event;
+				var tagname = is_ie ? e.srcElement.tagName : e.target.tagName;
+				if(tagname == 'INPUT' || tagname == 'TEXTAREA') return;
+				actualCode = e.keyCode ? e.keyCode : e.charCode;
+				if(pageid < maxpage && actualCode == 39) {
+					window.location = 'showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&seedstat=0&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}&page={(pageid+1)}';
+				}
+				if(pageid > 1 && actualCode == 37) {
+					window.location = 'showseeds.aspx?type={typestr}&orderby={orderby}&asc={asc}&keywords={PTTools.Escape(keywords)}&seedstat=0&userstat={userstat}&username={searchusername}&keywordsmode={keywordsmode}&page={(pageid-1)}';
+				}
+			}
+		}
+	</script>
+	<%/if%>
+</div>
+<%else%>
+	<%if {needlogin}%>
+		<%template _login%>
+	<%else%>
+		<%template _errmsgbox%>
+	<%/if%>
+<%/if%>
+<%if {config.forumjump}==1%>
+	{navhomemenu}
+<%/if%>
+<%if {showvisitedforumsmenu}%>
+<div class="p_pop" id="visitedforums_menu" style="display: none">
+	<h3 class="xi1">浏览过的版块</h3>
+	<ul>
+	<%loop (SimpleForumInfo) simpforuminfo visitedforums%>
+		<%if {simpforuminfo.Fid}!=forumid%>
+		<li><a href="{forumpath}{simpforuminfo.Url}">{simpforuminfo.Name}</a></li>
+		<%/if%>
+	<%/loop%>
+	</ul>
+</div>
+<%/if%>
+<%template _adlist%>
+{mediaad}
+<%else%>
+<%template _quickpost%>
+<%/if%>
+<%template _copyright%>
+<%template _footer%>

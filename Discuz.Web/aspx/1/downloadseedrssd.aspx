@@ -1,0 +1,1 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="downloadseedrssd.aspx.cs" Inherits="Discuz.Web.downloadseedrssd" %>

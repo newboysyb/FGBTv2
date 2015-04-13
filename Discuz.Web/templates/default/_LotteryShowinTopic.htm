@@ -1,0 +1,87 @@
+﻿<%if {topic.Special}==128&&{lotteryinfo.Id}>0%>
+<!--博彩区开始-->
+<div class="pollpanel" style="background-color:#FFC;border:1px dotted #F90; padding:10px;">
+	<h4 >
+      <%csharp%>string formatstr1="0.00";<%/csharp%>
+      - 花园博彩：<strong>{topic.title}</strong>
+      <br/>- 每注10G上传，最高可投100注，只能投注一个选项
+      <br/>- 已由发布者支付基础流量 <b>{lotteryinfo.BaseWager}TB</b>
+      <br/>- 投注截止时间：<b>{lotteryinfo.EndTime} </b>
+      <br/>
+      <br/>- 胜出彩金池 = ( 输家总注数 + 基础流量TB数 x 100 ) x 10G
+      <br/>- 胜出彩金池分配：{(PTLottery.BANKER_RETURN_RATIO*100).ToString(formatstr1)}%返还庄家，封顶两倍基础流量；{(PTLottery.WAGER_RETURN_RATIO*100).ToString(formatstr1)}%按照投注多少平均分配给胜出者
+      <br/>- 赔率计算公式：赔率 = 1 + ( 输家总注数 + 基础流量TB数 x 100 ) x {(PTLottery.WAGER_RETURN_RATIO).ToString(formatstr1)} / 赢家总注数
+      <br/>- 若胜出，投注数 x 10G x 赔率 即为最后获得的含本金返还流量
+
+	</h4>
+	<table border="0" cellpadding="0" cellspacing="0" summary="pollpanel" style="width:100%;">
+	<tbody>
+	<%csharp%>string formatstr="0.000";<%/csharp%>
+	<%loop (LotteryOption) lotteryoption PTLottery.GetLotteryOptionList(topicid)%>
+	<tr>
+		<td class="selector" style="width:400px;background-color:#EFE;border:1px solid #AAA;text-align:center;">
+			选项{(lotteryoption.OptionId+1)}：<br/><span style="color:#A60"><b>{lotteryoption.OptionName}</b></span>
+      <br/>
+      <%if {lotterycuroption}==-3%>
+      <button type="button" id="lotteryoption{lotteryoption.OptionId}submit" name="replysubmit" class="pn">
+          <span id="lotteryoption{lotteryoption.OptionId}btntxt">&nbsp;&nbsp;开始时间：{lotteryinfo.StartTime}，{PTTools.Second2String((lotteryinfo.StartTime-DateTime.Now).TotalSeconds)}后&nbsp;&nbsp;</span>
+      </button>
+      <%else if {lotterycuroption}==-1%>
+        <%if {topic.Posterid}=={userid}%>
+           投注中，不能投注自己发布的博彩
+        <%else%>
+            <button type="button" id="lotteryoption{lotteryoption.OptionId}submit" name="replysubmit" onclick="showWindow('mods', 'topicadmin.aspx?action=lottery&forumid={topic.fid}&topicid={topicid}&postid={post.id}&optionid={lotteryoption.OptionId}&operat=lottery');return false;" class="pn">
+                <span id="lotteryoption{lotteryoption.OptionId}btntxt">&nbsp;&nbsp;我要投注&nbsp;&nbsp;</span>
+            </button>
+        <%/if%>
+      <%else if {lotterycuroption}==-4%>
+          投注已结束
+      <%else if {lotterycuroption}==-5&&{lotteryoption.Win}==1%>
+          <span style="color:red;"><b>胜出项，流量已派发</b></span>
+      <%else if {lotterycuroption}==-5%>
+          <span style="color:green;"><b>失败项</b></span>
+      <%else if {lotterycuroption==lotteryoption.OptionId}%>
+      <button type="button" id="lotteryoption{lotteryoption.OptionId}submit" name="replysubmit" onclick="showWindow('mods', 'topicadmin.aspx?action=lottery&forumid={topic.fid}&topicid={topicid}&postid={post.id}&optionid={lotteryoption.OptionId}&operat=lottery');return false;" class="pn">
+          <span id="lotteryoption{lotteryoption.OptionId}btntxt">&nbsp;&nbsp;追加投注&nbsp;&nbsp;</span>
+      </button>
+      <%/if%>
+      <br/>当前赔率：<b>{(1.0+(lotteryinfo.BaseWager*100.0+lotteryinfo.WagerCount-lotteryoption.WagerCount)*PTLottery.WAGER_RETURN_RATIO/(lotteryoption.WagerCount>0?lotteryoption.WagerCount:1)).ToString(formatstr)}</b>&nbsp;&nbsp;&nbsp;已投注：<b>{lotteryoption.WagerCount}</b>注
+
+      
+		</td>
+		<td style="border:1px solid #AAA;background-color:#FFF;">
+        <div class="newrate cl" style="border-top:0px; margin:5px;">
+          <ul class="cl">
+            <%csharp%>int wagerlistcount=0;<%/csharp%>
+            <%loop (LotteryWager) lotterwager PTLottery.GetLotteryWagerList(topicid,lotteryoption.OptionId)%>
+
+                <li>
+                    <div style="position: absolute; z-index: 999; clip: rect(auto, auto, auto, auto); left: 421px; top: 5343px; display: none; " class="attach_popup" id="_rate_{lotterwager.Id}_menu">
+                      <p class="cornerlayger">{lotterwager.WagerTime}&nbsp;<em>{lotterwager.WagerCount}注</em></p>
+                      <p class="minicorner"/>
+                    </div>
+
+                    <p class="rateavatar" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12'})" id="_rate_{lotterwager.Id}" style="padding-bottom:0px;margin-bottom:0px;">
+                      <a target="_blank" href="userinfo-{lotterwager.Userid}.aspx">
+                          <img width="48" height="48" onerror="this.onerror=null;this.src='images/common/noavatar_small.gif'" src="{lotterwager.Avatarurl}"/>
+                      </a>
+                    </p>
+                    <p class="cl" style="padding-top:0px;margin-top:0px;font-size:12px;"><a href="userinfo-{lotterwager.Userid}.aspx" style="text-decoration:none;color:black">{lotterwager.Username}</a></p>
+        
+                </li>
+
+                <%set {wagerlistcount}={wagerlistcount}+1%>
+            <%/loop%>
+            
+            <%if {wagerlistcount}==0%>
+              <p>&nbsp;&nbsp;当前无人投注</p>
+            <%/if%>
+          </ul>
+        </div>
+		</td>
+	</tr>
+	<%/loop%>
+	</tbody>
+	</table>
+</div>
+<%/if%>

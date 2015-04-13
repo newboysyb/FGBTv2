@@ -1,0 +1,25 @@
+<%if {canreply}&&{userid}>0%>
+    <form method="post" name="postform" id="quickpostform" action="postreply.aspx?forumid={forumid}&topicid={topicid}" enctype="multipart/form-data" >
+ 
+				<span style="display:none">
+				<input type="checkbox" value="1" name="htmlon" id="htmlon" <%if {usergroupinfo.allowhtml}!=1%> disabled<%/if%>/>
+				<input type="checkbox" name="parseurloff" id="parseurloff" value="1" <%if {parseurloff}==1%> checked <%/if%>/>
+				<input type="checkbox" name="smileyoff" id="smileyoff" value="1" <%if {smileyoff}==1%> checked disabled <%/if%>/>
+				<input type="checkbox" name="bbcodeoff" id="bbcodeoff" value="1" <%if {bbcodeoff}==1%> checked disabled <%/if%>/>
+				<input type="checkbox" name="usesig" id="usesig" value="1" <%if {usesig}==1%> checked <%/if%>/>
+				<input type="checkbox" name="emailnotify" id="emailnotify" <%if {replyemailstatus}==1%> checked <%/if%>/>
+				<input type="checkbox" name="postreplynotice" id="postreplynotice" <%if {replynotificationstatus}==1%> checked <%/if%>/>
+				</span>
+        
+        <textarea rows="5" cols="80" name="{config.antispampostmessage}" id="quickpostmessage" tabindex="6" class="txt"></textarea>
+        <input type="submit" id="replysubmit" name="replysubmit" value="发表回复" />
+        <%if {isseccode}%>
+            <div class="inbox">
+                <%template _vcode%>
+            </div>
+        <%/if%>		
+    </form>
+<%else%>
+    <div>你需要登录后才可以发回复 | <a href="login.aspx">登录</a></div>
+<%/if%>
+

@@ -1,0 +1,43 @@
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Event.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Event.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Cache.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Data.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Forum.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Plugin.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Cache.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Data.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Forum.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Discuz.Plugin.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\bin\ReleaseWeb\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\obj\ReleaseWeb\Discuz.Event.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Event\obj\ReleaseWeb\Discuz.Event.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Event.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Event.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Cache.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Data.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Forum.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Plugin.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Cache.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Data.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Forum.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Discuz.Plugin.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\bin\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\obj\ReleaseWeb\Discuz.Event.csprojResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\obj\ReleaseWeb\Discuz.Event.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Event\obj\ReleaseWeb\Discuz.Event.pdb

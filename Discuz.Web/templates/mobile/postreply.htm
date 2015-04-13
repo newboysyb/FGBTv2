@@ -1,0 +1,68 @@
+﻿<%template _header%>
+<%if page_err==0%>
+    <%if {ispost}%>
+        <%template _msgbox%>
+    <%else%>
+        <div id="nav">
+           &raquo; {ShowForumAspxRewrite(forum.Pathlist.Trim(),forumid,forumpageid)}
+        </div>
+        
+        <div class="tz mtn">
+            <div class="tz pbn">
+                <a href="posttopic.aspx?forumid={forumid}" title="发帖" >发帖</a>
+            </div>
+            
+            <%set (int){postlayer} = DNTRequest.GetInt("postlayer", -1)%>
+            <%set (string){replyposter} = Utils.HtmlEncode(DNTRequest.GetString("poster"))%>
+            <form method="post" name="postform" id="quickpostform" action="" enctype="multipart/form-data" >
+                <%if {postlayer}>0%>
+                    <strong>回复 <a target="_blank" href="{DNTRequest.GetUrlReferrer()}#{postid}">{postlayer}楼<font color="Olive">{replyposter}</font>的帖子</a></strong>
+                    <input type="hidden" name="{config.antispamposttitle}" type="text" id="title" value="回复 {postlayer}楼{replyposter}的帖子#{postid}#" class="txt postpx"/>
+                <%else%>
+                    <strong>回复 <a target="_blank" href="showtopic-{topic.tid}.aspx""><font color="Olive">{topic.Poster}</font>的主题帖</a></strong>
+                    <input type="hidden" name="{config.antispamposttitle}" type="text" id="title" value="" class="txt postpx"/>
+                <%/if%>
+                
+                <textarea rows="5" cols="80" name="{config.antispampostmessage}" id="quickpostmessage" tabindex="6" class="txt">{message}</textarea>
+                <input type="submit" id="replysubmit" name="replysubmit" value="发表回复" />
+                <%if {isseccode}%>
+                    <div class="inbox">
+                        <%template _vcode%>
+                    </div>
+                <%/if%>	
+                
+                <span style="display:none">
+                    <p><input type="checkbox" value="1" name="htmlon" id="htmlon" <%if {usergroupinfo.allowhtml}!=1%> disabled<%/if%>/><label for="htmlon">html 代码</label></p>
+                    <p><input type="checkbox" id="allowimgcode" disabled<%if {allowimg}==1%> checked="checked"<%/if%> /><label for="allowimgcode">[img] 代码</label></p>
+                    <p><input type="checkbox" name="parseurloff" id="parseurloff" value="1" <%if {parseurloff}==1%> checked <%/if%>/><label for="parseurloff">禁用 网址自动识别</label></p>
+                    <p><input type="checkbox" name="smileyoff" id="smileyoff" value="1" <%if {smileyoff}==1%> checked disabled <%/if%>/><label for="smileyoff">禁用 表情</label></p>
+                    <p><input type="checkbox" name="bbcodeoff" id="bbcodeoff" value="1" <%if {bbcodeoff}==1%> checked disabled <%/if%>/><label for="bbcodeoff">禁用 论坛代码</label></p>
+                    <p><input type="checkbox" name="usesig" id="usesig" value="1" <%if {usesig}==1%> checked <%/if%>/><label for="usesig">使用个人签名</label></p>
+                    
+                    <p><input type="checkbox" name="emailnotify" id="emailnotify" <%if {config.replyemailstatus}==1%> checked <%/if%>/><label for="emailnotify">发送邮件通知</label></p>
+                    <p><input type="checkbox" name="postreplynotice" id="postreplynotice" checked="checked" /><label for="postreplynotice">发送短消息通知</label></p>
+                </span>
+            </form>
+        </div>
+	<%/if%>
+<%else%>
+	<%if {ispost}%>
+		<%if {needlogin}%>
+			<%template _login%>
+		<%else%>
+            <%csharp%>
+                string backLink = HttpContext.Current.Request.UrlReferrer.ToString();
+                SetBackLink(backLink.Contains("&cedit=yes") ? backLink : backLink + "&cedit=yes");
+            <%/csharp%>
+		   <%template _errmsgbox%>
+		<%/if%>
+	<%else%>
+		<%if {needlogin}%>
+			<%template _login%>
+		<%else%>
+		   <%template _errmsgbox%>
+		<%/if%>
+	<%/if%>
+<%/if%>
+<%template _copyright%>
+<%template _footer%>

@@ -1,0 +1,8 @@
+﻿<%if {userid}>0%>
+<ul class="f_tab">
+		<li <%if pagename=="usercpinvitation.aspx"%>class="cur_tab"<%/if%>><a href="usercpinvitation.aspx">购买邀请</a></li>
+		<li <%if pagename=="usercpmyinvitation.aspx"%>class="cur_tab"<%/if%>><a href="usercpmyinvitation.aspx">我的邀请</a></li>
+		<li <%if pagename=="usercpusedinvitation.aspx"%>class="cur_tab"<%/if%>><a href="usercpusedinvitation.aspx">过期/已用邀请</a></li>
+		<li <%if pagename=="usercpmyuser.aspx"%>class="cur_tab"<%/if%>><a href="usercpmyuser.aspx">我邀请的用户</a></li>
+</ul>
+<%/if%>

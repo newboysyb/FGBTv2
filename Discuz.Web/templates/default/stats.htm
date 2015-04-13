@@ -1,0 +1,246 @@
+﻿<%template _header%>
+<div class="wrap s_clear pageinfo">
+    <div id="nav">
+        <a href="{config.forumurl}" class="title">{config.forumtitle}</a> &raquo; <a href="stats.aspx">
+            统计</a> &raquo; <strong>
+                <%if {type}==""%>
+                基本概况
+                <%else if {type}=="views"%>
+                流量统计
+                <%else if {type}=="client"%>
+                客户软件
+                <%else if {type}=="posts"%>
+                发帖量记录
+                <%else if {type}=="forumsrank"%>
+                版块排行
+                <%else if {type}=="topicsrank"%>
+                主题排行
+                <%else if {type}=="postsrank"%>
+                发帖排行
+                <%else if {type}=="creditsrank"%>
+                积分排行
+                <%else if {type}=="onlinetime"%>
+                在线时间
+                <%else if {type}=="trade"%>
+                交易排行
+                <%else if {type}=="team"%>
+                管理团队
+                <%else if {type}=="modworks"%>
+                管理统计
+                <%else if {type}=="trend"%>
+                趋势统计
+                <%/if%>
+            </strong>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function changeTab(obj) {
+        if (obj.className == 'currenttab') {
+            obj.className = '';
+        }
+        else {
+            obj.className = 'currenttab';
+        }
+    }
+</script>
+
+<%if {page_err}==0%>
+<div class="wrap uc cl">
+    <div class="uc_app">
+        <h2>
+            统计</h2>
+        <ul>
+            <li id="tab_main" class="current"><a onmouseout="changeTab(this)" onmouseover="changeTab(this)"
+                href="stats.aspx">基本状况</a></li>
+            <li id="tab_updown"><a onmouseout="changeTab(this)" onmouseover="changeTab(this)"
+                href="?type=updown">上传下载排行</a></li>
+            <li id="tab_ratio"><a onmouseout="changeTab(this)" onmouseover="changeTab(this)"
+                href="?type=ratio">共享率排行</a></li>
+            <li id="tab_views"><a onmouseout="changeTab(this)" onmouseover="changeTab(this)"
+                href="?type=views">流量统计</a></li>
+            <li id="tab_client"><a onmouseout="changeTab(this)" onmouseover="changeTab(this)"
+                href="?type=client">客户软件</a></li>
+            <li id="tab_posts"><a onmouseout="changeTab(this)" onmouseover="changeTab(this)"
+                href="?type=posts">发帖量记录</a></li>
+            <li id="tab_forumsrank"><a onmouseout="changeTab(this)" onmouseover="changeTab(this)"
+                href="?type=forumsrank">版块排行</a></li>
+            <li id="tab_topicsrank"><a onmouseout="changeTab(this)" onmouseover="changeTab(this)"
+                href="?type=topicsrank">主题排行</a></li>
+            <li id="tab_postsrank"><a onmouseout="changeTab(this)" onmouseover="changeTab(this)"
+                href="?type=postsrank">发帖排行</a></li>
+            <li id="tab_creditsrank"><a onmouseout="changeTab(this)" onmouseover="changeTab(this)"
+                href="?type=creditsrank">积分排行</a></li>
+            <li id="tab_onlinetime"><a onmouseout="changeTab(this)" onmouseover="changeTab(this)"
+                href="?type=onlinetime">在线时间</a></li>   
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        try {
+            $("tab_main").className = "";
+            $("tab_" + '{type}').className = "current";
+        } catch (e) {
+            $("tab_main").className = "current";
+        }
+    </script>
+
+    <div class="uc_main">
+        <div class="uc_content stats">
+            <%if {type}=="bt"%>
+            
+            <%/if%>
+            
+            <%if {type}==""%>
+            <h1>BT统计数据</h1>
+            <div class="hintinfo notice">BT统计数据已被缓存，上次于 {btstats.LastUpdate} 被更新，下次将于 {btstats.NextUpdate} 进行更新</div>	
+            <table cellpadding="0" cellspacing="0" border="0" class="datatable" style="margin-bottom: 10px;">
+              <tr><!--1-->
+                <td class="t_th">发种计数</td>
+                <td>{btstats.AllSeedsCount}&nbsp;<span class="StatsGray">({btstatspk.AllSeedsCount})</span></td>
+                <td class="t_th">[统计]总上传流量</td>
+                <td>{btstats.SStatsUpload}&nbsp;<span class="StatsGray">({btstatspk.SStatsUpload})</span></td>
+              </tr>
+              <tr><!--2-->
+                <td class="t_th">发种总容量</td>
+                <td>{btstats.sAllSize}&nbsp;<span class="StatsGray">({btstatspk.sAllSize})</span></td>
+                <td class="t_th">[统计]总上传流量，含金币折算</td>
+                <td>{btstats.SStatsUploadAll}&nbsp;<span class="StatsGray">({btstatspk.SStatsUploadAll})</span></td>
+              </tr>
+              <tr><!--3-->
+                <td class="t_th">在线种子计数</td>
+                <td>{btstats.OnlineSeedsCount}&nbsp;<span class="StatsGray">|</span>&nbsp;{btstats.SOnlineCountRatio}&nbsp;<span class="StatsGray">({btstatspk.OnlineSeedsCount})</span></td>
+                <td class="t_th">[统计]总下载流量</td>
+                <td>{btstats.SStatsDownload}</td>
+              </tr>
+              <tr><!--4-->
+                <td class="t_th">在线种子总容量</td>
+                <td>{btstats.sOnlineSize}&nbsp;<span class="StatsGray">|</span>&nbsp;{btstats.SOnlineSizeRatio}&nbsp;<span class="StatsGray">({btstatspk.sOnlineSize})</span></td>
+                <td class="t_th">[统计]今天上传流量</td>
+                <td>{btstats.SStatsUploadToday}&nbsp;<span class="StatsGray">({btstatspk.SStatsUploadToday})</span></td>
+              </tr>
+              <tr><!--5-->
+                <td class="t_th">客户端在线人数</td>
+                <td>{btstats.OnlineUserCount}&nbsp;<span class="StatsGray">({btstatspk.OnlineUserCount})</span></td>
+                <td class="t_th">[统计]今天下载流量</td>
+                <td>{btstats.SStatsDownloadToday}&nbsp;<span class="StatsGray">({btstatspk.SStatsDownloadToday})</span></td>
+              </tr>
+              <tr><!--6-->
+                <td class="t_th">正在做种人数</td>
+                <td>{btstats.SeederCount}&nbsp;<span class="StatsGray">({btstatspk.SeederCount})</span></td>
+                <td class="t_th">[统计]上传/下载</td>
+                <td>{btstats.StatsRatio}</td>
+              </tr>
+              <tr><!--7-->
+                <td class="t_th">正在下载人数</td>
+                <td>{btstats.LeecherCount}&nbsp;<span class="StatsGray">({btstatspk.LeecherCount})</span></td>
+                <td class="t_th"></td>
+                <td></td>
+              </tr>
+              <tr><!--8-->
+                <td class="t_th">总节点计数</td>
+                <td>{btstats.PeerCount}&nbsp;<span class="StatsGray">({btstatspk.PeerCount})</span></td>
+                <td class="t_th">[物理]当前下载总速度</td>
+                <td>{btstats.sDownSpeed}/s&nbsp;<span class="StatsGray">({btstatspk.sDownSpeed}/s)</span></td>
+              </tr>
+              <tr><!--9-->
+                <td class="t_th">正在做种节点数</td>
+                <td>{btstats.UpPeerCount}&nbsp;<span class="StatsGray">({btstatspk.UpPeerCount})</span></td>
+                <td class="t_th">[物理]今天下载总流量</td>
+                <td>{btstats.sTodayTraffic}&nbsp;<span class="StatsGray">({btstatspk.sTodayTraffic})</span></td>
+              </tr>
+              <tr><!--10-->
+                <td class="t_th">正在下载节点数</td>
+                <td>{btstats.DownPeerCount}&nbsp;<span class="StatsGray">({btstatspk.DownPeerCount})</span></td>
+                <td class="t_th">[物理]历史下载总流量</td>
+                <td>{btstats.sAllTraffic}</td>
+              </tr>
+            </table>
+            
+            
+            <h1>基本状况</h1>
+            <div class="hintinfo notice">基本状况数据已被缓存，上次于 {Default_Basic.LastUpdate} 被更新，下次将于 {Default_Basic.NextUpdate} 进行更新</div>
+              {Default_Basic.StatsValue}
+            <h1>论坛统计</h1>
+            <div class="hintinfo notice">论坛统计数据已被缓存，上次于 {Default_Forum.LastUpdate} 被更新，下次将于 {Default_Forum.NextUpdate} 进行更新</div>
+              {Default_Forum.StatsValue}
+            <h1>流量概况</h1>
+            <div class="hintinfo notice">流量概况数据已被缓存，上次于 {Default_Traffic.LastUpdate} 被更新，下次将于 {Default_Traffic.NextUpdate} 进行更新</div>	
+              {Default_Traffic.StatsValue}
+            <h1>月份流量</h1>
+            <div class="hintinfo notice">月份流量数据已被缓存，上次于 {Default_MonthTraffic.LastUpdate} 被更新，下次将于 {Default_MonthTraffic.NextUpdate} 进行更新</div>
+              {Default_MonthTraffic.StatsValue}
+
+            <%/if%>
+            
+            <%if {type}=="views"%>
+                <h1>星期流量</h1>
+                <div class="hintinfo notice">星期流量数据已被缓存，上次于 {Views_Week.LastUpdate} 被更新，下次将于 {Views_Week.NextUpdate} 进行更新</div>
+                  {Views_Week.StatsValue}
+                <h1>时段流量</h1>
+                <div class="hintinfo notice">时段流量数据已被缓存，上次于 {Views_Hour.LastUpdate} 被更新，下次将于 {Views_Hour.NextUpdate} 进行更新</div>
+                  {Views_Hour.StatsValue}
+            <%/if%>
+            <%if {type}=="client"%>
+                <h1>操作系统</h1>
+                <div class="hintinfo notice">操作系统数据已被缓存，上次于 {Client_OS.LastUpdate} 被更新，下次将于 {Client_OS.NextUpdate} 进行更新</div>
+                  {Client_OS.StatsValue}
+                <h1>浏览器</h1>
+                <div class="hintinfo notice">浏览器数据已被缓存，上次于 {Client_Browser.LastUpdate} 被更新，下次将于 {Client_Browser.NextUpdate} 进行更新</div>
+                  {Client_Browser.StatsValue}
+            <%/if%>
+            <%if {type}=="posts"%>
+                <h1>每月新增帖子记录</h1>
+                <div class="hintinfo notice">每月新增帖子记录已被缓存，上次于 {Posts_Month.LastUpdate} 被更新，下次将于 {Posts_Month.NextUpdate} 进行更新</div>
+                  {Posts_Month.StatsValue}
+                <h1>每日新增帖子记录</h1>
+                <div class="hintinfo notice">每日新增帖子记录已被缓存，上次于 {Posts_Day.LastUpdate} 被更新，下次将于 {Posts_Day.NextUpdate} 进行更新</div>
+                  {Posts_Day.StatsValue}
+            <%/if%>
+            <%if {type}=="forumsrank"%>
+                <h1>版块排行</h1>
+                <div class="hintinfo notice">版块排行数据已被缓存，上次于 {ForumsRank.LastUpdate} 被更新，下次将于 {ForumsRank.NextUpdate} 进行更新</div>
+                  {ForumsRank.StatsValue}
+            <%/if%>
+            <%if {type}=="topicsrank"%>
+                <h1>主题排行</h1>
+                <div class="hintinfo notice">主题排行数据已被缓存，上次于 {TopicsRank.LastUpdate} 被更新，下次将于 {TopicsRank.NextUpdate} 进行更新</div>
+                  {TopicsRank.StatsValue}
+            <%/if%>
+            <%if {type}=="postsrank"%>
+                <h1>发帖排行</h1>
+                <div class="hintinfo notice">发帖排行数据已被缓存，上次于 {PostsRank.LastUpdate} 被更新，下次将于 {PostsRank.NextUpdate} 进行更新</div>
+                  {PostsRank.StatsValue}
+            <%/if%>
+            <%if {type}=="creditsrank"%>
+                <h1>积分排行</h1>
+                <div class="hintinfo notice">积分排行数据已被缓存，上次于 {CreditsRank.LastUpdate} 被更新，下次将于 {CreditsRank.NextUpdate} 进行更新</div>
+                  {CreditsRank.StatsValue}
+            <%/if%>
+            <%if {type}=="onlinetime"%>
+                <h1>在线时间排行</h1>
+                <div class="hintinfo notice">在线时间排行数据已被缓存，上次于 {OnlineTimeRank.LastUpdate} 被更新，下次将于 {OnlineTimeRank.NextUpdate} 进行更新</div>
+                  {OnlineTimeRank.StatsValue}
+            <%/if%>
+            <%if {type}=="updown"%>
+              <h1>上传下载排行</h1>
+              <div class="hintinfo notice">上传下载排行数据已被缓存，上次于 {UpDownRank.LastUpdate} 被更新，下次将于 {UpDownRank.NextUpdate} 进行更新</div>
+                {UpDownRank.StatsValue}
+            <%/if%>
+            <%if {type}=="ratio"%>
+              <h1>共享率排行</h1>
+              <div class="hintinfo notice">共享率排行数据已被缓存，上次于 {RatioRank.LastUpdate} 被更新，下次将于 {RatioRank.NextUpdate} 进行更新</div>
+                {RatioRank.StatsValue}
+            <%/if%>
+        </div>
+    </div>
+</div>
+<%else%>
+<%if {needlogin}%>
+<%template _login%>
+<%else%>
+<%template _errmsgbox%>
+<%/if%>
+<%/if%>
+<%template _copyright%>
+<%template _footer%>

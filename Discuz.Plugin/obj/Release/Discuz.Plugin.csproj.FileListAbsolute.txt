@@ -1,0 +1,14 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin\bin\Release\Discuz.Plugin.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin\bin\Release\Discuz.Plugin.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin\bin\Release\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin\bin\Release\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin\bin\Release\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin\bin\Release\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin\bin\Release\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin\bin\Release\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin\bin\Release\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin\obj\Release\Discuz.Plugin.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin\obj\Release\Discuz.Plugin.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin\bin\Release\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin\bin\Release\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin\obj\Release\Discuz.Plugin.csprojResolveAssemblyReference.cache

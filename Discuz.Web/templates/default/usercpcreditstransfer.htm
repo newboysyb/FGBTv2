@@ -1,0 +1,76 @@
+﻿<%template _header%>
+<div class="wrap cl pageinfo">
+	<div id="nav">
+		<%if {usergroupinfo.allowsearch}>0%>
+			<%template _quicksearch%>
+		<%/if%>
+		<a href="{config.forumurl}" class="title">{config.forumtitle}</a> &raquo; <a href="usercpprofile.aspx">用户中心</a> &raquo; <strong>积分转帐</strong>
+	</div>
+</div>
+<div class="wrap uc cl">
+	<%template _menu%>
+	<div class="uc_main">
+	<div class="uc_content">
+		<h1>积分转帐</h1>
+		<%template _scoremenu%>	
+	<%if page_err==0%>
+	<%if ispost%>
+		<%template _usercpmsgbox%>
+	<%else%>
+		<form action="" method="post" id="postform">
+		<table cellspacing="0" cellpadding="0" class="tfm" summary="积分转帐">			
+			<caption>
+				<div class="hintinfo" style="margin:0;">积分交易税 {creditstax},兑换最低余额 {Scoresets.GetExchangeMinCredits()},转账最低余额 {Scoresets.GetTransferMinCredits()}</div>				
+			</caption>
+			<tbody>
+			<tr>
+				<th>当前帐户</th>
+				<td class="paychange">
+				<%if {score[3]}!=""%>
+				{score[3]}: <em>{user.extcredits3}</em>
+				<%/if%>
+				</td>
+			</tr>
+			<tr>
+				<th>用户密码</th>
+				<td>
+					<input name="password" type="password" id="password" size="25" class="txt"/>
+				</td>
+			</tr>
+			<tr>
+				<th>将数量</th>
+				<td>
+					<span class="z"><input name="paynum" type="text" id="paynum" value="100" size="10" class="txt" /> 的</span> 				
+					<div class="ftid">
+						<select name="extcredits" id="extcredits">
+							<option value="3" selected="selected">上传</option>
+						</select>
+					</div>
+					<script type="text/javascript">simulateSelect('extcredits');</script>
+				</td>
+			</tr>
+			<tr>
+				<th>转帐给用户（请用英文逗号“,”分隔多个接收者，管理员转账将从IMAX账户支出，转账无税费）:</th>
+				<td>
+					<textarea name="fromto" type="text" id="fromto" cols = "100" rows = "15" /></textarea>
+					<a href="###" name="sbutton" value=" " onclick="alert('接收者的所得为 '+$('postform').extcredits.options[$('postform').extcredits.selectedIndex].text + ':'+Math.round($('postform').paynum.value*(1-{creditstax})*100)/100)" ID="Button1" >计算</a>
+				</td>
+			</tr>
+			<tr>
+				<th> </th>
+				<td>
+					<button type="submit" name="Submit" ID="Submit1" class="pn"><span>确定</span></button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		</form>
+	<%/if%>
+<%else%>
+	<%template _usercperrmsgbox%>
+<%/if%>
+	</div>
+	</div>
+</div>
+<%template _copyright%>
+<%template _footer%>

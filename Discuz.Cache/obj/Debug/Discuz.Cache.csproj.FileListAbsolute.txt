@@ -1,0 +1,14 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Cache\bin\Debug\Discuz.Cache.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Cache\bin\Debug\Discuz.Cache.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Cache\bin\Debug\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Cache\bin\Debug\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Cache\bin\Debug\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Cache\bin\Debug\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Cache\bin\Debug\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Cache\bin\Debug\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Cache\bin\Debug\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Cache\bin\Debug\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Cache\bin\Debug\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Cache\obj\Debug\Discuz.Cache.csprojResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Cache\obj\Debug\Discuz.Cache.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Cache\obj\Debug\Discuz.Cache.pdb

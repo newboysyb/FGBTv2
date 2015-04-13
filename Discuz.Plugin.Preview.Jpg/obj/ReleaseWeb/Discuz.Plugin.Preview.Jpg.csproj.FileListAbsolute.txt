@@ -1,0 +1,32 @@
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\bin\ReleaseWeb\Discuz.Plugin.Preview.Jpg.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\bin\ReleaseWeb\Discuz.Plugin.Preview.Jpg.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\bin\ReleaseWeb\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\bin\ReleaseWeb\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\bin\ReleaseWeb\Discuz.Plugin.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\bin\ReleaseWeb\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\bin\ReleaseWeb\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\bin\ReleaseWeb\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\bin\ReleaseWeb\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\bin\ReleaseWeb\Discuz.Plugin.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\bin\ReleaseWeb\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\bin\ReleaseWeb\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\bin\ReleaseWeb\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\obj\ReleaseWeb\Discuz.Plugin.Preview.Jpg.csprojResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\obj\ReleaseWeb\Discuz.Plugin.Preview.Jpg.dll
+H:\WorkFolder\PTProject\Code 3.6 Web\Discuz.Plugin.Preview.Jpg\obj\ReleaseWeb\Discuz.Plugin.Preview.Jpg.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\Discuz.Plugin.Preview.Jpg.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\Discuz.Plugin.Preview.Jpg.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\Discuz.Plugin.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\Discuz.Plugin.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\obj\ReleaseWeb\Discuz.Plugin.Preview.Jpg.csprojResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\obj\ReleaseWeb\Discuz.Plugin.Preview.Jpg.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\obj\ReleaseWeb\Discuz.Plugin.Preview.Jpg.pdb

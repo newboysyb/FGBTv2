@@ -1,0 +1,5 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Plugin.Mail.SysMail.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Plugin.Mail.SysMail.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\obj\Release\Discuz.Plugin.Mail.SysMail.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\obj\Release\Discuz.Plugin.Mail.SysMail.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\obj\Release\Discuz.Plugin.Mail.SysMail.csprojResolveAssemblyReference.cache

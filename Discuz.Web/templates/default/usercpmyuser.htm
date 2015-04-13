@@ -1,0 +1,74 @@
+﻿<%template _header%>
+<div class="wrap cl pageinfo">
+	<div id="nav">
+		<%if {usergroupinfo.allowsearch}>0%>
+			<%template _quicksearch%>
+		<%/if%>
+		<a href="{config.forumurl}" class="title">{config.forumtitle}</a> &raquo; <a href="usercpprofile.aspx">用户中心</a> &raquo; <strong>我邀请的用户</strong>
+	</div>
+</div>
+<div class="wrap uc cl">
+	<%template _menu%>
+	<div class="uc_main">
+	<div class="uc_content">
+		<h1>我邀请的用户</h1>
+		<%template _invitemenu%>	
+    <%if page_err==0%>
+				<%if {userlist.rows.Count}>0%>		
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="datatable">
+              <caption>
+                <div class="hintinfo" style="margin:0;">
+                    <p>请注意：如果被邀请人因为严重违反论坛相关规定被管理人员禁封，您将受到扣除500G上传的处罚。详情请查看公告区通知</p>
+                    <p>请注意：邀请人真实上传达到一定值，您将获得奖励上传，最多可达270G。详情请查看公告区通知</p>
+                </div>
+                <br/>
+              </caption>
+				  		<tr class="colplural">
+				  		<td width="5%">序号</th>
+				  		<th width="10%">邀请码id</th>
+							<th width="5%">用户id</th>
+							<th width="10%">用户名</th>
+							<th width="8%">用户级别</th>
+							<th width="10%">上传</th>
+							<th width="10%">下载</th>
+							<th width="5%">共享率</th>
+							<th width="20%">注册时间</th>
+							<th width="20%">最后访问</th>
+						</tr>
+						<%loop myuser userlist%>
+						<tbody>
+						<tr class="messagetable" onmouseover="this.className='messagetableon'" onmouseout="this.className='messagetable'">
+                          <td>{myuser[sn]}</td>
+                          <td>{myuser[id]}</td>
+                          <td>{myuser[registerid]}</td>
+                          <td>
+                          <%set {aspxrewriteurl} = this.UserInfoAspxRewrite({myuser[registerid]})%>
+                          <a href="{aspxrewriteurl}" target="_blank">{myuser[username]}</a></td>
+                          <td>{myuser[group]}</td>
+                          <td>{myuser[up]}</td>
+                          <td>{myuser[down]}</td>
+                          <td>{myuser[rat]}</td>
+                          <td>{myuser[joindate]}</td>
+                          <td>{myuser[lastvisit]}</td>
+						</tr>
+						</tbody>
+						<%/loop%>
+						</table>
+        <%else%>
+            <div class="zerothreads">暂无记录</div>
+        <%/if%>
+
+		<div class="pages_btns">
+			<div class="pages">
+			<em>{pageid}/{pagecount}页</em> {pagenumbers}
+			</div>
+		</div>
+        
+    <%else%>
+      <%template _usercperrmsgbox%>
+    <%/if%>
+	</div>
+	</div>
+</div>
+<%template _copyright%>
+<%template _footer%>

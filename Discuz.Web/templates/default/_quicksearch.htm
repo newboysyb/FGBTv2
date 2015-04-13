@@ -1,0 +1,107 @@
+﻿<form method="post" action="{forumpath}search.aspx" target="_blank" onsubmit="bind_keyword(this);" class="y">
+	<input type="hidden" name="poster" />
+	<input type="hidden" name="keyword" />
+	<input type="hidden" name="type" value="" />
+	<input id="keywordtype" type="hidden" name="keywordtype" value="0" />
+	<a href="javascript:void(0);" class="drop s_type" id="quicksearch" onclick="showMenu(this.id, false);" onmouseover="MouseCursor(this);">快速搜索</a>
+	<input type="text" id="quicksearch_textinput" name="keywordf" value="输入搜索关键字:种子标题" onblur="bind_inputmessage(false);" onclick="bind_inputmessage(true);" onkeydown="bind_inputmessage(true);" class="txt"/>
+	<input name="searchsubmit" type="submit" value="" class="btnsearch"/>
+</form>
+<ul id="quicksearch_menu" class="p_pop" style="display: none;">
+	<li><a href="###" onclick="$('keywordtype').value='0';$('quicksearch').innerHTML='帖子标题';$('quicksearch_menu').style.display='none';bind_inputmessage(false);" onmouseover="MouseCursor(this);">帖子标题</a></li>
+	<%if {config.Enablespace}==1%>
+	<li><a href="###" onclick="$('keywordtype').value='2';$('quicksearch').innerHTML='空间日志';$('quicksearch_menu').style.display='none';bind_inputmessage(false);" onmouseover="MouseCursor(this);">空间日志</a></li>
+	<%/if%>
+	<%if {config.Enablealbum}==1%>
+	<li><a href="###" onclick="$('keywordtype').value='3';$('quicksearch').innerHTML='相册标题';$('quicksearch_menu').style.display='none';bind_inputmessage(false);" onmouseover="MouseCursor(this);">相册标题</a></li>
+	<%/if%>
+	<li><a href="###" onclick="$('keywordtype').value='8';$('quicksearch').innerHTML='作者';$('quicksearch_menu').style.display='none';bind_inputmessage(false);" onmouseover="MouseCursor(this);">作者</a></li>
+	<li><a href="###" onclick="$('keywordtype').value='9';$('quicksearch').innerHTML='版块';$('quicksearch_menu').style.display='none';bind_inputmessage(false);" onmouseover="MouseCursor(this);">版块</a></li>
+</ul>
+<script type="text/javascript">
+    function bind_inputmessage(click)
+    {
+
+        if(!click)
+        {
+            var isdefaultvalue = false;
+            if($('quicksearch_textinput').value == "" ||$('quicksearch_textinput').value == "输入搜索关键字:种子标题" ||$('quicksearch_textinput').value == "输入搜索关键字:帖子标题" ||$('quicksearch_textinput').value == "输入搜索关键字:空间日志" ||$('quicksearch_textinput').value == "输入搜索关键字:相册标题" ||$('quicksearch_textinput').value == "输入搜索关键字:作者名称" ||$('quicksearch_textinput').value == "输入搜索关键字:版块名称" )
+            {
+                isdefaultvalue = true;
+            }
+            else if($('quicksearch').innerHTML=='帖子标题' || $('quicksearch').innerHTML=='快速搜索' )
+            {
+                if(isdefaultvalue) $('quicksearch_textinput').value = "输入搜索关键字:帖子标题";
+            }
+            else if($('quicksearch').innerHTML=='空间日志')
+            {
+                if(isdefaultvalue) $('quicksearch_textinput').value = "输入搜索关键字:空间日志";
+            }
+            else if($('quicksearch').innerHTML=='相册标题')
+            {
+                if(isdefaultvalue) $('quicksearch_textinput').value = "输入搜索关键字:相册标题";
+            }
+            else if($('quicksearch').innerHTML=='作者')
+            {
+                if(isdefaultvalue) $('quicksearch_textinput').value = "输入搜索关键字:作者名称";
+            }
+            else if($('quicksearch').innerHTML=='版块')
+            {
+                if(isdefaultvalue) $('quicksearch_textinput').value = "输入搜索关键字:版块名称";
+            }
+         }
+         else
+         {
+
+            if($('quicksearch').innerHTML=='帖子标题' || $('quicksearch').innerHTML=='快速搜索' )
+            {
+                if($('quicksearch_textinput').value == "输入搜索关键字:帖子标题") $('quicksearch_textinput').value = "";
+            }
+            else if($('quicksearch').innerHTML=='空间日志')
+            {
+                if($('quicksearch_textinput').value == "输入搜索关键字:空间日志") $('quicksearch_textinput').value = "";
+            }
+            else if($('quicksearch').innerHTML=='相册标题')
+            {
+                if($('quicksearch_textinput').value == "输入搜索关键字:相册标题") $('quicksearch_textinput').value = "";
+            }
+            else if($('quicksearch').innerHTML=='作者')
+            {
+                if($('quicksearch_textinput').value == "输入搜索关键字:作者名称") $('quicksearch_textinput').value = "";
+            }
+            else if($('quicksearch').innerHTML=='版块')
+            {
+                if($('quicksearch_textinput').value == "输入搜索关键字:版块名称") $('quicksearch_textinput').value = "";
+            }
+         }
+    }
+    function bind_keyword(form) 
+    {
+        if (form.keywordtype.value == '20') 
+        {
+            form.action = '{forumpath}showseeds.aspx?keywords=' + escape(form.keywordf.value).replace(/\+/g, '%2B').replace(/\"/g,'%22').replace(/\'/g, '%27').replace(/\//g,'%2F');
+        } 
+        else if (form.keywordtype.value == '9')
+        {
+            form.action = '{forumpath}forumsearch.aspx?q=' + escape(form.keywordf.value).replace(/\+/g, '%2B').replace(/\"/g,'%22').replace(/\'/g, '%27').replace(/\//g,'%2F');
+        } 
+        else if (form.keywordtype.value == '8') 
+        {
+            form.action = '{forumpath}search.aspx?advsearch=1';
+            form.keyword.value = '';
+            form.poster.value = form.keywordf.value != form.keywordf.defaultValue ? form.keywordf.value.replace(/\+/g, '%2B').replace(/\"/g,'%22').replace(/\'/g, '%27').replace(/\//g,'%2F') : '';
+        } 
+        else 
+        {
+            form.action = '{forumpath}search.aspx';
+            form.poster.value = '';
+            form.keyword.value = form.keywordf.value != form.keywordf.defaultValue ? form.keywordf.value.replace(/\+/g, '%2B').replace(/\"/g,'%22').replace(/\'/g, '%27').replace(/\//g,'%2F') : '';
+            if (form.keywordtype.value == '2')
+                form.type.value = 'spacepost';
+            else if (form.keywordtype.value == '3')
+                form.type.value = 'album';
+            else 
+                form.type.value = 'topic';
+        }
+    }
+</script>

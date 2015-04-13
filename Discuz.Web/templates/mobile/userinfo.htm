@@ -1,0 +1,288 @@
+﻿<%template _header%>
+<%if page_err==0%>
+
+    <div class="box">
+        <a href="index.aspx">返回论坛</a><span class="pipe">|</span>
+        <a href="javascript:history.back();" onclick="javascript:history.back();" title="返回上一页" >返回上一页</a>
+    </div>
+    
+    <div class="bm">
+    
+        <div class="bm_c">
+            <div>{user.username} (UID: {user.uid})</div>
+        </div>
+        
+        <p class="bm_h">个人资料</p>
+        <div class="bm_c profile_bm_c">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="xs1 profile_table">
+                <tbody>		
+                <tr>
+                  <th width="150">性别: </th>
+                  <td><%if {user.gender}==0%>保密<%/if%>
+                    <%if {user.gender}==1%>男<%/if%>
+                    <%if {user.gender}==2%>女<%/if%>
+                  </td>
+                </tr>
+                <%if {user.location}!=""%>
+                <tr>
+                  <th>来自: </th>
+                  <td>{user.location}</td>
+                </tr>
+                <%/if%>
+                <%if {user.bday}!=""%>
+                <tr>
+                  <th>生日: </th>
+                  <td>{user.bday}</td>
+                </tr>
+                <%/if%>
+                <%if {user.website}!=""%>
+                <tr>
+                  <th>个人主页: </th>
+                  <td>{user.website}</td>
+                </tr>
+                <%/if%>
+                <%if {user.bio}!=""%>
+                <tr>
+                  <th>自我介绍: </th>
+                  <td>{user.bio}</td>
+                </tr>
+                <%/if%>
+                
+                <%if {admininfo}!=null&&{admininfo.Allowviewrealname}==1%>
+                <%if {user.realname}!=""%>
+                <tr>
+                  <th>真实姓名: </th>
+                  <td>{user.realname}</td>
+                </tr>
+                <%/if%>
+                <%if {user.idcard}!=""%>
+                <tr>
+                  <th>身份证号码: </th>
+                  <td>{user.idcard}</td>
+                </tr>
+                <%/if%>
+                <%if {user.mobile}!=""%>
+                <tr>
+                  <th>移动电话号码: </th>
+                  <td>{user.mobile}</td>
+                </tr>
+                <%/if%>
+                <%if {user.phone}!=""%>		
+                <tr>
+                  <th>固定电话号码: </th>
+                  <td>{user.phone}</td>
+                </tr>
+                <%/if%>
+                <%/if%>
+                
+                <%if {user.showemail}==1%>
+                <tr>
+                  <th>E-Mail: </th>
+                  <td><a herf="#" onclick="javascript:location.href='mailto:{user.email}';">{user.email}</a></td>
+                </tr>
+                <%/if%>
+                <%if {user.qq}!=""%>
+                <tr>
+                  <th>QQ: </th>
+                  <td>{user.qq}</td>
+                </tr>
+                <%/if%>
+                <%if {user.msn}!=""%>		
+                <tr>
+                  <th>MSN Messenger: </th>
+                  <td>{user.msn}</td>
+                </tr>
+                <%/if%>
+                <%if {user.yahoo}!=""%>		
+                <tr>
+                  <th>Yahoo Messenger: </th>
+                  <td>{user.yahoo}</td>
+                </tr>
+                <%/if%>
+                <%if {user.skype}!=""%>		
+                <tr>
+                  <th>Skype: </th>
+                  <td>{user.skype}</td>
+                </tr>
+                <%/if%>
+                <%if {user.icq}!=""%>		
+                <tr>
+                  <th>ICQ: </th>
+                  <td>{user.icq}</td>
+                </tr>
+                <%/if%>
+                </tbody>
+            </table>
+        </div>
+        
+        <p class="bm_h">用户信息</p>
+        <div class="bm_c profile_bm_c">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="xs1 profile_table">
+                <tbody>		
+                <tr>
+                    <th width="150">用户组: </th>
+                    <td> {group.grouptitle}
+                    <%if {user.groupid}==4||{user.groupid}==5%>
+                        <%set (int){nowdateint} = Utils.StrToInt(DateTime.Now.ToString("yyyyMMdd"),0)%>
+                          <%if {user.groupexpiry}==0||{user.groupexpiry}==29990101%>
+                              <span class="xg2" style="font-size:12px">过期时间: 永久</span>
+                          <%else%>
+                              <%set (string){usergroupexpiry} = Utils.FormatDate({user.groupexpiry},true)%>
+                              <span class="xg2" style="font-size:12px">过期时间: {usergroupexpiry}</span>
+                          <%/if%>
+                    <%/if%>     
+                    </td>
+                </tr>
+                
+                <%if {user.joindate}!=""%>
+                    <%set (string){jdate} = ForumUtils.ConvertDateTime({user.joindate})%>
+                    <tr>
+                        <th>注册日期:</th>
+                        <td>{jdate}</td>
+                    </tr>
+                <%/if%>
+                
+                <%if {user.joindate}!=""%>
+                    <%set (string){jdate} = ForumUtils.ConvertDateTime({user.joindate})%>
+                    <tr>
+                        <th>注册日期:</th>
+                        <td>{jdate}</td>
+                    </tr>
+                <%/if%>
+                <%if {user.lastvisit}!=""%>
+                    <%set (string){lvisit} = ForumUtils.ConvertDateTime({user.lastvisit})%>
+                    <tr>
+                        <th>最后访问(登录):</th>
+                        <td>{lvisit}</td>
+                    </tr>
+                <%/if%>    
+                <%if {user.lastactivity}!=""%>
+                    <%set (string){lactivity} = ForumUtils.ConvertDateTime({user.lastactivity})%>
+                    <tr>
+                        <th>最后活动:</th>
+                        <td>{lactivity}</td>
+                    </tr>
+                <%/if%> 
+                <%if {admininfo}!=null&&{admininfo.Allowviewip}==1%>
+                    <tr>
+                        <th>注册 IP:</th>
+                        <td>{user.regip}</td>
+                    </tr>
+                <%/if%>
+                <%if {user.nickname}!=""%>
+                    <tr>
+                        <th>昵称:</th>
+                        <td>{user.nickname}</td>
+                    </tr>
+                <%/if%>
+                <%if {user.Customstatus}!=""%>	
+                    <tr>
+                        <th>自定义头衔:</th>
+                        <td>{user.Customstatus}</td>
+                    </tr>
+                <%/if%>
+                <tr>
+                    <th>阅读权限:</th>
+                    <td>{group.readaccess}</td>
+                </tr>
+                <tr>
+                    <th>发帖量:</th>
+                    <td>{user.posts}</td>
+                </tr>
+                <tr>
+                    <th>精华帖数:</th>
+                    <td>{user.digestposts}</td>
+                </tr>
+                <tr>
+                    <th>在线时间:</th>
+                    <td>{user.oltime}分钟</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <p class="bm_h">积分流量</p>
+        <div class="bm_c profile_bm_c">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="xs1 profile_table">
+                <tbody>		
+                <tr>
+                    <th width="150">积分:</th>
+                    <td>{user.credits}</td>
+                </tr>
+                <tr>
+                    <th>共享率:</th>
+                    <td>{PTTools.Ratio2Str(user.Upload,user.Download)}</td>
+                </tr>
+                <tr>
+                    <th>威望:</th>
+                    <td>{user.oltime}</td>
+                </tr>
+                <tr>
+                    <th>上传:</th>
+                    <td>{user.oltime}</td>
+                </tr>
+                <tr>
+                    <th>今天上传:</th>
+                    <td>{user.credits}</td>
+                </tr>
+                <%if ({usergroupid}==1&&{useradminid}==1)||{user.uid}=={userid}%>    
+                    <tr>
+                        <th>真实上传:</th>
+                        <td>{realup}</td>
+                    </tr>
+                    <tr>
+                        <th>今天真实上传:</th>
+                        <td>{score7}</td>
+                    </tr>
+                <%/if%>
+                <tr>
+                    <th>金币:</th>
+                    <td>{score2}</td>
+                </tr>
+                <tr>
+                    <th>下载:</th>
+                    <td>{score4}</td>
+                </tr>
+                <tr>
+                    <th>今天下载:</th>
+                    <td>{score6}</td>
+                </tr>
+                <%if ({usergroupid}==1&&{useradminid}==1)||{user.uid}=={userid}%>
+                    <tr>
+                        <th>真实下载:</th>
+                        <td>{realdown}</td>
+                    </tr>
+                    <tr>
+                        <th>今天真实下载:</th>
+                        <td>{score8}</td>
+                    </tr>
+                <%/if%>
+                <tr>
+                    <th>正在上传的种子:</th>
+                    <td>{user.UpCount}</td>
+                </tr>
+                <tr>
+                    <th>正在下载的种子:</th>
+                    <td>{user.DownCount}</td>
+                </tr>
+                <tr>
+                    <th>发布的种子:</th>
+                    <td>{user.Published}</td>
+                </tr>
+                <tr>
+                    <th>下载完成的种子:</th>
+                    <td>{user.Finished}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+		</div>
+<%else%>
+	<%if {needlogin}%>
+		<%template _login%>
+	<%else%>
+	<%template _errmsgbox%>
+	<%/if%>
+<%/if%>
+<%template _copyright%>
+<%template _footer%>

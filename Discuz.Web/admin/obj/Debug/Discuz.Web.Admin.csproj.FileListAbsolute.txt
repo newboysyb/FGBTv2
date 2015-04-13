@@ -1,0 +1,5 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Web.Admin.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Web.Admin.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\admin\obj\Debug\Discuz.Web.Admin.csprojResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\admin\obj\Debug\Discuz.Web.Admin.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\admin\obj\Debug\Discuz.Web.Admin.pdb

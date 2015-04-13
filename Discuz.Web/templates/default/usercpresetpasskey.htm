@@ -1,0 +1,69 @@
+﻿<%template _header%>
+<div class="wrap cl pageinfo">
+	<div id="nav">
+		<%if {usergroupinfo.allowsearch}>0%>
+			<%template _quicksearch%>
+		<%/if%>
+		<a href="{config.forumurl}" class="title">{config.forumtitle}</a> &raquo; <a href="usercpprofile.aspx">用户中心</a> &raquo; <strong>重置用户识别码（Passkey）</strong>
+	</div>
+</div>
+<div class="wrap uc cl">
+	<%template _menu%>
+	<div class="uc_main">
+	<div class="uc_content">
+		<h1>重置用户识别码（Passkey）</h1>
+		<%template _btmenu%>	
+    <%if page_err==0%>
+      <%if ispost%>
+        <%template _usercpmsgbox%>
+      <%else%>
+        <form action="" method="post" id="postform">
+        <table cellspacing="0" cellpadding="0" class="tfm" summary="共享率保护">
+          <caption>
+            <div class="hintinfo" style="margin:0;">
+                <p>重置Passkey之前请仔细阅读以下注意事项</p>
+                <p>1.Passkey是进行流量统计的唯一依据，请务必保护好您的Passkey，不要泄露，不要将从本站下载的种子发给别人</p>
+                <p>2.生成新的Passkey之后，您需要修改所有正在上传下载种子中的Tracker地址</p>
+                <p>操作过程：请先将所有种子停止，然后使用重置Passkey功能，在uTorrent中替换所有种子内的Passkey值，之后再重新开启所有任务</p>
+            </div>
+          </caption>
+          <tbody>
+          <tr>
+              <th>您当前的Passkey为:</th>
+              <td>
+                  {btuserinfo.Passkey}<br/>
+              </td>
+          </tr>
+          <tr>
+              <th>正在上传的种子数:</th>
+              <td>
+                  <a href="{forumurl}showseeds.aspx?type=all&orderby=0&asc=False&seedstat=0&username={user.username}&userstat=1" style="color:#09C; font-weight:bold;"><img src="{forumurl}templates/{templatepath}/images/bt/upcount.png" title="正在上传种子数"/> {user.UpCount}</a><br/>
+              </td>
+          </tr>
+          <tr>
+              <th>正在下载的种子数:</th>
+              <td>
+                  <a href="{forumurl}showseeds.aspx?type=all&orderby=0&asc=False&seedstat=0&username={user.username}&userstat=2" style="color:#F60; font-weight:bold;"><img src="{forumurl}templates/{templatepath}/images/bt/downcount.png" title="正在下载种子数"/> {user.DownCount}</a>
+              </td>
+          </tr>
+          <tr>
+            <th>验证用户密码</th>
+            <td><input name="password" type="password" id="password" size="20" class="txt"/></td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button type="submit" name="Submit" class="pn"><span>确定</span></button>
+            </td>
+          </tr>
+          </tbody>
+          </table>
+          </form>
+      <%/if%>
+    <%else%>
+      <%template _usercperrmsgbox%>
+    <%/if%>
+	</div>
+	</div>
+</div>
+<%template _copyright%>
+<%template _footer%>

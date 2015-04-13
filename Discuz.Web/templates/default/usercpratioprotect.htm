@@ -1,0 +1,70 @@
+﻿<%template _header%>
+<div class="wrap cl pageinfo">
+	<div id="nav">
+		<%if {usergroupinfo.allowsearch}>0%>
+			<%template _quicksearch%>
+		<%/if%>
+		<a href="{config.forumurl}" class="title">{config.forumtitle}</a> &raquo; <a href="usercpprofile.aspx">用户中心</a> &raquo; <strong>共享率保护</strong>
+	</div>
+</div>
+<div class="wrap uc cl">
+	<%template _menu%>
+	<div class="uc_main">
+	<div class="uc_content">
+		<h1>共享率保护</h1>
+		<%template _btmenu%>	
+    <%if page_err==0%>
+      <%if ispost%>
+        <%template _usercpmsgbox%>
+      <%else%>
+        <form action="" method="post" id="postform">
+        <table cellspacing="0" cellpadding="0" class="tfm" summary="共享率保护">
+          <caption>
+            <div class="hintinfo" style="margin:0;">
+                开启共享率保护后，共享率偏低状态将不能下载非蓝种，防止账号因为过度下载造成不能继续使用，建议开启<br/>
+                <!--开启Passkey保护后，将限制用户从多个地点同时上传下载，减少因为Passkey泄露后造成的流量损失，建议开启<br/>
+                开启重复下载保护后，同一个种子将不能被下载3次以上，减少种子被迅雷等下载软件盗用后造成的流量损失，建议开启<br/>-->
+            </div>
+          </caption>
+          <tbody>
+          <tr>
+              <th>共享率保护</th>
+              <td>
+                  <input id="ratioprotect" type="checkbox" name="ratioprotect" value="1" <%if {ratioprotect}>0%>checked="checked"<%/if%>/>开启
+              </td>
+          </tr>
+          <!--
+          <tr>
+              <th>Passkey保护</th>
+              <td>
+                  <input id="passkeyprotect" type="checkbox" name="passkeyprotect" value="2" <%if {passkeyprotect}>0%>checked="checked"<%/if%>/>开启
+              </td>
+          </tr>
+          <tr>
+              <th>重复下载保护</th>
+              <td>
+                  <input id="downloadprotect" type="checkbox" name="downloadprotect" value="3" <%if {downloadprotect}>0%>checked="checked"<%/if%>/>开启
+              </td>
+          </tr>
+          <tr>
+          -->
+            <th>验证用户密码</th>
+            <td><input name="password" type="password" id="password" size="20" class="txt"/></td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button type="submit" name="Submit" class="pn"><span>确定</span></button>
+            </td>
+          </tr>
+          </tbody>
+          </table>
+          </form>
+      <%/if%>
+    <%else%>
+      <%template _usercperrmsgbox%>
+    <%/if%>
+	</div>
+	</div>
+</div>
+<%template _copyright%>
+<%template _footer%>

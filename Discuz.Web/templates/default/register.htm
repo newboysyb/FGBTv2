@@ -1,0 +1,531 @@
+<%template _header%>
+<%if {infloat}!=1%>
+<div class="wrap cl pageinfo">
+	<div id="nav">
+		<%if {usergroupinfo.allowsearch}>0%>
+			<%template _quicksearch%>
+		<%/if%>
+		<a href="{config.forumurl}">{config.forumtitle}</a> &raquo; 
+		 <strong>
+      <%if {cngi_login}%>
+          <%if {cngi_school}=="buaa"%>
+              <strong>通过CNGI08 自助注册 将自动绑定所注册的未来花园BT账号到 CNGI08[ 用户 {cngi_name} 来自 {cngi_school}] （账号名可以任意取，不是必须使用学号）</strong>
+          <%else%>
+              <strong>通过CNGI08 用户注册 将自动绑定所注册的未来花园BT账号到 CNGI08[ 用户 {cngi_name} 来自 {cngi_school} ] （账号名可以任意取，不是必须使用CNGI认证编号）</strong>
+          <%/if%>
+      <%else if {ssoCreateToken}!=""%>
+          <strong>北航校内用户 通过 i北航 i.buaa.edu.cn [ 用户 {ssoUid} ] 自助注册未来花园BT账号</strong>
+      <%else%>
+          用户注册
+      <%/if%>
+		</strong>
+	</div>
+</div>
+<%/if%>
+<%if {agree}=="" && {infloat}!=1%>
+	<%if page_err==0%>
+		<%if {config.rules}==1%>
+        <div class="wrap cl">
+	        <div class="blr">
+		        <h3 class="flb"><em>用户注册协议</em></h3>
+		        <form id="form1" name="form1" method="post" action="">
+		        <div class="c cl floatwrap">
+			        {config.rulestxt}
+		        </div>
+		        <p class="fsb pns cl">
+			        <input name="agree" type="hidden" value="true" />
+			        <button disabled="disabled" type="submit" id="btnagree" class="pn pnc"><span>同意</span></button>
+			        <button name="cancel" id="cancel" type="button" onClick="javascript:location.replace('index.aspx')" class="pn"><span>不同意</span></button>	  
+			        <script type="text/javascript">
+			        var secs = 5;
+			        var wait = secs * 1000;
+			        $("btnagree").innerHTML = "<span>同 意(" + secs + ")</span>";
+			        $("btnagree").disabled = true;
+			        for(i = 1; i <= secs; i++) {
+				        window.setTimeout("update(" + i + ")", i * 1000);
+			        }
+			        window.setTimeout("timer()", wait);
+			        function update(num, value) {
+				        if(num == (wait/1000)) {
+						        $("btnagree").innerHTML = "<span>同 意</span>";
+				        } else {
+						        printnr = (wait / 1000) - num;
+						        $("btnagree").innerHTML = "<span>同 意(" + printnr + ")</span>";
+				        }
+			        }
+			        function timer() {
+				        $("btnagree").disabled = false;
+				        $("btnagree").innerHTML = "<span>同 意</span>";
+			        }
+			        </script>
+		        </p>
+		        </form>
+	        </div>
+        </div>
+		<%csharp%>
+		/*
+		<script type="text/javascript">
+		location.replace('register.aspx?agree=yes')
+		</script>
+		*/
+		<%/csharp%>
+		<%/if%>
+	<%else%>
+		<%template _errmsgbox%>
+	<%/if%>
+<%else%>
+
+<%if {createuser}==""%>
+    <%if {page_err}==0%>
+	    <%if {infloat}!=1%>
+	    <div class="wrap cl">
+		    <div class="blr" id="floatlayout_register">
+	    <%/if%>
+	    <%if {config.rules}==1%>
+		    <div id="bbrule" style="display:none">
+			    <%if {infloat}==1%>
+					<h3 class="flb" id="fctrl_register" style="cursor: move;"><em id="returnregmessage" fwin="register">网站服务条款</em><span><a title="关闭" onclick="hideWindow('register')" class="flbc" onclick="hideWindow('register')" title="关闭">关闭</a></span></h3>
+			    <%/if%>
+			    <div class="c cl floatwrap">
+				    {config.rulestxt}
+			    </div>
+			    <p class="fsb pns cl">
+				    <button type="submit" id="btnagree" class="pn pnc"  onclick="javascript:$('agree').checked=true;$('bbrule').style.display='none';$('bbreg').style.display=''"><span>同意</span></button>
+				    <button name="cancel" id="cancel"  onClick="hideWindow('register')" class="pn"><span>不同意</span></button>
+			    </p>
+		    </div>
+	    <%/if%>
+	    <%if {infloat}==1%>
+	    <div id="bbreg">
+	        <h3 class="flb"><em id="returnregmessage">注册</em><span><a href="javascript:;" class="flbc" onclick="hideWindow('register')" title="关闭">关闭</a></span></h3>
+	        <div id="succeedmessage" class="c cl" style="display:none"></div>
+	            <form id="form2" name="form2" method="post" onsubmit=" <%if {config.rules}==1%>if(!checkagreed()) return false;<%/if%>$('form2').action='{rooturl}register.aspx?infloat=1&createuser=1<%if {ssoCreateToken}!=""%>&ctoken={ssoCreateToken}<%/if%>&';ajaxpost('form2', 'returnregmessage', 'returnregmessage', 'onerror');return false;" action="{rooturl}register.aspx?infloat=1&createuser=1<%if {ssoCreateToken}!=""%>&ctoken={ssoCreateToken}<%/if%>&">
+	    <%else%>
+            <h3 class="flb"><em id="returnregmessage"></em></h3>
+            <div id="succeedmessage" class="c cl" style="display:none"></div>
+            <form id="form1" name="form1" method="post" action="?createuser=1<%if {ssoCreateToken}!=""%>&ctoken={ssoCreateToken}<%/if%>">
+	    <%/if%>
+	        <div class="c cl">
+		        <div style="overflow:hidden;overflow-y:auto" class="lgfm" id="reginfo_a">
+		          <%if {ssoCreateToken}!=""%>
+		          <span id="ihomeregisterspan" >
+                  <button tabindex="6" value="true" name="regsubmit" type="submit" id="registerformsubmitihome" class="pn" <%if {config.rules}==1%>onclick="return checkagreed();" <%/if%>><span>立即自动创建未来花园BT账号</span></button>
+                  <br/><br/>
+                  <label><em>提示：</em><span class="ihome_reg_alert">非常重要：如果您现在还不了解未来花园BT，请勿直接创建账号，先到 <a href="http://i.buaa.edu.cn/space.php?uid=8555">未来花园BT的i北航主页</a> 了解之后再做决定</span></label>
+                  <label><em>用户名：</em>{DEFAULT_username}</label>
+                  <label><em>密码：</em>通过 i北航 登陆后可设置</label>
+                  <label><em>邮箱：</em>通过 i北航 登陆后可设置</label>
+                  <label><em>注意：</em><span class="ihome_reg_alert">自动生成的用户名（格式为：数字_iHome）注册后#不可更改#，必须设置独立密码后方可脱离 i北航 独立登陆</span></label>
+                  <br/>
+                  <button tabindex="7" value="false" name="registerformsubmitihomeself" type="button" id="registerformsubmitihomeself" class="pn" onclick="javascript:switchtoselfregister();" ><span>自定义用户名密码创建[推荐！]</span></button>
+                  <br/><br/>
+                  <script type="text/javascript" reload="1">
+                      function switchtoselfregister() {
+                          $('username').value='';
+                          $('password').value='';
+                          $('password2').value='';
+                          $('email').value='';
+                          $('email2').value='';
+                          $('activation_hidden').style.display='';
+                          $('ihomeregisterspan').style.display='none';
+                          $('registerformsubmit').style.display='';
+                    }
+                  </script>
+		          </span>
+		          <%/if%>
+			        <span id="activation_hidden" <%if {ssoCreateToken}!=""%>style="display:none;"<%/if%>>
+			        <%if {allowregister}==true||{ssoCreateToken}!=""||{cngi_login}==true%>
+                    <%if {needinvitecode} && {cngi_login}==false %>
+                      本站（bt.buaa6.edu.cn）目前采用邀请注册机制，你可以通过已经获得账号的同学朋友获得邀请码。邀请码不是免费获得的，需要消耗上传流量来购买。请珍惜邀请，珍惜账号。<br/><br/>
+                    <label><em>邀请码:</em><input name="registercode" type="text" id="registercode" size="40" value="{DEFAULT_invitecode}"  maxlength="32" class="txt"/> *</label>
+                    <%/if%>
+                    <label><em>用户名:</em><input type="text" class="txt" tabindex="1"  value="{DEFAULT_username}" maxlength="20" size="25" autocomplete="off" name="{config.antispamregisterusername}" id="username" onkeyup="checkusername(this.value);"/> *</label>
+                    <label><em>密码:</em><input type="password" class="txt" tabindex="1" value="{DEFAULT_password}"  id="password" size="25" name="password" onblur="return checkpasswd(this);"/> *</label>	
+                    <label id="passwdpower" style="display: none;"><em>密码强度</em><strong id="showmsg"></strong></label>
+                    <label><em>确认密码:</em><input type="password" class="txt" tabindex="1" value="{DEFAULT_password}" id="password2" size="25" name="password2" onblur="checkdoublepassword(this.form)"/> *</label>
+                    邮箱将用于重置密码等，填写后不能更改
+                    <label><em>Email:</em><input type="text" class="txt" value="{DEFAULT_email}" tabindex="1"  id="email" size="25" autocomplete="off" name="{config.antispamregisteremail}" onblur="checkemail(this.value)"/> *</label>
+                    <label><em>重复Email:</em><input name="email2" type="text" class="txt" value="{DEFAULT_email}" tabindex="1"  id="email2" size="25" autocomplete="off" name="{config.antispamregisteremail}" onblur="checkemail(this.value)"/> *</label>
+                    <%if {config.Realnamesystem}==1%>
+                    <label><em>真实姓名:</em><input name="realname" type="text" id="realname" size="10" class="txt" /> *</label>
+                    <label><em>身份证:</em><input name="idcard" type="text" id="idcard" size="20" class="txt" /> *</label>
+                    <label><em>移动电话:</em><input name="mobile" type="text" id="mobile" size="20" class="txt" /> *</label>
+                    <label><em>固定电话:</em><input name="phone" type="text" id="phone" size="20" class="txt" /> *</label>
+                    <%/if%>
+                  
+                  </span>
+                  <%if {isseccode}%>
+                      <div class="regsec">
+                        <label style="display: inline;"><em>验证: </em><span style="position: relative;">
+                            <%template _vcode%></span>
+                        </label>
+                      </div>
+                  <%/if%>
+			       <%else%>
+                  本站当前不允许普通注册<br/>请使用iHome或CNGI08通道注册<br/><br/><br/><br/>
+			       <%/if%>
+			       
+                <%if {cngi_login}%>
+                      <h4>注册成功之后，CNGI08教育科研网统一身份认证账号和未来花园BT账号后将不能解除绑定</h4>
+                <%else if {ssoCreateToken}!=""%>
+                      <h4>注册成功之后，航行iHome.buaa.edu.cn账号和未来花园BT账号后将不能解除绑定</h4>
+                <%else%>
+                <%/if%>
+                <br/>
+                <%if !{cngi_login}&&{ssoCreateToken}==""%>
+                    <h4><a href="http://sp-bbs.buaa6.edu.cn/Shibboleth.sso/DS?target=http%3A%2F%2Fsp-bbs.buaa6.edu.cn%2Fregister.aspx">通过 CNGI08教育科研网统一<br/>身份认证免邀请注册（暂不可用）</a></h4>
+<br/><h4><a href="http://i.buaa.edu.cn/buaasso.php?m=sso&to=buaabt">通过 ihome i北航社区免邀请注册</a></h4>
+                <%/if%>
+		        </div>
+		        <div class="lgf">
+			        <h4>已有帐号？
+				        <%if {infloat}==1%>
+				        
+				        <a onclick="hideWindow('register');showWindow('login', this.href);" href="{rooturl}login.aspx" class="xg2">现在登录</a>
+				        
+				        <%else%>
+                    <%if {cngi_login}%>
+                          <a href="cngilogin.aspx" title="现在登录" class="xg2">现在绑定</a>
+                    <%else if {ssoCreateToken}!=""%>
+                          <a href="login.aspx?ctoken={ssoCreateToken}" title="现在登录" class="xg2">现在绑定</a>
+                    <%else%>
+                          <a href="login.aspx" title="现在登录" class="xg2">现在登录</a>
+                    <%/if%>
+				        <%/if%>
+			        </h4>
+			        
+		        </div>
+	        </div>
+	        <p class="fsb pns cl">
+		        <span id="reginfo_b_btn">
+		        <button tabindex="5" value="true" name="regsubmit" type="submit" id="registerformsubmit" 
+		        <%if {ssoCreateToken}!=""||({allowregister}==false&&{cngi_login}==false)%>style="display:none;"<%/if%> class="pn" <%if {config.rules}==1%>onclick="return checkagreed();" <%/if%>><span>创建用户</span></button>
+		        <%if {config.rules}==1%>
+		        <input type="checkbox" id="agree" value="true" name="agree" class="checkbox" style="margin-left:5px;"/><label for="agreebbrule">同意<a onclick="javascript:$('bbrule').style.display='';$('bbreg').style.display='none'" href="javascript:;">网站服务条款</a></label>
+			        <script type="text/javascript" reload="1">
+			            function checkagreed() {
+			                $('returnregmessage').className = ''; 
+						        if ($('agree').checked == true) {
+							        return true;
+						        }
+						        else {
+						            $('returnregmessage').innerHTML = "请确认《网络服务条款》";
+						            $('returnregmessage').className = 'onerror';
+							        return false;
+						        }
+				        }
+			        </script>
+		        <%/if%>
+		        </span>
+	        </p>
+	    </form>
+        </div>
+        </div>
+        </div>
+        <script type="text/javascript">
+	        var PasswordStrength ={
+		        Level : ["极佳","一般","较弱","太弱"],
+		        LevelValue : [35,25,15,0],//强度值
+		        Factor : [2,1,4],//字符加数,分别为字母，数字，其它
+		        KindFactor : [0,0,5,10],//密码含几种组成的加数 
+		        Regex : [/[a-zA-Z]/g,/\d/g,/[^a-zA-Z0-9]/g] //字符正则数字正则其它正则
+		        }
+		
+	        PasswordStrength.StrengthValue = function(pwd)
+	        {
+		        var strengthValue = 0;
+		        var ComposedKind = 0;
+		        for(var i = 0 ; i < this.Regex.length;i++)
+		        {
+			        var chars = pwd.match(this.Regex[i]);
+			        if(chars != null)
+			        {
+				        strengthValue += chars.length * this.Factor[i];
+				        ComposedKind ++;
+			        }
+		        }
+		        strengthValue += this.KindFactor[ComposedKind];
+		        return strengthValue;
+	        } 
+
+	        PasswordStrength.StrengthLevel = function(pwd)
+	        {
+		        var value = this.StrengthValue(pwd);
+		        for(var i = 0 ; i < this.LevelValue.length ; i ++)
+		        {
+			        if(value >= this.LevelValue[i] )
+				        return this.Level[i];
+		        }
+	        }
+
+	        function checkpasswd(o)
+	        {
+		        var pshowmsg = '密码不得少于6个字符';
+		        if(o.value.length<6)  {
+		            $("returnregmessage").innerHTML = pshowmsg;
+		            $("returnregmessage").className = 'onerror';
+		        } 
+		        else
+		        {
+		 
+		           var showmsg=PasswordStrength.StrengthLevel(o.value);
+		           switch(showmsg) {
+		               case "太弱": showmsg += " <img src='" + forumpath + "images/level/1.gif' width='88' height='11' />"; break;
+		               case "较弱": showmsg += " <img src='" + forumpath + "images/level/2.gif' width='88' height='11' />"; break;
+		               case "一般": showmsg += " <img src='" + forumpath + "images/level/3.gif' width='88' height='11' />"; break;
+		               case "极佳": showmsg += " <img src='" + forumpath + "images/level/4.gif' width='88' height='11' />"; break;
+		           }
+		           $('passwdpower').style.display='';
+		           $('showmsg').innerHTML = showmsg;
+		           $('returnregmessage').className = '';
+		           $('returnregmessage').innerHTML = '注册';		   
+		        }
+		 
+//		        if(pshowmsg!='' &&  pshowmsg!=null && pshowmsg!=undefined)
+//		        {
+//		        $('returnregmessage').innerHTML=pshowmsg;
+//		        $('returnregmessage').className='onerror';
+//		        }
+//		        else
+//		        {
+//		        $('returnregmessage').className='';
+//		        $('returnregmessage').innerHTML='注册';
+//		        }
+        
+ 
+	        }
+	        function checkemail(strMail)
+	        {
+		        var str;
+		        if(strMail.length==0) return false; 
+		        var objReg = new RegExp("[A-Za-z0-9-_]+@[A-Za-z0-9-_]+[\.][A-Za-z0-9-_]") 
+		        var IsRightFmt = objReg.test(strMail) 
+		        var objRegErrChar = new RegExp("[^a-z0-9-._@]","ig") 
+		        var IsRightChar = (strMail.search(objRegErrChar)==-1) 
+		        var IsRightLength = strMail.length <= 60 
+		        var IsRightPos = (strMail.indexOf("@",0) != 0 && strMail.indexOf(".",0) != 0 && strMail.lastIndexOf("@")+1 != strMail.length && strMail.lastIndexOf(".")+1 != strMail.length) 
+		        var IsNoDupChar = (strMail.indexOf("@",0) == strMail.lastIndexOf("@"))
+		        if (!(IsRightFmt && IsRightChar && IsRightLength && IsRightPos && IsNoDupChar))
+                {
+		         str="E-mail 地址无效，请提供真实Email，以便找回密码和论坛通知所用。";
+		         }
+	            if(str!='' &&  str!=null && str!=undefined)
+		        {
+		        $('returnregmessage').innerHTML=str;
+		        $('returnregmessage').className='onerror';
+		        }
+		        else
+		        {
+		        $('returnregmessage').className='';
+		        $('returnregmessage').innerHTML='注册';
+		        }
+	        }
+	        function htmlEncode(source, display, tabs)
+	        {
+		        function special(source)
+		        {
+			        var result = '';
+			        for (var i = 0; i < source.length; i++)
+			        {
+				        var c = source.charAt(i);
+				        if (c < ' ' || c > '~')
+				        {
+					        c = '&#' + c.charCodeAt() + ';';
+				        }
+				        result += c;
+			        }
+			        return result;
+		        }
+		
+		        function format(source)
+		        {
+			        // Use only integer part of tabs, and default to 4
+			        tabs = (tabs >= 0) ? Math.floor(tabs) : 4;
+			
+			        // split along line breaks
+			        var lines = source.split(/\r\n|\r|\n/);
+			
+			        // expand tabs
+			        for (var i = 0; i < lines.length; i++)
+			        {
+				        var line = lines[i];
+				        var newLine = '';
+				        for (var p = 0; p < line.length; p++)
+				        {
+					        var c = line.charAt(p);
+					        if (c === '\t')
+					        {
+						        var spaces = tabs - (newLine.length % tabs);
+						        for (var s = 0; s < spaces; s++)
+						        {
+							        newLine += ' ';
+						        }
+					        }
+					        else
+					        {
+						        newLine += c;
+					        }
+				        }
+				        // If a line starts or ends with a space, it evaporates in html
+				        // unless it's an nbsp.
+				        newLine = newLine.replace(/(^ )|( $)/g, '&nbsp;');
+				        lines[i] = newLine;
+			        }
+			
+			        // re-join lines
+			        var result = lines.join('<br />');
+			
+			        // break up contiguous blocks of spaces with non-breaking spaces
+			        result = result.replace(/  /g, ' &nbsp;');
+			
+			        // tada!
+			        return result;
+		        }
+
+		        var result = source;
+		
+		        // ampersands (&)
+		        result = result.replace(/\&/g,'&amp;');
+
+		        // less-thans (<)
+		        result = result.replace(/\</g,'&lt;');
+
+		        // greater-thans (>)
+		        result = result.replace(/\>/g,'&gt;');
+		
+		        if (display)
+		        {
+			        // format for display
+			        result = format(result);
+		        }
+		        else
+		        {
+			        // Replace quotes if it isn't for display,
+			        // since it's probably going in an html attribute.
+			        result = result.replace(new RegExp('"','g'), '&quot;');
+		        }
+
+		        // special characters
+		        result = special(result);
+		
+		        // tada!
+		        return result;
+	        }
+
+	        var profile_username_toolong = '您的用户名超过 20 个字符，请输入一个较短的用户名。';
+	        var profile_username_tooshort = '您输入的用户名小于3个字符, 请输入一个较长的用户名。';
+	        var profile_username_pass = "<img src='{imagedir}/check_right.gif'/>";
+
+	        function checkusername(username)
+	        {
+		        var unlen = username.replace(/[^\x00-\xff]/g, "**").length;
+
+		        if(unlen < 3 || unlen > 20) {
+			        $("returnregmessage").innerHTML =(unlen < 3 ? profile_username_tooshort : profile_username_toolong);
+			        $('returnregmessage').className = 'onerror';
+			        return;
+		        }
+		        ajaxRead("{rooturl}tools/ajax.aspx?t=checkusername&username=" + escape(username), "showcheckresult(obj,'" + escape(username) + "');");
+	        }
+
+	        function showcheckresult(obj, username)
+	        {
+		        var res = obj.getElementsByTagName('result');
+		        var result = "";
+		        if (res[0] != null && res[0] != undefined)
+		        {
+			        if (res[0].childNodes.length > 1) {
+				        result = res[0].childNodes[1].nodeValue;
+			        } else {
+				        result = res[0].firstChild.nodeValue;    		
+			        }
+		        }
+		        if (result == "1")
+		        {
+		            var tips="对不起，您输入的用户名 \"" + htmlEncode(unescape(username), true, 4) + "\" 已经被他人使用或被禁用。";
+			        $('returnregmessage').innerHTML=tips;
+			        $('returnregmessage').className='onerror';
+		        }
+		        else
+		        {
+			        $('returnregmessage').className='';
+			         $('returnregmessage').innerHTML='注册';
+		        }
+	        }
+
+	        function checkdoublepassword(theform)
+	        {
+	          var pw1 = theform.password.value;
+	          var pw2 = theform.password2.value;
+	          if(pw1=='' &&  pw2=='')
+	          {
+	          return;
+	          }
+	          var str;
+	  
+		         if(pw1!=pw2)
+		         {
+		          str ="两次输入的密码不一致";
+		         }
+		          if(str!='' &&  str!=null && str!=undefined)
+		          {
+		          $('returnregmessage').innerHTML=str;
+		          $('returnregmessage').className='onerror';
+		          }
+		          else
+		          {
+		          $('returnregmessage').className='';
+		          $('returnregmessage').innerHTML='注册';
+		          }
+	        }
+	    </script>
+	    <script type="text/javascript"  src="{jsdir}/ajax.js"></script>
+    <%else%>
+        <%if {infloat}==1%>
+        	<h3 class="flb"><em>出现了{page_err}个错误</em><span><a href="javascript:;" class="flbc" onclick="hideWindow('register')" title="关闭">关闭</a></span></h3>
+            <div class="c cl" id="errormsg">
+		        <div class="msg_inner error_msg">
+		            <p style="margin-bottom:16px;line-height:60px;">{msgbox_text}</p>
+		        </div>
+	        </div>
+        <%else%>
+            <%template _errmsgbox%>
+        <%/if%>
+    <%/if%>
+<%else%>
+    <%if {createuser}!=""%>
+        <%if {infloat}==1%>
+	        <%if page_err==0%>	
+	            <script type="text/javascript">
+	                $('form2').style.display='none';
+	                $('returnregmessage').className='';
+	            </script>
+	            <div class="msgbox cl" id="succeemessage">
+		            <div class="msg_inner">
+		            <p style="margin-bottom:16px;">{msgbox_text}</p>
+		            <%if {msgbox_url}!=""%>
+		            <p><a href="javascript:;" onclick="location.reload()" class="xg2">如果长时间没有响应请点击此处</a></p>
+		            <script type="text/javascript">setTimeout('location.reload()', 3000);</script>
+		            <%/if%>
+		            </div>
+	            </div>
+	            <script>
+	                $('succeedmessage').style.display='';
+	                $('succeedmessage').innerHTML=$('succeemessage').innerHTML;
+	                $('returnregmessage').innerHTML='注册';
+	            </script>	
+	        <%else%>
+	            <p>{msgbox_text}</p>
+	        <%/if%>
+	    <%else%>
+		    <%if page_err==0%>
+		        <%template _msgbox%>
+		    <%else%>
+		        <%template _errmsgbox%>
+		    <%/if%>
+	    <%/if%>
+    <%/if%>
+<%/if%>
+<%/if%>
+<%template _copyright%>
+<%template _footer%>

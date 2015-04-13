@@ -1,0 +1,32 @@
+    <form method="post" name="postform" action="{forumurl}posttopic.aspx?forumid={forumid}" enctype="multipart/form-data">
+
+    <%if {forum.applytopictype}==1 && {topictypeselectoptions}!=""%>
+    <div class="inbox">
+        <span class="xw1">主题分类：</span>
+        <select name="typeid" id="typeid" tabindex="5">{topictypeselectoptions}</select>
+    </div>
+    <%/if%>
+			
+    <%if {canquickpost}%>
+        <div class="inbox bt mtn">
+            <span class="xw1">标题：</span>
+            <input type="text" name="{config.antispamposttitle}" size="25" tabindex="6" value="" class="txt"/>
+        </div>
+        <div class="inbox">
+            <textarea rows="5" cols="24" name="{config.antispampostmessage}" id="e_textarea" class="txt"></textarea>
+        </div>
+    <%else%>
+        <div>你需要登录后才可以发帖 | <a href="login.aspx">登录</a></div>
+    <%/if%>
+
+		<%if {isseccode}%>
+        <div class="inbox">
+            <%template _vcode%>
+        </div>
+		<%/if%>
+		
+    <%if {canquickpost}%>
+    <input type="submit" id="postsubmit" name="topicsubmit" value="发表帖子" />
+    <%/if%>
+			
+    </form>

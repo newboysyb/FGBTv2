@@ -1,0 +1,71 @@
+﻿<%template _header%> 
+<%if page_err==0%>
+
+    <div id="nav">
+        &raquo; <%if {forum.Pathlist}!=""%>{ShowForumAspxRewrite(forum.Pathlist.Trim(),forumid,forumpageid)}  &raquo; <%/if%>
+    </div>
+    
+    <%if {ispost}%>
+        <%template _msgbox%>
+    <%else%>
+        <form method="post" name="postform" action="{forumurl}posttopic.aspx?forumid={forumid}" enctype="multipart/form-data">
+            <%if {forum.applytopictype}==1 && {topictypeselectoptions}!=""%>
+            <div class="inbox">
+                <span class="xw1">主题分类：</span>
+                <select name="typeid" id="typeid" tabindex="5">{topictypeselectoptions}</select>
+            </div>
+            <%/if%>
+            
+            <%if {allowposttopic}%>
+                <div class="inbox bt mtn">
+                    <span class="xw1">标题：</span>
+                    <input type="text" name="{config.antispamposttitle}" size="25" tabindex="6" value="" class="txt"/>
+                </div>
+                <div class="inbox">
+                    <textarea rows="5" cols="24" name="{config.antispampostmessage}" id="e_textarea" class="txt"></textarea>
+                </div>
+            <%else%>
+                <div>你需要登录后才可以发帖 | <a href="login.aspx">登录</a></div>
+            <%/if%>
+            
+            <%if {isseccode}%>
+                <div class="inbox">
+                    <%template _vcode%>
+                </div>
+            <%/if%>
+            
+            <%if {allowposttopic}%>
+            <input type="submit" id="postsubmit" name="topicsubmit" value="发表帖子" />
+            <%/if%>
+            
+            <span style="display:none">
+                <p><input type="checkbox" value="1" name="htmlon" id="htmlon" <%if {usergroupinfo.allowhtml}!=1%> disabled<%/if%>/><label for="htmlon">html 代码</label></p>
+                <p><input type="checkbox" id="allowimgcode" disabled<%if {allowimg}==1%> checked="checked"<%/if%> /><label for="allowimgcode">[img] 代码</label></p>
+                <p><input type="checkbox" name="parseurloff" id="parseurloff" value="1" <%if {parseurloff}==1%> checked <%/if%>/><label for="parseurloff">禁用 网址自动识别</label></p>
+                <p><input type="checkbox" name="smileyoff" id="smileyoff" value="1" <%if {smileyoff}==1%> checked disabled <%/if%>/><label for="smileyoff">禁用 表情</label></p>
+                <p><input type="checkbox" name="bbcodeoff" id="bbcodeoff" value="1" <%if {bbcodeoff}==1%> checked disabled <%/if%>/><label for="bbcodeoff">禁用 论坛代码</label></p>
+                <p><input type="checkbox" name="usesig" id="usesig" value="1" <%if {usesig}==1%> checked <%/if%>/><label for="usesig">使用个人签名</label></p>       
+            </span>
+        </form>
+    <%/if%>
+<%else%>
+    <%if {ispost}%>
+        <%if {needlogin}%>
+            <%template _login%>
+        <%else%>
+            <%csharp%>
+                string backLink = HttpContext.Current.Request.RawUrl.ToString();
+                SetBackLink(backLink.Contains("&cedit=yes") ? backLink : backLink + "&cedit=yes");
+            <%/csharp%>
+            <%template _errmsgbox%>
+        <%/if%>
+    <%else%>
+        <%if {needlogin}%>
+              <%template _login%>
+        <%else%>
+           <%template _errmsgbox%>
+        <%/if%>	
+	  <%/if%>
+<%/if%>
+<%template _copyright%>
+<%template _footer%>

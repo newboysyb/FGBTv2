@@ -1,0 +1,16 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\ReleaseTracker\Discuz.Plugin.Preview.Jpg.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\ReleaseTracker\Discuz.Plugin.Preview.Jpg.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\ReleaseTracker\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\ReleaseTracker\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\ReleaseTracker\Discuz.Plugin.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\ReleaseTracker\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\ReleaseTracker\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\ReleaseTracker\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\ReleaseTracker\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\ReleaseTracker\Discuz.Plugin.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\ReleaseTracker\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\ReleaseTracker\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\bin\ReleaseTracker\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\obj\ReleaseTracker\Discuz.Plugin.Preview.Jpg.csprojResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\obj\ReleaseTracker\Discuz.Plugin.Preview.Jpg.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Preview.Jpg\obj\ReleaseTracker\Discuz.Plugin.Preview.Jpg.pdb

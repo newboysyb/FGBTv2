@@ -1,0 +1,5 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Space.Modules.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\bin\Discuz.Space.Modules.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\space\modules\builtin\obj\Debug\ResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\space\modules\builtin\obj\Debug\Discuz.Space.Modules.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Web\space\modules\builtin\obj\Debug\Discuz.Space.Modules.pdb

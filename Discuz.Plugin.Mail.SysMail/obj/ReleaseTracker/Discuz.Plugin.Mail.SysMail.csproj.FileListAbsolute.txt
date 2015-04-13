@@ -1,0 +1,16 @@
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\ReleaseTracker\Discuz.Plugin.Mail.SysMail.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\ReleaseTracker\Discuz.Plugin.Mail.SysMail.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\ReleaseTracker\Discuz.Common.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\ReleaseTracker\Discuz.Plugin.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\ReleaseTracker\Discuz.Entity.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\ReleaseTracker\Discuz.Config.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\ReleaseTracker\Newtonsoft.Json.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\ReleaseTracker\Discuz.Common.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\ReleaseTracker\Discuz.Plugin.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\ReleaseTracker\Discuz.Entity.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\ReleaseTracker\Discuz.Config.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\ReleaseTracker\Newtonsoft.Json.pdb
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\bin\ReleaseTracker\Newtonsoft.Json.xml
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\obj\ReleaseTracker\Discuz.Plugin.Mail.SysMail.csprojResolveAssemblyReference.cache
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\obj\ReleaseTracker\Discuz.Plugin.Mail.SysMail.dll
+H:\WorkFolder\PTProject\Code 3.6\Discuz.Plugin.Mail.SysMail\obj\ReleaseTracker\Discuz.Plugin.Mail.SysMail.pdb
